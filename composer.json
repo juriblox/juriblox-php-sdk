@@ -1,0 +1,49 @@
+{
+    "name": "juriblox/php-sdk",
+    "type": "library",
+
+    "description" : "PHP SDK for consuming the JuriBlox API",
+    "keywords": ["juriblox"],
+
+    "license": "See LICENSE file",
+
+    "authors": [
+        {
+            "name": "Vic D'Elfant",
+            "email": "vicdelfant@midd.ag"
+        }
+    ],
+
+    "support": {
+        "issues": "https://github.com/juriblox/juriblox-php-sdk/issues"
+    },
+
+    "autoload": {
+        "psr-4": {
+            "JuriBlox\\Sdk\\": "src",
+            "JuriBlox\\Sdk\\Tests\\": "tests"
+        }
+    },
+
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
+    },
+
+    "require": {
+        "php": ">=5.5",
+        "vlucas/phpdotenv": "^2.2",
+        "guzzlehttp/guzzle": "^6.1",
+        "beberlei/assert": "^2.4",
+        "nesbot/carbon": "^1.21"
+    },
+
+    "require-dev": {
+        "phpunit/phpunit": "5.1.*"
+    },
+
+    "scripts": {
+        "test": "phpunit"
+    }
+}
