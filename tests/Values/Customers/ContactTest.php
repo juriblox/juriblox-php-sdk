@@ -16,7 +16,6 @@ class ContactTest extends \PHPUnit_Framework_TestCase
     {
         $contact = new Contact(self::VALID_CONTACT_NAME, self::VALID_CONTACT_EMAIL_CAPITALS);
 
-        $this->assertEquals(self::VALID_CONTACT_NAME, $contact->getName());
         $this->assertEquals(self::VALID_CONTACT_EMAIL, $contact->getEmail());
     }
 
@@ -34,5 +33,7 @@ class ContactTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(self::VALID_CONTACT_NAME, $contact->getName());
         $this->assertEquals(self::VALID_CONTACT_EMAIL, $contact->getEmail());
+
+        $this->assertEquals(sprintf('%s <%s>', self::VALID_CONTACT_NAME, self::VALID_CONTACT_EMAIL), (string) $contact);
     }
 }

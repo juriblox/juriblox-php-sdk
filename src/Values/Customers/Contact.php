@@ -45,4 +45,12 @@ class Contact
     {
         return $this->name;
     }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return sprintf('%s <%s>', $this->getName(), $this->getEmail());
+    }
 }
