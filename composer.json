@@ -5,7 +5,7 @@
     "description" : "PHP SDK for consuming the JuriBlox API",
     "keywords": ["juriblox"],
 
-    "license": "See LICENSE file",
+    "license": "proprietary",
 
     "authors": [
         {
