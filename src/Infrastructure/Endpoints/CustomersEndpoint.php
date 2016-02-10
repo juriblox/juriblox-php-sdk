@@ -7,7 +7,7 @@ use JuriBlox\Sdk\Infrastructure\Collections\CustomersCollection;
 class CustomersEndpoint extends AbstractEndpoint
 {
     /**
-     * Alle customers
+     * Get all customers
      *
      * @return CustomersCollection
      */
