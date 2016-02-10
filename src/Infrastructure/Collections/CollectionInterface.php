@@ -5,7 +5,7 @@ namespace JuriBlox\Sdk\Infrastructure\Collections;
 use JuriBlox\Sdk\Entities\EntityInterface;
 use JuriBlox\Sdk\Infrastructure\Drivers\DriverInterface;
 
-interface CollectionInterface extends \Iterator
+interface CollectionInterface
 {
     /**
      * Create a collection instance based on an existing driver

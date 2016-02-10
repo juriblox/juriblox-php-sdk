@@ -5,7 +5,7 @@ namespace JuriBlox\Sdk\Infrastructure\Collections;
 use JuriBlox\Sdk\Exceptions\CannotParseResponseException;
 use JuriBlox\Sdk\Infrastructure\Drivers\DriverInterface;
 
-abstract class AbstractCollection implements CollectionInterface
+abstract class AbstractCollection implements CollectionInterface, \Iterator, \Countable
 {
     /**
      * Driver to use to perform requests
@@ -45,7 +45,7 @@ abstract class AbstractCollection implements CollectionInterface
     /**
      * AbstractCollection constructor
      */
-    private function __construct()
+    protected function __construct()
     {
         $this->index = 0;
         $this->records = [];
@@ -73,8 +73,21 @@ abstract class AbstractCollection implements CollectionInterface
     /**
      * {@inheritdoc}
      */
+    public function count()
+    {
+        return sizeof($this->records);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function current()
     {
+        if (!$this->valid())
+        {
+            return null;
+        }
+
         return static::createEntityFromData($this->records[$this->index]);
     }
 
