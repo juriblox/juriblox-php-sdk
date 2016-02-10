@@ -79,14 +79,10 @@ class RateLimitingException extends RequestFailedException
     /**
      * {@inheritdoc}
      */
-    public function setResponseContext(Response $response)
+    public function loadResponseContext()
     {
-        parent::setResponseContext($response);
-
-        $this->requestsLimit = $response->getHeader(self::HEADER_REQUESTS_LIMIT)[0];
-        $this->requestsRemaining = $response->getHeader(self::HEADER_REQUESTS_REMAINING)[0];
-        $this->limitResetMinutes = $response->getHeader(self::HEADER_LIMIT_RESET)[0];
-
-        return $this;
+        $this->requestsLimit = $this->response->getHeader(self::HEADER_REQUESTS_LIMIT)[0];
+        $this->requestsRemaining = $this->response->getHeader(self::HEADER_REQUESTS_REMAINING)[0];
+        $this->limitResetMinutes = $this->response->getHeader(self::HEADER_LIMIT_RESET)[0];
     }
 }

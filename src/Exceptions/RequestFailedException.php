@@ -23,7 +23,16 @@ class RequestFailedException extends \Exception
     public function setResponseContext(Response $response)
     {
         $this->response = $response;
+        $this->loadResponseContext();
 
         return $this;
+    }
+
+    /**
+     * Load the necessary information from the response context for this specific exception type
+     */
+    protected function loadResponseContext()
+    {
+        
     }
 }
