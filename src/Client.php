@@ -5,6 +5,7 @@ namespace JuriBlox\Sdk;
 use JuriBlox\Sdk\Infrastructure\Drivers\Driver;
 use JuriBlox\Sdk\Infrastructure\Drivers\DriverInterface;
 use JuriBlox\Sdk\Infrastructure\Endpoints\CustomersEndpoint;
+use JuriBlox\Sdk\Infrastructure\Endpoints\TemplatesEndpoint;
 
 class Client
 {
@@ -43,5 +44,15 @@ class Client
     public function customers()
     {
         return CustomersEndpoint::fromDriver($this->driver);
+    }
+
+    /**
+     * Get an endpoint for working with JuriBlox templates
+     *
+     * @return TemplatesEndpoint
+     */
+    public function templates()
+    {
+        return TemplatesEndpoint::fromDriver($this->driver);
     }
 }
