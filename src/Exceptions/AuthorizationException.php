@@ -2,7 +2,7 @@
 
 namespace JuriBlox\Sdk\Exceptions;
 
-class AuthorizationException extends \Exception
+class AuthorizationException extends RequestFailedException
 {
 
 }

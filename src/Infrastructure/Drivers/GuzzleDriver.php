@@ -133,13 +133,13 @@ class GuzzleDriver implements DriverInterface
             // Throw authorization exception
             if ($exception->getResponse()->getStatusCode() ==  self::STATUS_AUTHORIZATION_ERROR)
             {
-                throw new AuthorizationException();
+                throw (new AuthorizationException())->setResponseContext($exception->getResponse());
             }
 
             // Throw rate limiting exception
             elseif ($exception->getResponse()->getStatusCode() ==  self::STATUS_RATE_LIMITING_ERROR)
             {
-                throw new RateLimitingException();
+                throw (new RateLimitingException())->setResponseContext($exception->getResponse());
             }
 
             throw $exception;
@@ -148,7 +148,7 @@ class GuzzleDriver implements DriverInterface
         $result = @json_decode($response->getBody()->getContents());
         if ($result === false)
         {
-            throw new CannotParseResponseException();
+            throw (new CannotParseResponseException())->setResponseContext($response);
         }
 
         return $result;

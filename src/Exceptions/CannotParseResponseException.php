@@ -2,7 +2,7 @@
 
 namespace JuriBlox\Sdk\Exceptions;
 
-class CannotParseResponseException extends \Exception
+class CannotParseResponseException extends RequestFailedException
 {
 
 }
