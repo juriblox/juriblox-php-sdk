@@ -20,7 +20,7 @@ abstract class AbstractPagedCollection extends AbstractCollection
         parent::__construct();
 
         $this->currentPage = 0;
-        $this->recordsPerPage = 0;
+        $this->recordsPerPage = 50;
 
         $this->totalPages = 0;
         $this->totalRecords = 0;
@@ -78,8 +78,9 @@ abstract class AbstractPagedCollection extends AbstractCollection
      */
     protected function fetch()
     {
-        $result = $this->driver->get($this->uri . '?page={page}', [
-            'page' => $this->currentPage
+        $result = $this->driver->get($this->uri . '?page={page}&limit={limit}', [
+            'page'  => $this->currentPage,
+            'limit' => $this->recordsPerPage
         ]);
 
         if (!isset($result->{$this->key}))
