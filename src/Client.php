@@ -2,9 +2,11 @@
 
 namespace JuriBlox\Sdk;
 
+use JuriBlox\Sdk\Infrastructure\Collections\CustomTemplatesCollection;
 use JuriBlox\Sdk\Infrastructure\Drivers\Driver;
 use JuriBlox\Sdk\Infrastructure\Drivers\DriverInterface;
 use JuriBlox\Sdk\Infrastructure\Endpoints\CustomersEndpoint;
+use JuriBlox\Sdk\Infrastructure\Endpoints\CustomTemplatesEndpoint;
 use JuriBlox\Sdk\Infrastructure\Endpoints\TemplatesEndpoint;
 
 class Client
@@ -34,6 +36,16 @@ class Client
 
         $this->driver = $driver;
         $this->driver->setApplicationName($applicationName);
+    }
+
+    /**
+     * Get an endpoint for working with the custom JuriBlox templates
+     *
+     * @return CustomTemplatesCollection
+     */
+    public function customTemplates()
+    {
+        return CustomTemplatesEndpoint::fromDriver($this->driver);
     }
 
     /**
