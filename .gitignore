@@ -1,4 +1,5 @@
-/composer.lock
 /.env
+/composer.lock
 
+/build
 /vendor
