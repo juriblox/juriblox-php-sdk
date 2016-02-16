@@ -2,6 +2,7 @@
 
 namespace JuriBlox\Sdk\Domain\Documents\Entities;
 
+use JuriBlox\Sdk\Domain\Documents\Values\Definition;
 use JuriBlox\Sdk\Domain\Documents\Values\DocumentId;
 use JuriBlox\Sdk\Domain\Documents\Values\Language;
 use JuriBlox\Sdk\Domain\Documents\Values\Revision;
@@ -97,6 +98,13 @@ class Template
     private $revision;
 
     /**
+     * Definitions
+     *
+     * @var array
+     */
+    private $definitions;
+
+    /**
      * Template variables
      *
      * @var array
@@ -111,6 +119,7 @@ class Template
         $this->custom = false;
 
         $this->tags = [];
+        $this->definitions = [];
         $this->variables = [];
     }
 
@@ -142,6 +151,36 @@ class Template
     }
 
     /**
+     * Add a definition
+     *
+     * @param Definition $definition
+     */
+    public function addDefinition(Definition $definition)
+    {
+        $this->definitions[] = $definition;
+    }
+
+    /**
+     * Add a tag
+     *
+     * @param Tag $tag
+     */
+    public function addTag(Tag $tag)
+    {
+        $this->tags[] = $tag;
+    }
+
+    /**
+     * Add a variable
+     *
+     * @param TemplateVariable $variable
+     */
+    public function addVariable(TemplateVariable $variable)
+    {
+        $this->variables[] = $variable;
+    }
+
+    /**
      * @return \DateTime
      */
     public function getCreatedDatetime()
@@ -155,6 +194,14 @@ class Template
     public function getCreator()
     {
         return $this->creator;
+    }
+
+    /**
+     * @return array
+     */
+    public function getDefinitions()
+    {
+        return $this->definitions;
     }
 
     /**
@@ -323,21 +370,5 @@ class Template
     public function setStatus(TemplateStatus $status)
     {
         $this->status = $status;
-    }
-
-    /**
-     * @param array $tags
-     */
-    public function setTags($tags)
-    {
-        $this->tags = $tags;
-    }
-
-    /**
-     * @param array $variables
-     */
-    public function setVariables($variables)
-    {
-        $this->variables = $variables;
     }
 }

@@ -15,5 +15,5 @@ $client = new Client(new GuzzleDriver(getenv('JURIBLOX_CLIENT_ID'), getenv('JURI
 /** @var Template $template */
 foreach ($client->templates()->getAll() as $template)
 {
-    print_r($template);
+    printf("Template ID: %s, name: %s, version: %s, tags: %d, variables: %d, definitions: %d\n", $template->getId(), $template->getName(), $template->getRevision()->getVersion(), sizeof($template->getTags()), sizeof($template->getVariables()), sizeof($template->getDefinitions()));
 }
