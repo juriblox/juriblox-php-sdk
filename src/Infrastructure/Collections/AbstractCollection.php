@@ -224,13 +224,15 @@ abstract class AbstractCollection implements CollectionInterface, \Iterator, \Co
 
     /**
      * @param string $uri
-     * @param array $parameters
+     * @param array  $inlineParameters
      */
-    protected function setUri($uri, array $parameters = [])
+    protected function setUri($uri, array $inlineParameters = [])
     {
         $this->uri = $uri;
 
-        $this->mergeUriParameters($parameters);
+        array_walk($inlineParameters, function($value, $name) use (&$uri) {
+            $uri = str_replace('{' . $name . '}', $value, $uri);
+        }, $uri);
     }
 
     /**
