@@ -7,6 +7,7 @@ use JuriBlox\Sdk\Infrastructure\Drivers\Driver;
 use JuriBlox\Sdk\Infrastructure\Drivers\DriverInterface;
 use JuriBlox\Sdk\Infrastructure\Endpoints\CustomersEndpoint;
 use JuriBlox\Sdk\Infrastructure\Endpoints\CustomTemplatesEndpoint;
+use JuriBlox\Sdk\Infrastructure\Endpoints\DocumentsEndpoint;
 use JuriBlox\Sdk\Infrastructure\Endpoints\TemplatesEndpoint;
 
 class Client
@@ -39,7 +40,7 @@ class Client
     }
 
     /**
-     * Get an endpoint for working with the custom JuriBlox templates
+     * Get an endpoint for working with the custom templates
      *
      * @return CustomTemplatesCollection
      */
@@ -49,7 +50,7 @@ class Client
     }
 
     /**
-     * Get an endpoint for working with JuriBlox customers
+     * Get an endpoint for working with customers
      *
      * @return CustomersEndpoint
      */
@@ -59,7 +60,17 @@ class Client
     }
 
     /**
-     * Get an endpoint for working with JuriBlox templates
+     * Get an endpoint for working with documents
+     *
+     * @return DocumentsEndpoint
+     */
+    public function documents()
+    {
+        return DocumentsEndpoint::fromDriver($this->driver);
+    }
+
+    /**
+     * Get an endpoint for working with templates
      *
      * @return TemplatesEndpoint
      */
