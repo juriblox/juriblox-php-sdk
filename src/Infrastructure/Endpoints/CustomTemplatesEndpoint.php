@@ -12,7 +12,7 @@ class CustomTemplatesEndpoint extends AbstractEndpoint
      *
      * @return TemplatesCollection
      */
-    public function getAll()
+    public function findAll()
     {
         return CustomTemplatesCollection::fromDriver($this->driver);
     }

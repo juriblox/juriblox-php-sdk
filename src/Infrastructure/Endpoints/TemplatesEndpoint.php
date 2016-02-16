@@ -11,7 +11,7 @@ class TemplatesEndpoint extends AbstractEndpoint
      *
      * @return TemplatesCollection
      */
-    public function getAll()
+    public function findAll()
     {
         return TemplatesCollection::fromDriver($this->driver);
     }

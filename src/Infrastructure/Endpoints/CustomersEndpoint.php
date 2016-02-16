@@ -11,7 +11,7 @@ class CustomersEndpoint extends AbstractEndpoint
      *
      * @return CustomersCollection
      */
-    public function getAll()
+    public function findAll()
     {
         return CustomersCollection::fromDriver($this->driver);
     }
