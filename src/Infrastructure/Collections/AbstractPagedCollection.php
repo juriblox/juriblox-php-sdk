@@ -85,7 +85,7 @@ abstract class AbstractPagedCollection extends AbstractCollection
 
         if (!isset($result->{$this->getKey()}))
         {
-            throw new CannotParseResponseException(sprintf('The "%s" key does not exist in the result returned by the API'));
+            throw new CannotParseResponseException(sprintf('The "%s" key does not exist in the result returned by the API', $this->getKey()));
         }
 
         if (!isset($result->meta->pagination))
