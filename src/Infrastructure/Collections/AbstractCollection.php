@@ -2,6 +2,7 @@
 
 namespace JuriBlox\Sdk\Infrastructure\Collections;
 
+use JuriBlox\Sdk\Assertion;
 use JuriBlox\Sdk\Exceptions\CannotParseResponseException;
 use JuriBlox\Sdk\Infrastructure\Drivers\DriverInterface;
 
@@ -22,13 +23,6 @@ abstract class AbstractCollection implements CollectionInterface, \Iterator, \Co
     protected $index;
 
     /**
-     * Key used in the result returned by the API
-     *
-     * @var string
-     */
-    protected $key;
-
-    /**
      * Current page with records
      *
      * @var array
@@ -36,11 +30,18 @@ abstract class AbstractCollection implements CollectionInterface, \Iterator, \Co
     protected $records;
 
     /**
+     * Key used in the result returned by the API
+     *
+     * @var string
+     */
+    private $key;
+
+    /**
      * URL to retrieve entities from (for example, /templates)
      *
      * @var string
      */
-    protected $uri;
+    private $uri;
 
     /**
      * AbstractCollection constructor
@@ -52,7 +53,7 @@ abstract class AbstractCollection implements CollectionInterface, \Iterator, \Co
     }
 
     /**
-     * Initiate a collection
+     * Initiate a collection along with the URI and key
      *
      * @param DriverInterface $driver
      * @param string          $uri
@@ -60,7 +61,7 @@ abstract class AbstractCollection implements CollectionInterface, \Iterator, \Co
      *
      * @return AbstractCollection
      */
-    protected static function fromDriverWithSettings(DriverInterface $driver, $uri, $key)
+    public static function fromDriverWithSettings(DriverInterface $driver, $uri, $key)
     {
         $collection = new static();
         $collection->driver = $driver;
@@ -137,5 +138,44 @@ abstract class AbstractCollection implements CollectionInterface, \Iterator, \Co
         }
 
         $this->records = $result->{$this->key};
+    }
+
+    /**
+     * @return string
+     */
+    protected function getKey()
+    {
+        return $this->key;
+    }
+
+    /**
+     * @return string
+     */
+    protected function getUri()
+    {
+        return $this->uri;
+    }
+
+    /**
+     * @param string $key
+     */
+    protected function setKey($key)
+    {
+        $this->key = $key;
+    }
+
+    /**
+     * @param string $uri
+     * @param array $parameters
+     */
+    protected function setUri($uri, $parameters = [])
+    {
+        Assertion::isArray($parameters);
+
+        array_walk($parameters, function($value, $name) use (&$uri) {
+            $uri = str_replace('{' . $name . '}', $value, $uri);
+        }, $uri);
+
+        $this->uri = $uri;
     }
 }

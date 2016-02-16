@@ -78,12 +78,12 @@ abstract class AbstractPagedCollection extends AbstractCollection
      */
     protected function fetch()
     {
-        $result = $this->driver->get($this->uri . '?page={page}&limit={limit}', [
+        $result = $this->driver->get($this->getUri() . '?page={page}&limit={limit}', [
             'page'  => $this->currentPage,
             'limit' => $this->recordsPerPage
         ]);
 
-        if (!isset($result->{$this->key}))
+        if (!isset($result->{$this->getKey()}))
         {
             throw new CannotParseResponseException(sprintf('The "%s" key does not exist in the result returned by the API'));
         }
@@ -93,7 +93,7 @@ abstract class AbstractPagedCollection extends AbstractCollection
             throw new CannotParseResponseException('The meta/pagination key does not exist in the result returned by the API');
         }
 
-        $this->records = $result->{$this->key};
+        $this->records = $result->{$this->getKey()};
 
         $this->currentPage = $result->meta->pagination->current_page;
         $this->recordsPerPage = $result->meta->pagination->per_page;
