@@ -118,9 +118,9 @@ class Template
     {
         $this->custom = false;
 
-        $this->tags = [];
-        $this->definitions = [];
-        $this->variables = [];
+        $this->clearTags();
+        $this->clearDefinitions();
+        $this->clearVariables();
     }
 
     /**
@@ -178,6 +178,30 @@ class Template
     public function addVariable(TemplateVariable $variable)
     {
         $this->variables[] = $variable;
+    }
+
+    /**
+     * Clear the template's definitions
+     */
+    public function clearDefinitions()
+    {
+        $this->definitions = [];
+    }
+
+    /**
+     * Clear the linked tags
+     */
+    public function clearTags()
+    {
+        $this->tags = [];
+    }
+
+    /**
+     * Clear the template's variables
+     */
+    public function clearVariables()
+    {
+        $this->variables = [];
     }
 
     /**
