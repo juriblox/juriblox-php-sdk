@@ -2,7 +2,7 @@
 
 namespace JuriBlox\Sdk\Infrastructure\Collections;
 
-use JuriBlox\Sdk\Entities\EntityInterface;
+use JuriBlox\Sdk\Domain\EntityInterface;
 use JuriBlox\Sdk\Infrastructure\Drivers\DriverInterface;
 
 interface CollectionInterface

@@ -2,7 +2,7 @@
 
 use Dotenv\Dotenv;
 use JuriBlox\Sdk\Client;
-use JuriBlox\Sdk\Entities\Customer;
+use JuriBlox\Sdk\Domain\Customers\Entities\Customer;
 use JuriBlox\Sdk\Infrastructure\Drivers\GuzzleDriver;
 
 require __DIR__ . '/../vendor/autoload.php';

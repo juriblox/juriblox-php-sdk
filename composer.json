@@ -20,8 +20,7 @@
 
     "autoload": {
         "psr-4": {
-            "JuriBlox\\Sdk\\": "src",
-            "JuriBlox\\Sdk\\Tests\\": "tests"
+            "JuriBlox\\Sdk\\": ["src", "tests"]
         }
     },
 
