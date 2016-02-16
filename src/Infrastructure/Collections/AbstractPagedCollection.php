@@ -6,10 +6,32 @@ use JuriBlox\Sdk\Exceptions\CannotParseResponseException;
 
 abstract class AbstractPagedCollection extends AbstractCollection
 {
+    /**
+     * Current page
+     *
+     * @var int
+     */
     protected $currentPage;
+
+    /**
+     * Records per page
+     *
+     * @var int
+     */
     protected $recordsPerPage;
 
+    /**
+     * Total number of pages
+     *
+     * @var int
+     */
     protected $totalPages;
+
+    /**
+     * Total number of records
+     *
+     * @var int
+     */
     protected $totalRecords;
 
     /**

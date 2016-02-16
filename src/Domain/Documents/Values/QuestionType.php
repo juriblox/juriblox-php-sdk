@@ -46,16 +46,16 @@ class QuestionType
     /**
      * @return string
      */
-    public function getType()
+    public function __toString()
     {
-        return $this->type;
+        return (string) $this->getType();
     }
 
     /**
      * @return string
      */
-    public function __toString()
+    public function getType()
     {
-        return (string) $this->getType();
+        return $this->type;
     }
 }

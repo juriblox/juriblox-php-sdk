@@ -14,48 +14,6 @@ use JuriBlox\Sdk\Domain\Users\Entities\User;
 class Template
 {
     /**
-     * Template ID
-     *
-     * @var TemplateId
-     */
-    private $id;
-
-    /**
-     * Custom template
-     *
-     * @var bool
-     */
-    private $custom;
-
-    /**
-     * Template name
-     *
-     * @var string
-     */
-    private $name;
-
-    /**
-     * Description
-     *
-     * @var string
-     */
-    private $description;
-
-    /**
-     * Linked tags
-     *
-     * @var array
-     */
-    private $tags;
-
-    /**
-     * Most recent document generated using this template
-     *
-     * @var DocumentId
-     */
-    private $lastDocument;
-
-    /**
      * Creation date and time
      *
      * @var \DateTime
@@ -70,32 +28,11 @@ class Template
     private $creator;
 
     /**
-     * Office this template belongs to
+     * Custom template
      *
-     * @var Office
+     * @var bool
      */
-    private $office;
-
-    /**
-     * Language this template is written in
-     *
-     * @var Language
-     */
-    private $language;
-
-    /**
-     * Current status
-     *
-     * @var TemplateStatus
-     */
-    private $status;
-
-    /**
-     * Current revision
-     *
-     * @var Revision
-     */
-    private $revision;
+    private $custom;
 
     /**
      * Definitions
@@ -105,23 +42,74 @@ class Template
     private $definitions;
 
     /**
+     * Description
+     *
+     * @var string
+     */
+    private $description;
+
+    /**
+     * Template ID
+     *
+     * @var TemplateId
+     */
+    private $id;
+
+    /**
+     * Language this template is written in
+     *
+     * @var Language
+     */
+    private $language;
+
+    /**
+     * Most recent document generated using this template
+     *
+     * @var DocumentId
+     */
+    private $lastDocument;
+
+    /**
+     * Template name
+     *
+     * @var string
+     */
+    private $name;
+
+    /**
+     * Office this template belongs to
+     *
+     * @var Office
+     */
+    private $office;
+
+    /**
+     * Current revision
+     *
+     * @var Revision
+     */
+    private $revision;
+
+    /**
+     * Current status
+     *
+     * @var TemplateStatus
+     */
+    private $status;
+
+    /**
+     * Linked tags
+     *
+     * @var array
+     */
+    private $tags;
+
+    /**
      * Template variables
      *
      * @var array
      */
     private $variables;
-
-    /**
-     * Template constructor
-     */
-    private function __construct()
-    {
-        $this->custom = false;
-
-        $this->clearTags();
-        $this->clearDefinitions();
-        $this->clearVariables();
-    }
 
     /**
      * Create a template entity based on an existing identity
@@ -148,6 +136,18 @@ class Template
     public static function fromIdString($id)
     {
         return static::fromId(new TemplateId($id));
+    }
+
+    /**
+     * Template constructor
+     */
+    private function __construct()
+    {
+        $this->custom = false;
+
+        $this->clearTags();
+        $this->clearDefinitions();
+        $this->clearVariables();
     }
 
     /**

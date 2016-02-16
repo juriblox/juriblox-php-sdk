@@ -7,7 +7,7 @@ interface ReferenceInterface
     /**
      * @param $reference
      */
-   function __construct($reference);
+    function __construct($reference);
 
     /**
      * @return string

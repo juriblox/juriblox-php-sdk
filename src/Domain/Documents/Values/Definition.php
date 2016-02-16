@@ -5,18 +5,18 @@ namespace JuriBlox\Sdk\Domain\Documents\Values;
 class Definition
 {
     /**
-     * Name (human-readable)
-     *
-     * @var string
-     */
-    private $name;
-
-    /**
      * Description/explanation
      *
      * @var string
      */
     private $description;
+
+    /**
+     * Name (human-readable)
+     *
+     * @var string
+     */
+    private $name;
 
     /**
      * Visible
@@ -42,17 +42,17 @@ class Definition
     /**
      * @return string
      */
-    public function getName()
+    public function getDescription()
     {
-        return $this->name;
+        return $this->description;
     }
 
     /**
      * @return string
      */
-    public function getDescription()
+    public function getName()
     {
-        return $this->description;
+        return $this->name;
     }
 
     /**

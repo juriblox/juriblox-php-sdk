@@ -18,14 +18,14 @@ class Client
     const VERSION = '0.0.1';
 
     /**
-     * @var Driver
-     */
-    private $driver;
-
-    /**
      * @var null|string
      */
     private $applicationName;
+
+    /**
+     * @var Driver
+     */
+    private $driver;
 
     /**
      * @param DriverInterface   $driver

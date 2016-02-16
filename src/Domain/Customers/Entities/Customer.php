@@ -8,13 +8,6 @@ use JuriBlox\Sdk\Domain\Customers\Values\CustomerReference;
 class Customer
 {
     /**
-     * Customer reference
-     *
-     * @var CustomerReference
-     */
-    private $reference;
-
-    /**
      * Company name
      *
      * @var string
@@ -27,12 +20,11 @@ class Customer
     private $contact;
 
     /**
-     * Customer constructor
+     * Customer reference
+     *
+     * @var CustomerReference
      */
-    private function __construct()
-    {
-
-    }
+    private $reference;
 
     /**
      * Create a customer entity based on an existing identity
@@ -59,6 +51,14 @@ class Customer
     public static function fromReferenceString($reference)
     {
         return static::fromReference(new CustomerReference($reference));
+    }
+
+    /**
+     * Customer constructor
+     */
+    private function __construct()
+    {
+
     }
 
     /**

@@ -36,13 +36,6 @@ abstract class AbstractCollection implements CollectionInterface, \Iterator, \Co
     private $key;
 
     /**
-     * URL to retrieve entities from (for example, /templates)
-     *
-     * @var string
-     */
-    private $uri;
-
-    /**
      * GET parameters in the URL
      *
      * @var array
@@ -50,15 +43,11 @@ abstract class AbstractCollection implements CollectionInterface, \Iterator, \Co
     private $parameters;
 
     /**
-     * AbstractCollection constructor
+     * URL to retrieve entities from (for example, /templates)
+     *
+     * @var string
      */
-    protected function __construct()
-    {
-        $this->index = 0;
-        $this->records = [];
-
-        $this->clearUriParameters();
-    }
+    private $uri;
 
     /**
      * Initiate a collection along with the URI and key
@@ -77,6 +66,17 @@ abstract class AbstractCollection implements CollectionInterface, \Iterator, \Co
         $collection->key = $key;
 
         return $collection;
+    }
+
+    /**
+     * AbstractCollection constructor
+     */
+    protected function __construct()
+    {
+        $this->index = 0;
+        $this->records = [];
+
+        $this->clearUriParameters();
     }
 
     /**

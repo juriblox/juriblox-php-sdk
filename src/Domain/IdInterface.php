@@ -7,7 +7,7 @@ interface IdInterface
     /**
      * @param $id
      */
-   function __construct($id);
+    function __construct($id);
 
     /**
      * @return string

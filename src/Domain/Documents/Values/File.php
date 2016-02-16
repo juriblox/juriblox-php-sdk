@@ -9,17 +9,31 @@ class File
     /**
      * @var string
      */
-    private $url;
-
-    /**
-     * @var string
-     */
     private $filename;
 
     /**
      * @var FileType
      */
     private $type;
+
+    /**
+     * @var string
+     */
+    private $url;
+
+    /**
+     * Create a File value object from raw text values (including $type)
+     *
+     * @param   string  $url
+     * @param   string  $filename
+     * @param   string  $type
+     *
+     * @return File
+     */
+    public static function fromText($url, $filename, $type)
+    {
+        return new static($url, $filename, new FileType($type));
+    }
 
     /**
      * File constructor
@@ -35,20 +49,6 @@ class File
         $this->url = $url;
         $this->filename = $filename;
         $this->type = $type;
-    }
-
-    /**
-     * Create a File value object from raw text values (including $type)
-     *
-     * @param   string  $url
-     * @param   string  $filename
-     * @param   string  $type
-     *
-     * @return File
-     */
-    public static function fromText($url, $filename, $type)
-    {
-        return new static($url, $filename, new FileType($type));
     }
 
     /**

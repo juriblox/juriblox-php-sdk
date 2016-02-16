@@ -9,12 +9,12 @@ class Contact
     /**
      * @var string
      */
-    private $name;
+    private $email;
 
     /**
      * @var string
      */
-    private $email;
+    private $name;
 
     /**
      * CustomerContact constructor
@@ -33,6 +33,14 @@ class Contact
     /**
      * @return string
      */
+    public function __toString()
+    {
+        return sprintf('%s <%s>', $this->getName(), $this->getEmail());
+    }
+
+    /**
+     * @return string
+     */
     public function getEmail()
     {
         return $this->email;
@@ -44,13 +52,5 @@ class Contact
     public function getName()
     {
         return $this->name;
-    }
-
-    /**
-     * @return string
-     */
-    public function __toString()
-    {
-        return sprintf('%s <%s>', $this->getName(), $this->getEmail());
     }
 }

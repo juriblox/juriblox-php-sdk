@@ -21,14 +21,6 @@ class Tag
     private $name;
 
     /**
-     * Tag constructor
-     */
-    private function __construct()
-    {
-
-    }
-
-    /**
      * Create a tag entity based on an existing identity
      *
      * @param TagId $id
@@ -53,6 +45,14 @@ class Tag
     public static function fromIdString($id)
     {
         return static::fromId(new TagId($id));
+    }
+
+    /**
+     * Tag constructor
+     */
+    private function __construct()
+    {
+
     }
 
     /**

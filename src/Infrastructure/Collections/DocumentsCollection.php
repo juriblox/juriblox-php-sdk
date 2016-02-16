@@ -23,20 +23,13 @@ class DocumentsCollection extends AbstractPagedCollection
     }
 
     /**
-     * Return only documents based on a specific template
+     * @param $dto
      *
-     * @param TemplateId $templateId
-     *
-     * @return DocumentsCollection
+     * @return Template
      */
-    public function filterByTemplateId(TemplateId $templateId)
+    public function createEntityFromData($dto)
     {
-        $this->setKey('documents');
-        $this->setUri('templates/{template}/documents', [
-            'template' => $templateId->getId()
-        ]);
-
-        return $this;
+        print_r($dto); exit();
     }
 
     /**
@@ -57,12 +50,19 @@ class DocumentsCollection extends AbstractPagedCollection
     }
 
     /**
-     * @param $dto
+     * Return only documents based on a specific template
      *
-     * @return Template
+     * @param TemplateId $templateId
+     *
+     * @return DocumentsCollection
      */
-    public function createEntityFromData($dto)
+    public function filterByTemplateId(TemplateId $templateId)
     {
-        print_r($dto); exit();
+        $this->setKey('documents');
+        $this->setUri('templates/{template}/documents', [
+            'template' => $templateId->getId()
+        ]);
+
+        return $this;
     }
 }

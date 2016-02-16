@@ -12,16 +12,6 @@ abstract class AbstractEndpoint
     protected $driver;
 
     /**
-     * AbstractEndpoint constructor
-     *
-     * @param DriverInterface $driver
-     */
-    protected function __construct(DriverInterface $driver)
-    {
-        $this->driver = $driver;
-    }
-
-    /**
      * Create an endpoint using an existing Driver object
      *
      * @param DriverInterface $driver
@@ -31,5 +21,15 @@ abstract class AbstractEndpoint
     public static function fromDriver(DriverInterface $driver)
     {
         return new static($driver);
+    }
+
+    /**
+     * AbstractEndpoint constructor
+     *
+     * @param DriverInterface $driver
+     */
+    protected function __construct(DriverInterface $driver)
+    {
+        $this->driver = $driver;
     }
 }

@@ -2,10 +2,49 @@
 
 namespace JuriBlox\Sdk\Domain\Documents\Entities;
 
+use JuriBlox\Sdk\Domain\Customers\Entities\Customer;
 use JuriBlox\Sdk\Domain\Documents\Values\DocumentId;
+use JuriBlox\Sdk\Domain\Documents\Values\DocumentReference;
+use JuriBlox\Sdk\Domain\Documents\Values\Language;
+use JuriBlox\Sdk\Domain\Offices\Entities\Office;
 
 class Document
 {
+    /**
+     * Alert date/time
+     *
+     * @var \DateTime
+     */
+    private $alertDate;
+
+    /**
+     * Answers provided when generating this document
+     *
+     * @var array
+     */
+    private $answers;
+
+    /**
+     * Creation date/time
+     *
+     * @var \DateTime
+     */
+    private $createdDatetime;
+
+    /**
+     * Customer this document is for
+     *
+     * @var Customer
+     */
+    private $customer;
+
+    /**
+     * Files generated for this document
+     *
+     * @var array
+     */
+    private $files;
+
     /**
      * Document ID
      *
@@ -14,12 +53,39 @@ class Document
     private $id;
 
     /**
-     * Document constructor
+     * Document's language
+     *
+     * @var Language
      */
-    private function __construct()
-    {
+    private $language;
 
-    }
+    /**
+     * Office this document belongs to
+     *
+     * @var Office
+     */
+    private $office;
+
+    /**
+     * Reference
+     *
+     * @var DocumentReference
+     */
+    private $reference;
+
+    /**
+     * Tags linked to this document
+     *
+     * @var array
+     */
+    private $tags;
+
+    /**
+     * Title
+     *
+     * @var string
+     */
+    private $title;
 
     /**
      * Create a document entity based on an existing identity
@@ -46,5 +112,13 @@ class Document
     public static function fromIdString($id)
     {
         return static::fromId(new DocumentId($id));
+    }
+
+    /**
+     * Document constructor
+     */
+    private function __construct()
+    {
+
     }
 }

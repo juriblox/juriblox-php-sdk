@@ -13,6 +13,13 @@ class RateLimitingException extends RequestFailedException
     const HEADER_REQUESTS_REMAINING = 'X-Rate-Limit-Remaining';
 
     /**
+     * Minutes until the request limit gets reset
+     *
+     * @var int
+     */
+    private $limitResetMinutes;
+
+    /**
      * Maximum number of requests
      *
      * @var int
@@ -25,13 +32,6 @@ class RateLimitingException extends RequestFailedException
      * @var int
      */
     private $requestsRemaining;
-
-    /**
-     * Minutes until the request limit gets reset
-     *
-     * @var int
-     */
-    private $limitResetMinutes;
 
     /**
      * Get the number of minutes until the request limit gets reset
