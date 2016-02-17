@@ -17,34 +17,46 @@ class User
     private $name;
 
     /**
-     * Create a User value object from raw text values
+     * Create a User entity based on an existing identity
      *
-     * @param   int     $id
-     * @param   string  $name
+     * @param UserId $id
      *
-     * @return  User
+     * @return User
      */
-    public static function fromText($id, $name)
+    public static function fromId(UserId $id)
     {
-        return new static(new UserId($id), $name);
+        $user = new static();
+        $user->id = $id;
+
+        return $user;
     }
 
     /**
-     * @param $id
-     * @param $name
+     * Create a User entity based on an identity represented as a string
+     *
+     * @param string $id
+     *
+     * @return User
      */
-    public function __construct(UserId $id, $name)
+    public static function fromIdString($id)
     {
-        $this->id = $id;
-        $this->name = $name;
+        return static::fromId(new UserId($id));
     }
 
     /**
-     * @return string
+     * Office constructor
      */
-    public function __toString()
+    private function __construct()
     {
-        return (string) $this->getId();
+
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name ?: null;
     }
 
     /**

@@ -17,34 +17,38 @@ class Office
     private $name;
 
     /**
-     * Create an Office value object from raw text values
+     * Create an Office entity based on an existing identity
      *
-     * @param   int     $id
-     * @param   string  $name
+     * @param OfficeId $id
      *
-     * @return  Office
+     * @return Office
      */
-    public static function fromText($id, $name)
+    public static function fromId(OfficeId $id)
     {
-        return new static(new OfficeId($id), $name);
+        $office = new static();
+        $office->id = $id;
+
+        return $office;
     }
 
     /**
-     * @param $id
-     * @param $name
+     * Create a Office entity based on an identity represented as a string
+     *
+     * @param string $id
+     *
+     * @return Office
      */
-    public function __construct(OfficeId $id, $name)
+    public static function fromIdString($id)
     {
-        $this->id = $id;
-        $this->name = $name;
+        return static::fromId(new OfficeId($id));
     }
 
     /**
-     * @return string
+     * Office constructor
      */
-    public function __toString()
+    private function __construct()
     {
-        return (string) $this->getId();
+
     }
 
     /**
@@ -61,5 +65,13 @@ class Office
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name ?: null;
     }
 }

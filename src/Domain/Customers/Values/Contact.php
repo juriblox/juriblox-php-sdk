@@ -17,17 +17,15 @@ class Contact
     private $name;
 
     /**
-     * CustomerContact constructor
+     * Contact constructor
      *
      * @param $name
      * @param $email
      */
-    public function __construct($name, $email)
+    public function __construct($name, $email = null)
     {
-        Assertion::email($email);
-
         $this->name = $name;
-        $this->email = strtolower($email);
+        $this->setEmail($email);
     }
 
     /**
@@ -35,6 +33,11 @@ class Contact
      */
     public function __toString()
     {
+        if ($this->getEmail() === null)
+        {
+            return $this->getName();
+        }
+
         return sprintf('%s <%s>', $this->getName(), $this->getEmail());
     }
 
@@ -52,5 +55,15 @@ class Contact
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * @param string $email
+     */
+    public function setEmail($email)
+    {
+        Assertion::nullOrEmail($email);
+
+        $this->email = strtolower($email) ?: null;
     }
 }

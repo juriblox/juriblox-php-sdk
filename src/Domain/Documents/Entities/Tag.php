@@ -76,6 +76,6 @@ class Tag
      */
     public function setName($name)
     {
-        $this->name = $name ?: null;
+        $this->name = $name;
     }
 }
