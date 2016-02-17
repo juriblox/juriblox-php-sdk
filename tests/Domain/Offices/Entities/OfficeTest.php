@@ -10,41 +10,43 @@ class OfficeTest extends \PHPUnit_Framework_TestCase
     const VALID_OFFICE_NAME = 'JuriBlox';
 
     /**
-     * @expectedException \PHPUnit_Framework_Error
+     * @expectedException \JuriBlox\Sdk\Exceptions\AssertionFailedException
      */
-    public function test_constructor_with_invalid_id()
+    public function test_fromIdString_with_invalid_id()
     {
-        new Office(new \stdClass(), self::VALID_OFFICE_NAME);
+        Office::fromIdString('INVALID');
     }
 
-    public function test_constructor_with_valid_data()
+    public function test_fromIdString_with_valid_id()
     {
-        $officeId = new OfficeId(self::VALID_OFFICE_ID);
-
-        $office = new Office($officeId, self::VALID_OFFICE_NAME);
+        $office = Office::fromIdString(self::VALID_OFFICE_ID);
 
         $this->assertInstanceOf(OfficeId::class, $office->getId());
         $this->assertEquals(self::VALID_OFFICE_ID, $office->getId()->getId());
         $this->assertEquals(self::VALID_OFFICE_ID, (string) $office->getId());
-
-        $this->assertEquals(self::VALID_OFFICE_NAME, $office->getName());
     }
 
     /**
-     * @expectedException JuriBlox\Sdk\Exceptions\AssertionFailedException
+     * @expectedException \PHPUnit_Framework_Error
      */
-    public function test_fromText_with_invalid_id()
+    public function test_fromId_with_invalid_id()
     {
-        Office::fromText('INVALID', self::VALID_OFFICE_NAME);
+        Office::fromId(new \stdClass());
     }
 
-    public function test_fromText_with_valid_data()
+    public function test_fromId_with_valid_id()
     {
-        $office = Office::fromText(self::VALID_OFFICE_ID, self::VALID_OFFICE_NAME);
+        $office = Office::fromId(new OfficeId(self::VALID_OFFICE_ID));
 
         $this->assertInstanceOf(OfficeId::class, $office->getId());
         $this->assertEquals(self::VALID_OFFICE_ID, $office->getId()->getId());
         $this->assertEquals(self::VALID_OFFICE_ID, (string) $office->getId());
+    }
+
+    public function test_with_valid_data()
+    {
+        $office = Office::fromIdString(self::VALID_OFFICE_ID);
+        $office->setName(self::VALID_OFFICE_NAME);
 
         $this->assertEquals(self::VALID_OFFICE_NAME, $office->getName());
     }

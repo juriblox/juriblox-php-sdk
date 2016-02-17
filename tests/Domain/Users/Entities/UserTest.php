@@ -10,41 +10,43 @@ class UserTest extends \PHPUnit_Framework_TestCase
     const VALID_USER_NAME = 'John Doe';
 
     /**
-     * @expectedException \PHPUnit_Framework_Error
+     * @expectedException \JuriBlox\Sdk\Exceptions\AssertionFailedException
      */
-    public function test_constructor_with_invalid_id()
+    public function test_fromIdString_with_invalid_id()
     {
-        new User(new \stdClass(), self::VALID_USER_NAME);
+        User::fromIdString('INVALID');
     }
 
-    public function test_constructor_with_valid_data()
+    public function test_fromIdString_with_valid_id()
     {
-        $userId = new UserId(self::VALID_USER_ID);
-
-        $user = new User($userId, self::VALID_USER_NAME);
+        $user = User::fromIdString(self::VALID_USER_ID);
 
         $this->assertInstanceOf(UserId::class, $user->getId());
         $this->assertEquals(self::VALID_USER_ID, $user->getId()->getId());
         $this->assertEquals(self::VALID_USER_ID, (string) $user->getId());
-
-        $this->assertEquals(self::VALID_USER_NAME, $user->getName());
     }
 
     /**
-     * @expectedException JuriBlox\Sdk\Exceptions\AssertionFailedException
+     * @expectedException \PHPUnit_Framework_Error
      */
-    public function test_fromText_with_invalid_id()
+    public function test_fromId_with_invalid_id()
     {
-        User::fromText('INVALID', self::VALID_USER_NAME);
+        User::fromId(new \stdClass());
     }
 
-    public function test_fromText_with_valid_data()
+    public function test_fromId_with_valid_id()
     {
-        $user = User::fromText(self::VALID_USER_ID, self::VALID_USER_NAME);
+        $user = User::fromId(new UserId(self::VALID_USER_ID));
 
         $this->assertInstanceOf(UserId::class, $user->getId());
         $this->assertEquals(self::VALID_USER_ID, $user->getId()->getId());
         $this->assertEquals(self::VALID_USER_ID, (string) $user->getId());
+    }
+
+    public function test_with_valid_data()
+    {
+        $user = User::fromIdString(self::VALID_USER_ID);
+        $user->setName(self::VALID_USER_NAME);
 
         $this->assertEquals(self::VALID_USER_NAME, $user->getName());
     }

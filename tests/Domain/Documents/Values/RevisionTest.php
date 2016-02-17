@@ -36,5 +36,6 @@ class RevisionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(self::VALID_TEMPLATE_ID, (string) $revision->getDerivedOf());
 
         $this->assertEquals(self::VALID_REVISION_VERSION, $revision->getVersion());
+        $this->assertEquals(self::VALID_REVISION_VERSION, (string) $revision);
     }
 }
