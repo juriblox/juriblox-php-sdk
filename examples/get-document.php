@@ -13,3 +13,5 @@ $dotenv->load();
 $client = new Client(new GuzzleDriver(getenv('JURIBLOX_CLIENT_ID'), getenv('JURIBLOX_CLIENT_KEY')), 'JuriBlox SDK Example');
 
 $document = $client->documents()->findOneById(new DocumentId(40));
+
+print_r($document);
