@@ -2,6 +2,8 @@
 
 use Dotenv\Dotenv;
 
+require __DIR__ . '/../vendor/autoload.php';
+
 $vendors = @include __DIR__ . '/../vendor/autoload.php';
 if (!$vendors)
 {
