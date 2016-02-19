@@ -5,7 +5,10 @@ namespace JuriBlox\Sdk\Infrastructure\Endpoints;
 use JuriBlox\Sdk\Domain\Customers\Entities\Customer;
 use JuriBlox\Sdk\Domain\Customers\Values\Contact;
 use JuriBlox\Sdk\Domain\Documents\Entities\Document;
+use JuriBlox\Sdk\Domain\Documents\Entities\Question;
+use JuriBlox\Sdk\Domain\Documents\Entities\QuestionAnswer;
 use JuriBlox\Sdk\Domain\Documents\Entities\Tag;
+use JuriBlox\Sdk\Domain\Documents\Factories\QuestionAnswerFactory;
 use JuriBlox\Sdk\Domain\Documents\Values\DocumentId;
 use JuriBlox\Sdk\Domain\Documents\Values\DocumentReference;
 use JuriBlox\Sdk\Domain\Documents\Values\File;
@@ -57,7 +60,7 @@ class DocumentsEndpoint extends AbstractEndpoint
         $document->setTitle($result->title);
         $document->setReference(new DocumentReference($result->reference));
 
-        //$document->setAlertDate(new \DateTime($result->validTill));
+        $document->setAlertDate(new \DateTime($result->validTill));
         $document->setCreatedDatetime(new \DateTime($result->createdAt));
 
         $office = Office::fromIdString($result->office->id);
@@ -65,7 +68,7 @@ class DocumentsEndpoint extends AbstractEndpoint
 
         $document->setOffice($office);
 
-        if ($result->customer !== null)
+        if ($result->customer !== [])
         {
             $customer = Customer::fromReferenceString($result->customer->reference);
             $customer->setCompany($result->customer->company);
@@ -94,6 +97,12 @@ class DocumentsEndpoint extends AbstractEndpoint
             $tag->setName($entry->name);
 
             $document->addTag($tag);
+        }
+
+        // Answers
+        foreach ($result->answers as $entry)
+        {
+            $document->addAnswer(QuestionAnswerFactory::createFromDto($entry));
         }
 
         return $document;

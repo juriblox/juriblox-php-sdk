@@ -120,8 +120,19 @@ class Document
      */
     private function __construct()
     {
+        $this->clearAnswers();
         $this->clearFiles();
         $this->clearTags();
+    }
+
+    /**
+     * Add an answer
+     *
+     * @param QuestionAnswer $answer
+     */
+    public function addAnswer(QuestionAnswer $answer)
+    {
+        $this->answers[] = $answer;
     }
 
     /**
@@ -142,6 +153,14 @@ class Document
     public function addTag(Tag $tag)
     {
         $this->tags[] = $tag;
+    }
+
+    /**
+     * Clear answers
+     */
+    public function clearAnswers()
+    {
+        $this->answers = [];
     }
 
     /**
