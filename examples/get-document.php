@@ -8,6 +8,6 @@ require __DIR__  . '/bootstrap.php';
 
 $client = new Client(new GuzzleDriver(getenv('JURIBLOX_CLIENT_ID'), getenv('JURIBLOX_CLIENT_KEY')), 'JuriBlox SDK Example');
 
-$document = $client->documents()->findOneById(new DocumentId(51));
+$document = $client->documents()->findOneById(new DocumentId(55));
 
 print_r($document);
