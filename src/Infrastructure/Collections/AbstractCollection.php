@@ -79,7 +79,7 @@ abstract class AbstractCollection implements \Iterator, \Countable
         $this->index = 0;
         $this->records = [];
 
-        $this->clearUriParameters();
+        $this->clearUriQueryParameters();
     }
 
     /**
@@ -139,7 +139,7 @@ abstract class AbstractCollection implements \Iterator, \Countable
     /**
      * Clear the URI parameters we have defined
      */
-    protected function clearUriParameters()
+    protected function clearUriQueryParameters()
     {
         $this->parameters = [];
     }
@@ -172,6 +172,19 @@ abstract class AbstractCollection implements \Iterator, \Countable
     /**
      * @return string
      */
+    protected function getCombinedUri()
+    {
+        if (sizeof($this->parameters) == 0)
+        {
+            return $this->getUri();
+        }
+
+        return $this->getUri() . '?' . http_build_query($this->parameters);
+    }
+
+    /**
+     * @return string
+     */
     protected function getKey()
     {
         return $this->key;
@@ -186,28 +199,15 @@ abstract class AbstractCollection implements \Iterator, \Countable
     }
 
     /**
-     * @return string
-     */
-    protected function getUriWithParameters()
-    {
-        if (sizeof($this->parameters) == 0)
-        {
-            return $this->getUri();
-        }
-
-        return $this->getUri() . '?' . http_build_query($this->parameters);
-    }
-
-    /**
      * Merge the URI parameters
      *
      * @param $parameters
      */
-    protected function mergeUriParameters($parameters)
+    protected function mergeUriQueryParameters($parameters)
     {
         foreach ($parameters as $name => $value)
         {
-            $this->setUriParameter($name, $value);
+            $this->setUriQueryParameter($name, $value);
         }
     }
 
@@ -217,14 +217,14 @@ abstract class AbstractCollection implements \Iterator, \Countable
      * @param $name
      * @param $value
      */
-    protected function replaceUriParameter($name, $value)
+    protected function replaceUriQueryParameter($name, $value)
     {
         if (!array_key_exists($name, $this->parameters))
         {
             throw new \InvalidArgumentException(sprintf('The URI parameter "%s" is unknown. Use setUriParameter() if this is by design', $name));
         }
 
-        $this->setUriParameter($name, $value);
+        $this->setUriQueryParameter($name, $value);
     }
 
     /**
@@ -254,7 +254,7 @@ abstract class AbstractCollection implements \Iterator, \Countable
      * @param $name
      * @param $value
      */
-    protected function setUriParameter($name, $value)
+    protected function setUriQueryParameter($name, $value)
     {
         $this->parameters[$name] = $value;
     }
@@ -264,7 +264,7 @@ abstract class AbstractCollection implements \Iterator, \Countable
      *
      * @param array $parameters
      */
-    protected function setUriParameters(array $parameters)
+    protected function setUriQueryParameters(array $parameters)
     {
         $this->parameters = $parameters;
     }

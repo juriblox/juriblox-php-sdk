@@ -100,10 +100,10 @@ abstract class AbstractPagedCollection extends AbstractCollection
      */
     protected function fetch()
     {
-        $this->setUriParameter('page', $this->currentPage);
-        $this->setUriParameter('limit', $this->recordsPerPage);
+        $this->setUriQueryParameter('page', $this->currentPage);
+        $this->setUriQueryParameter('limit', $this->recordsPerPage);
 
-        $result = $this->endpoint->getDriver()->get($this->getUriWithParameters());
+        $result = $this->endpoint->getDriver()->get($this->getCombinedUri());
 
         if (!isset($result->{$this->getKey()}))
         {
