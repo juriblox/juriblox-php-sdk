@@ -4,7 +4,7 @@ namespace JuriBlox\Sdk\Infrastructure\Endpoints;
 
 use JuriBlox\Sdk\Infrastructure\Collections\TemplatesCollection;
 
-class TemplatesEndpoint extends AbstractEndpoint
+class TemplatesEndpoint extends AbstractEndpoint implements EndpointInterface
 {
     /**
      * Get all templates
@@ -13,6 +13,6 @@ class TemplatesEndpoint extends AbstractEndpoint
      */
     public function findAll()
     {
-        return TemplatesCollection::fromDriver($this->driver);
+        return TemplatesCollection::fromEndpoint($this);
     }
 }

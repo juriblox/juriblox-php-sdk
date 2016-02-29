@@ -103,7 +103,7 @@ abstract class AbstractPagedCollection extends AbstractCollection
         $this->setUriParameter('page', $this->currentPage);
         $this->setUriParameter('limit', $this->recordsPerPage);
 
-        $result = $this->driver->get($this->getUriWithParameters());
+        $result = $this->endpoint->getDriver()->get($this->getUriWithParameters());
 
         if (!isset($result->{$this->getKey()}))
         {

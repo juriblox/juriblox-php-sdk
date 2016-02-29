@@ -2,22 +2,24 @@
 
 namespace JuriBlox\Sdk\Infrastructure\Collections;
 
-use JuriBlox\Sdk\Infrastructure\Drivers\DriverInterface;
+use JuriBlox\Sdk\Infrastructure\Endpoints\EndpointInterface;
 
 class CustomTemplatesCollection extends TemplatesCollection
 {
     /**
-     * {@inheritdoc}
+     * @param EndpointInterface $endpoint
+     *
+     * @return CustomTemplatesCollection
      */
-    public static function fromDriver(DriverInterface $driver)
+    public static function fromEndpoint($endpoint)
     {
-        return static::fromDriverWithSettings($driver, 'templates/custom', 'templates');
+        return static::fromEndpointWithSettings($endpoint, 'templates/custom', 'templates');
     }
 
     /**
      * {@inheritdoc}
      */
-    public function createEntityFromData($dto)
+    protected function createEntityFromData($dto)
     {
         $template = parent::createEntityFromData($dto);
         $template->setCustom(true);

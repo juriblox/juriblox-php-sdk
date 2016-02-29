@@ -2,7 +2,7 @@
 
 namespace JuriBlox\Sdk\Domain\Customers\Values;
 
-use JuriBlox\Sdk\Assertion;
+use JuriBlox\Sdk\Validation\Assertion;
 
 class Contact
 {

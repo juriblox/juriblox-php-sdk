@@ -3,16 +3,15 @@
 namespace JuriBlox\Sdk\Infrastructure\Collections;
 
 use JuriBlox\Sdk\Exceptions\CannotParseResponseException;
-use JuriBlox\Sdk\Infrastructure\Drivers\DriverInterface;
+use JuriBlox\Sdk\Infrastructure\Endpoints\EndpointInterface;
+use JuriBlox\Sdk\Validation\Assertion;
 
-abstract class AbstractCollection implements CollectionInterface, \Iterator, \Countable
+abstract class AbstractCollection implements \Iterator, \Countable
 {
     /**
-     * Driver to use to perform requests
-     *
-     * @var DriverInterface
+     * @var EndpointInterface
      */
-    protected $driver;
+    protected $endpoint;
 
     /**
      * Index within the current page
@@ -52,16 +51,20 @@ abstract class AbstractCollection implements CollectionInterface, \Iterator, \Co
     /**
      * Initiate a collection along with the URI and key
      *
-     * @param DriverInterface $driver
-     * @param string          $uri
-     * @param string          $key
+     * @param EndpointInterface $endpoint
+     *
+     * @param string $uri
+     * @param string $key
      *
      * @return AbstractCollection
      */
-    public static function fromDriverWithSettings(DriverInterface $driver, $uri, $key)
+    public static function fromEndpointWithSettings($endpoint, $uri, $key)
     {
+        // TODO: Totdat de interfaces van PHP eindelijk volwassen worden
+        Assertion::isInstanceOf($endpoint, EndpointInterface::class);
+
         $collection = new static();
-        $collection->driver = $driver;
+        $collection->endpoint = $endpoint;
         $collection->uri = $uri;
         $collection->key = $key;
 
@@ -97,7 +100,7 @@ abstract class AbstractCollection implements CollectionInterface, \Iterator, \Co
             return null;
         }
 
-        return static::createEntityFromData($this->records[$this->index]);
+        return $this->createEntityFromData($this->records[$this->index]);
     }
 
     /**
@@ -139,6 +142,16 @@ abstract class AbstractCollection implements CollectionInterface, \Iterator, \Co
     protected function clearUriParameters()
     {
         $this->parameters = [];
+    }
+
+    /**
+     * Create an entity based on a DTO object
+     *
+     * @param $dto
+     */
+    protected function createEntityFromData($dto)
+    {
+        throw new \BadMethodCallException();
     }
 
     /**

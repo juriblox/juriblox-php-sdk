@@ -32,4 +32,12 @@ abstract class AbstractEndpoint
     {
         $this->driver = $driver;
     }
+
+    /**
+     * @return DriverInterface
+     */
+    public function getDriver()
+    {
+        return $this->driver;
+    }
 }

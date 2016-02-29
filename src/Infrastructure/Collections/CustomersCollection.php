@@ -4,18 +4,18 @@ namespace JuriBlox\Sdk\Infrastructure\Collections;
 
 use JuriBlox\Sdk\Domain\Customers\Entities\Customer;
 use JuriBlox\Sdk\Domain\Customers\Values\Contact;
-use JuriBlox\Sdk\Infrastructure\Drivers\DriverInterface;
+use JuriBlox\Sdk\Infrastructure\Endpoints\EndpointInterface;
 
 class CustomersCollection extends AbstractPagedCollection
 {
     /**
-     * @param DriverInterface $driver
+     * @param EndpointInterface $endpoint
      *
      * @return CustomersCollection
      */
-    public static function fromDriver(DriverInterface $driver)
+    public static function fromEndpoint($endpoint)
     {
-        return static::fromDriverWithSettings($driver, 'customers', 'customers');
+        return static::fromEndpointWithSettings($endpoint, 'customers', 'customers');
     }
 
     /**
@@ -23,7 +23,7 @@ class CustomersCollection extends AbstractPagedCollection
      *
      * @return Customer
      */
-    public function createEntityFromData($dto)
+    protected function createEntityFromData($dto)
     {
         $customer = Customer::fromReferenceString($dto->reference);
         $customer->setCompany($dto->company);

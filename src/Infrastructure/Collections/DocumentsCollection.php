@@ -3,33 +3,24 @@
 namespace JuriBlox\Sdk\Infrastructure\Collections;
 
 use JuriBlox\Sdk\Domain\Documents\Entities\Template;
+use JuriBlox\Sdk\Domain\Documents\Factories\DocumentFactory;
 use JuriBlox\Sdk\Domain\Documents\Values\DocumentReference;
 use JuriBlox\Sdk\Domain\Documents\Values\TemplateId;
-use JuriBlox\Sdk\Infrastructure\Drivers\DriverInterface;
+use JuriBlox\Sdk\Infrastructure\Endpoints\EndpointInterface;
 
 class DocumentsCollection extends AbstractPagedCollection
 {
     /**
-     * @param DriverInterface $driver
+     * @param EndpointInterface $endpoint
      *
      * @return DocumentsCollection
      */
-    public static function fromDriver(DriverInterface $driver)
+    public static function fromEndpoint($endpoint)
     {
         $collection = new static();
-        $collection->driver = $driver;
+        $collection->endpoint = $endpoint;
 
         return $collection;
-    }
-
-    /**
-     * @param $dto
-     *
-     * @return Template
-     */
-    public function createEntityFromData($dto)
-    {
-        print_r($dto); exit();
     }
 
     /**
@@ -64,5 +55,15 @@ class DocumentsCollection extends AbstractPagedCollection
         ]);
 
         return $this;
+    }
+
+    /**
+     * @param $dto
+     *
+     * @return Document
+     */
+    protected function createEntityFromData($dto)
+    {
+        return DocumentFactory::createFromDto($dto);
     }
 }

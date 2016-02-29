@@ -4,7 +4,7 @@ namespace JuriBlox\Sdk\Infrastructure\Endpoints;
 
 use JuriBlox\Sdk\Infrastructure\Collections\CustomersCollection;
 
-class CustomersEndpoint extends AbstractEndpoint
+class CustomersEndpoint extends AbstractEndpoint implements EndpointInterface
 {
     /**
      * Get all customers
@@ -13,6 +13,6 @@ class CustomersEndpoint extends AbstractEndpoint
      */
     public function findAll()
     {
-        return CustomersCollection::fromDriver($this->driver);
+        return CustomersCollection::fromEndpoint($this);
     }
 }

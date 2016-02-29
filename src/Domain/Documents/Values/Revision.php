@@ -2,8 +2,8 @@
 
 namespace JuriBlox\Sdk\Domain\Documents\Values;
 
-use JuriBlox\Sdk\Assertion;
 use JuriBlox\Sdk\Domain\IdInterface;
+use JuriBlox\Sdk\Validation\Assertion;
 
 class Revision
 {
