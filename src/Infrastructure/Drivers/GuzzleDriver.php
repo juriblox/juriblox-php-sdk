@@ -8,6 +8,7 @@ use GuzzleHttp\Psr7\Response;
 
 use JuriBlox\Sdk\Client;
 use JuriBlox\Sdk\Exceptions\AuthorizationException;
+use JuriBlox\Sdk\Exceptions\EntityNotFoundException;
 use JuriBlox\Sdk\Exceptions\RateLimitingException;
 use JuriBlox\Sdk\Exceptions\CannotParseResponseException;
 
@@ -17,6 +18,11 @@ class GuzzleDriver implements DriverInterface
      * Authorization error
      */
     const STATUS_AUTHORIZATION_ERROR = 403;
+
+    /**
+     * Resource not found
+     */
+    const STATUS_NOT_FOUND = 404;
 
     /**
      * Requests are being throttled due to a requests limit
@@ -142,8 +148,17 @@ class GuzzleDriver implements DriverInterface
                 $exceptionMessage = $result->error->message;
             }
 
+            // Throw "entity not found" exception
+            if ($response->getStatusCode() == self::STATUS_NOT_FOUND)
+            {
+                $castedException = new EntityNotFoundException($exceptionMessage, $exceptionCode);
+                $castedException->setResponseContext($response);
+
+                throw $castedException;
+            }
+
             // Throw authorization exception
-            if ($response->getStatusCode() == self::STATUS_AUTHORIZATION_ERROR)
+            elseif ($response->getStatusCode() == self::STATUS_AUTHORIZATION_ERROR)
             {
                 $castedException = new AuthorizationException($exceptionMessage, $exceptionCode);
                 $castedException->setResponseContext($response);
