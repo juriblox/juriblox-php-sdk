@@ -188,7 +188,7 @@ class Document
     }
 
     /**
-     * @return array
+     * @return array|QuestionAnswer[]
      */
     public function getAnswers()
     {
@@ -212,7 +212,7 @@ class Document
     }
 
     /**
-     * @return array
+     * @return array|File[]
      */
     public function getFiles()
     {
@@ -249,6 +249,14 @@ class Document
     public function getReference()
     {
         return $this->reference;
+    }
+
+    /**
+     * @return array|Tag[]
+     */
+    public function getTags()
+    {
+        return $this->tags;
     }
 
     /**

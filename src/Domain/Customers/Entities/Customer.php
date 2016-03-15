@@ -100,4 +100,22 @@ class Customer
     {
         $this->contact = $contact;
     }
+
+    public function __toString()
+    {
+        if ($this->contact !== null)
+        {
+            $output = $this->contact;
+            if ($this->company !== null)
+            {
+                $output .= sprintf(' (%s)', $this->company);
+            }
+        }
+        else
+        {
+            $output = $this->company;
+        }
+
+        return $output;
+    }
 }
