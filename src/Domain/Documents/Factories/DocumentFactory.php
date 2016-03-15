@@ -43,13 +43,16 @@ class DocumentFactory
             $customer = Customer::fromReferenceString($dto->customer->reference);
             $customer->setCompany($dto->customer->company);
 
-            $contact = new Contact($dto->contact->name);
-            if ($dto->contact->email !== null)
+            if (isset($dto->contact))
             {
-                $contact->setEmail($dto->contact->email);
-            }
+                $contact = new Contact($dto->contact->name);
+                if ($dto->contact->email !== null)
+                {
+                    $contact->setEmail($dto->contact->email);
+                }
 
-            $customer->setContact($contact);
+                $customer->setContact($contact);
+            }
 
             $document->setCustomer($customer);
         }
@@ -72,9 +75,12 @@ class DocumentFactory
         }
 
         // Answers
-        foreach ($dto->answers as $entry)
+        if (isset($dto->answers))
         {
-            $document->addAnswer(QuestionAnswerFactory::createFromDto($entry));
+            foreach ($dto->answers as $entry)
+            {
+                $document->addAnswer(QuestionAnswerFactory::createFromDto($entry));
+            }
         }
 
         return $document;
