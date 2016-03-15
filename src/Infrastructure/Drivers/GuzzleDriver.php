@@ -58,17 +58,17 @@ class GuzzleDriver implements DriverInterface
     /**
      * {@inheritdoc}
      */
-    public function get($uri, $parameters = null)
+    public function get($uri, $segments = null)
     {
-        return $this->request('GET', $uri, $parameters);
+        return $this->request('GET', $uri, $segments);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function post($uri, $parameters = null, $body)
+    public function post($uri, $segments = null, $body)
     {
-        return $this->request('POST', $uri, $parameters, $body);
+        return $this->request('POST', $uri, $segments, $body);
     }
 
     /**
@@ -100,7 +100,7 @@ class GuzzleDriver implements DriverInterface
      *
      * @param       $method
      * @param       $uri
-     * @param null  $parameters
+     * @param null  $segments
      * @param array $body
      *
      * @return object
@@ -109,11 +109,11 @@ class GuzzleDriver implements DriverInterface
      * @throws CannotParseResponseException
      * @throws RateLimitingException
      */
-    private function request($method, $uri, $parameters = null, array $body = null)
+    private function request($method, $uri, $segments = null, array $body = null)
     {
-        $parameters = ($parameters === null) ? [] : $parameters;
+        $segments = ($segments === null) ? [] : $segments;
 
-        array_walk($parameters, function($value, $name) use (&$uri) {
+        array_walk($segments, function($value, $name) use (&$uri) {
             $uri = str_replace('{' . $name . '}', $value, $uri);
         }, $uri);
 

@@ -79,7 +79,7 @@ abstract class AbstractCollection implements \Iterator, \Countable
         $this->index = 0;
         $this->records = [];
 
-        $this->clearUriQueryParameters();
+        $this->clearParameters();
     }
 
     /**
@@ -139,7 +139,7 @@ abstract class AbstractCollection implements \Iterator, \Countable
     /**
      * Clear the URI parameters we have defined
      */
-    protected function clearUriQueryParameters()
+    protected function clearParameters()
     {
         $this->parameters = [];
     }
@@ -203,11 +203,11 @@ abstract class AbstractCollection implements \Iterator, \Countable
      *
      * @param $parameters
      */
-    protected function mergeUriQueryParameters($parameters)
+    protected function mergeParameters($parameters)
     {
         foreach ($parameters as $name => $value)
         {
-            $this->setUriQueryParameter($name, $value);
+            $this->setParameter($name, $value);
         }
     }
 
@@ -217,14 +217,14 @@ abstract class AbstractCollection implements \Iterator, \Countable
      * @param $name
      * @param $value
      */
-    protected function replaceUriQueryParameter($name, $value)
+    protected function replaceParameter($name, $value)
     {
         if (!array_key_exists($name, $this->parameters))
         {
             throw new \InvalidArgumentException(sprintf('The URI parameter "%s" is unknown. Use setUriParameter() if this is by design', $name));
         }
 
-        $this->setUriQueryParameter($name, $value);
+        $this->setParameter($name, $value);
     }
 
     /**
@@ -237,13 +237,13 @@ abstract class AbstractCollection implements \Iterator, \Countable
 
     /**
      * @param string $uri
-     * @param array  $inlineParameters
+     * @param array  $segments
      */
-    protected function setUri($uri, array $inlineParameters = [])
+    protected function setUri($uri, array $segments = [])
     {
         $this->uri = $uri;
 
-        array_walk($inlineParameters, function($value, $name) use (&$uri) {
+        array_walk($segments, function($value, $name) use (&$uri) {
             $uri = str_replace('{' . $name . '}', $value, $uri);
         }, $uri);
     }
@@ -254,7 +254,7 @@ abstract class AbstractCollection implements \Iterator, \Countable
      * @param $name
      * @param $value
      */
-    protected function setUriQueryParameter($name, $value)
+    protected function setParameter($name, $value)
     {
         $this->parameters[$name] = $value;
     }
@@ -264,7 +264,7 @@ abstract class AbstractCollection implements \Iterator, \Countable
      *
      * @param array $parameters
      */
-    protected function setUriQueryParameters(array $parameters)
+    protected function setParameters(array $parameters)
     {
         $this->parameters = $parameters;
     }

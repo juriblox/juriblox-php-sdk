@@ -35,7 +35,7 @@ class DocumentsCollection extends AbstractPagedCollection
         $this->setKey('documents');
         $this->setUri('documents');
 
-        $this->setUriQueryParameter('reference', $reference->getReference());
+        $this->setParameter('reference', $reference->getReference());
 
         return $this;
     }

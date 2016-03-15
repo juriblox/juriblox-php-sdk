@@ -19,7 +19,7 @@ interface DriverInterface
      * Send GET request
      *
      * @param      $uri
-     * @param null $parameters
+     * @param null $segments
      *
      * @return object
      *
@@ -27,13 +27,13 @@ interface DriverInterface
      * @throws CannotParseResponseException
      * @throws RateLimitingException
      */
-    function get($uri, $parameters = null);
+    function get($uri, $segments = null);
 
     /**
      * Send POST request
      *
      * @param      $uri
-     * @param null $parameters
+     * @param null $segments
      * @param      $body
      *
      * @return object
@@ -42,7 +42,7 @@ interface DriverInterface
      * @throws CannotParseResponseException
      * @throws RateLimitingException
      */
-    function post($uri, $parameters = null, $body);
+    function post($uri, $segments = null, $body);
 
     /**
      * Sets the application's name for easier identification in server logs
