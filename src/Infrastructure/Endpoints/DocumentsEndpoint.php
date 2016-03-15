@@ -16,7 +16,7 @@ class DocumentsEndpoint extends AbstractEndpoint implements EndpointInterface
      *
      * @param DocumentReference $reference
      *
-     * @return DocumentsCollection
+     * @return DocumentsCollection|Document[]
      */
     public function findByReference(DocumentReference $reference)
     {
@@ -28,7 +28,7 @@ class DocumentsEndpoint extends AbstractEndpoint implements EndpointInterface
      *
      * @param TemplateId $templateId
      *
-     * @return DocumentsCollection
+     * @return DocumentsCollection|Document[]
      */
     public function findWithTemplateId(TemplateId $templateId)
     {

@@ -2,6 +2,7 @@
 
 namespace JuriBlox\Sdk\Infrastructure\Endpoints;
 
+use JuriBlox\Sdk\Domain\Documents\Entities\Template;
 use JuriBlox\Sdk\Infrastructure\Collections\CustomTemplatesCollection;
 use JuriBlox\Sdk\Infrastructure\Collections\TemplatesCollection;
 
@@ -10,7 +11,7 @@ class CustomTemplatesEndpoint extends AbstractEndpoint implements EndpointInterf
     /**
      * Get all templates
      *
-     * @return TemplatesCollection
+     * @return TemplatesCollection|Template[]
      */
     public function findAll()
     {
