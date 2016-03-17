@@ -24,6 +24,18 @@ abstract class AbstractEndpoint
     }
 
     /**
+     * Create an endpoint using an existing (parent) endpoint
+     *
+     * @param EndpointInterface $endpoint
+     *
+     * @return AbstractEndpoint
+     */
+    public static function fromEndpoint(EndpointInterface $endpoint)
+    {
+        return static::fromDriver($endpoint->getDriver());
+    }
+
+    /**
      * AbstractEndpoint constructor
      *
      * @param DriverInterface $driver

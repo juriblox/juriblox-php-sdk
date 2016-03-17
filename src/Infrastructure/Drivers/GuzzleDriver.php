@@ -110,9 +110,9 @@ class GuzzleDriver implements DriverInterface
      * @param array $body
      *
      * @return object
-     *
      * @throws AuthorizationException
      * @throws CannotParseResponseException
+     * @throws EntityNotFoundException
      * @throws RateLimitingException
      */
     private function request($method, $uri, $segments = null, array $body = null)

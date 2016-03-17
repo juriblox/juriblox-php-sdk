@@ -28,8 +28,8 @@ class Client
     private $driver;
 
     /**
-     * @param DriverInterface   $driver
-     * @param string            $applicationName       Web application's name for easier identification in logs
+     * @param DriverInterface $driver
+     * @param string          $applicationName Web application's name for easier identification in logs
      */
     public function __construct(DriverInterface $driver, $applicationName = null)
     {

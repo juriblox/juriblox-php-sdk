@@ -53,20 +53,23 @@ abstract class AbstractCollection implements \Iterator, \Countable
      *
      * @param EndpointInterface $endpoint
      *
-     * @param string $uri
-     * @param string $key
+     * @param string            $uri
+     * @param string            $key
+     *
+     * @param array             $segments
      *
      * @return AbstractCollection
      */
-    public static function fromEndpointWithSettings($endpoint, $uri, $key)
+    public static function fromEndpointWithSettings($endpoint, $uri, $key, $segments = [])
     {
         // TODO: Totdat de interfaces van PHP eindelijk volwassen worden
         Assertion::isInstanceOf($endpoint, EndpointInterface::class);
 
         $collection = new static();
         $collection->endpoint = $endpoint;
-        $collection->uri = $uri;
+
         $collection->key = $key;
+        $collection->setUri($uri, $segments);
 
         return $collection;
     }
@@ -159,11 +162,13 @@ abstract class AbstractCollection implements \Iterator, \Countable
      */
     protected function fetch()
     {
-        $result = $this->driver->get($this->uri);
+        $result = $this->endpoint->getDriver()->get($this->uri);
+
+        print_r($result); exit();
 
         if (!isset($result->{$this->key}))
         {
-            throw new CannotParseResponseException(sprintf('The "%s" key does not exist in the result returned by the API'));
+            throw new CannotParseResponseException(sprintf('The "%s" key does not exist in the result returned by the API', $this->key));
         }
 
         $this->records = $result->{$this->key};
@@ -241,11 +246,11 @@ abstract class AbstractCollection implements \Iterator, \Countable
      */
     protected function setUri($uri, array $segments = [])
     {
-        $this->uri = $uri;
-
         array_walk($segments, function($value, $name) use (&$uri) {
             $uri = str_replace('{' . $name . '}', $value, $uri);
         }, $uri);
+
+        $this->uri = $uri;
     }
 
     /**
