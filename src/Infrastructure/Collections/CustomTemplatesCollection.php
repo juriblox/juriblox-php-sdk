@@ -2,16 +2,16 @@
 
 namespace JuriBlox\Sdk\Infrastructure\Collections;
 
-use JuriBlox\Sdk\Infrastructure\Endpoints\EndpointInterface;
+use JuriBlox\Sdk\Infrastructure\Endpoints\CustomTemplatesEndpoint;
 
 class CustomTemplatesCollection extends TemplatesCollection
 {
     /**
-     * @param EndpointInterface $endpoint
+     * @param CustomTemplatesEndpoint $endpoint
      *
      * @return CustomTemplatesCollection
      */
-    public static function fromEndpoint($endpoint)
+    public static function fromEndpoint(CustomTemplatesEndpoint $endpoint)
     {
         return static::fromEndpointWithSettings($endpoint, 'templates/custom', 'templates');
     }

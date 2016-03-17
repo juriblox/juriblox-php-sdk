@@ -4,16 +4,16 @@ namespace JuriBlox\Sdk\Infrastructure\Collections;
 
 use JuriBlox\Sdk\Domain\Customers\Entities\Customer;
 use JuriBlox\Sdk\Domain\Customers\Values\Contact;
-use JuriBlox\Sdk\Infrastructure\Endpoints\EndpointInterface;
+use JuriBlox\Sdk\Infrastructure\Endpoints\CustomersEndpoint;
 
 class CustomersCollection extends AbstractPagedCollection
 {
     /**
-     * @param EndpointInterface $endpoint
+     * @param CustomersEndpoint $endpoint
      *
      * @return CustomersCollection
      */
-    public static function fromEndpoint($endpoint)
+    public static function fromEndpoint(CustomersEndpoint $endpoint)
     {
         return static::fromEndpointWithSettings($endpoint, 'customers', 'customers');
     }

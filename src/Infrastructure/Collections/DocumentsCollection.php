@@ -6,16 +6,16 @@ use JuriBlox\Sdk\Domain\Documents\Entities\Template;
 use JuriBlox\Sdk\Domain\Documents\Factories\DocumentFactory;
 use JuriBlox\Sdk\Domain\Documents\Values\DocumentReference;
 use JuriBlox\Sdk\Domain\Documents\Values\TemplateId;
-use JuriBlox\Sdk\Infrastructure\Endpoints\EndpointInterface;
+use JuriBlox\Sdk\Infrastructure\Endpoints\DocumentsEndpoint;
 
 class DocumentsCollection extends AbstractPagedCollection
 {
     /**
-     * @param EndpointInterface $endpoint
+     * @param DocumentsEndpoint $endpoint
      *
      * @return DocumentsCollection
      */
-    public static function fromEndpoint($endpoint)
+    public static function fromEndpoint(DocumentsEndpoint $endpoint)
     {
         $collection = new static();
         $collection->endpoint = $endpoint;
