@@ -52,6 +52,19 @@ class Office
     }
 
     /**
+     * @return string
+     */
+    public function __toString()
+    {
+        if ($this->name !== null)
+        {
+            return sprintf('%s (#%s)', $this->name, $this->id);
+        }
+
+        return '#' . $this->id;
+    }
+
+    /**
      * @return OfficeId
      */
     public function getId()

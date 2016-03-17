@@ -52,11 +52,16 @@ class User
     }
 
     /**
-     * @param string $name
+     * @return string
      */
-    public function setName($name)
+    public function __toString()
     {
-        $this->name = $name ?: null;
+        if ($this->name !== null)
+        {
+            return sprintf('%s (#%s)', $this->name, $this->id);
+        }
+
+        return '#' . $this->id;
     }
 
     /**
@@ -73,5 +78,13 @@ class User
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name ?: null;
     }
 }
