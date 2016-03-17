@@ -72,7 +72,7 @@ function printTable($table, $title = null)
     if ($title !== null)
     {
         print mb_strtoupper($title) . "\n";
-        print str_repeat('-', $keyLength + $valueLength) . "\n";
+        print str_repeat('-', $keyLength + 2 + $valueLength) . "\n";
     }
 
     foreach ($table as $key => $value)
