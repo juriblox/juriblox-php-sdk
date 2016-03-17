@@ -29,7 +29,9 @@ function printTable($table, $title = null)
     $keyLength = 20;
     $valueLength = 30;
 
-    // Determine column width
+    /*
+     * Determine column widths
+     */
     foreach ($table as $key => $value)
     {
         if (mb_strlen($key) > $keyLength)
@@ -39,8 +41,6 @@ function printTable($table, $title = null)
 
         if (is_array($value))
         {
-            $table[$key] = trim(implode("\n", $value));
-
             $length = 0;
             foreach ($value as $item)
             {
@@ -66,18 +66,60 @@ function printTable($table, $title = null)
         }
     }
 
+    $keyTotalLength = $keyLength + 2;
     $valueLength = min(60, $valueLength);
 
+    // Print header
     print "\n";
     if ($title !== null)
     {
         print mb_strtoupper($title) . "\n";
-        print str_repeat('-', $keyLength + 2 + $valueLength) . "\n";
+        print str_repeat('-', $keyTotalLength + $valueLength) . "\n";
     }
 
+    /*
+     * Print values
+     */
     foreach ($table as $key => $value)
     {
-        printf('%-' . $keyLength . "s: %s\n", mb_substr($key, 0, $keyLength), wordwrap($value, $valueLength));
+        // Format an array
+        if (is_array($value))
+        {
+            if (sizeof($value) == 0)
+            {
+                $wrapped = '[]';
+            }
+            else
+            {
+                $rows = [];
+                foreach ($value as $row)
+                {
+                    $rows[] = wordwrap($row, $valueLength, "\n" . str_repeat(' ', $keyTotalLength));
+                }
+
+                $wrapped = implode("\n" . str_repeat(' ', $keyTotalLength), $value);
+            }
+        }
+
+        // Check for NULL
+        elseif ($value === null)
+        {
+            $wrapped = 'NULL';
+        }
+
+        // Check whether we can display the value
+        elseif (!is_scalar($value) && (!is_object($value) || !method_exists($value, '__toString')))
+        {
+            throw new \InvalidArgumentException(sprintf('The value for "%s" (a %s) cannot be converted to a string representation', $key, get_class($value)));
+        }
+
+        // Perform simple wordwrapping on the value
+        else
+        {
+            $wrapped = wordwrap($value, $valueLength, "\n" . str_repeat(' ', $keyTotalLength));
+        }
+
+        printf('%-' . $keyLength . "s: %s\n", mb_substr($key, 0, $keyLength), $wrapped);
     }
 
     print "\n";
