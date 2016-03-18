@@ -5,8 +5,11 @@ namespace JuriBlox\Sdk\Domain\Documents\Factories;
 use JuriBlox\Sdk\Domain\Customers\Entities\Customer;
 use JuriBlox\Sdk\Domain\Customers\Values\Contact;
 use JuriBlox\Sdk\Domain\Documents\Entities\Document;
+use JuriBlox\Sdk\Domain\Documents\Entities\DocumentRequest;
 use JuriBlox\Sdk\Domain\Documents\Entities\Tag;
+use JuriBlox\Sdk\Domain\Documents\Values\DocumentId;
 use JuriBlox\Sdk\Domain\Documents\Values\DocumentReference;
+use JuriBlox\Sdk\Domain\Documents\Values\DocumentStatus;
 use JuriBlox\Sdk\Domain\Documents\Values\File;
 use JuriBlox\Sdk\Domain\Documents\Values\Language;
 use JuriBlox\Sdk\Domain\Offices\Entities\Office;
@@ -81,6 +84,34 @@ class DocumentFactory
             {
                 $document->addAnswer(QuestionAnswerFactory::createFromDto($entry));
             }
+        }
+
+        return $document;
+    }
+
+    /**
+     * Create a Document based on a DocumentRequest and the DocumentId returned by the JuriBlox API
+     *
+     * @param DocumentId      $id
+     * @param DocumentRequest $request
+     *
+     * @return Document
+     */
+    public static function createFromRequest(DocumentId $id, DocumentRequest $request)
+    {
+        $document = Document::fromId($id);
+        $document->setStatus(DocumentStatus::fromCode(DocumentStatus::STATUS_PENDING));
+
+        $document->setTitle($request->getTitle());
+        $document->setReference($request->getReference());
+        $document->setCustomer(Customer::fromReference($request->getCustomer()));
+
+        $document->setCreatedDatetime(new \DateTime());
+        $document->setAlertDate($request->getAlertDate());
+
+        foreach ($request->getAnswers() as $answer)
+        {
+            $document->addAnswer($answer);
         }
 
         return $document;

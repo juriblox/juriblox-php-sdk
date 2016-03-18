@@ -4,6 +4,7 @@ namespace JuriBlox\Sdk\Domain\Documents\Entities;
 
 use JuriBlox\Sdk\Domain\Documents\Values\AnswerId;
 use JuriBlox\Sdk\Domain\Documents\Values\QuestionAnswerId;
+use JuriBlox\Sdk\Domain\Documents\Values\QuestionId;
 
 class QuestionAnswer
 {
@@ -41,6 +42,21 @@ class QuestionAnswer
      * @var TemplateVariable
      */
     private $variable;
+
+    /**
+     * Create a QuestionAnswer for answering a given QuestionId
+     *
+     * @param QuestionId $questionId
+     *
+     * @return QuestionAnswer
+     */
+    public static function createForQuestionId(QuestionId $questionId)
+    {
+        $answer = new static();
+        $answer->question = Question::fromId($questionId);
+
+        return $answer;
+    }
 
     /**
      * Create a QuestionAnswer entity based on an existing identity

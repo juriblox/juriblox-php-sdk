@@ -108,12 +108,16 @@ class Customer
             $output = $this->contact;
             if ($this->company !== null)
             {
-                $output .= sprintf(' (%s)', $this->company);
+                $output .= sprintf(' (%s) [%s]', $this->company, $this->getReference()->getString());
             }
+        }
+        elseif ($this->company !== null)
+        {
+            $output = sprintf('%s [%s]', $this->company, $this->getReference()->getString());
         }
         else
         {
-            $output = $this->company;
+            $output = sprintf('[%s]', $this->getReference()->getString());
         }
 
         return $output;

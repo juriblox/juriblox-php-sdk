@@ -13,6 +13,7 @@ foreach ($client->documents()->findWithTemplateId(new TemplateId(633)) as $docum
     printTable([
         'ID'           => $document->getId(),
         'Title'        => $document->getTitle(),
+        'Status'       => $document->getStatus(),
         'Reference'    => $document->getReference(),
         'Language'     => $document->getLanguage(),
         'Office'       => $document->getOffice(),

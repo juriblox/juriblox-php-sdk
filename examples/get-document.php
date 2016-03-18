@@ -13,6 +13,7 @@ $document = $client->documents()->findOneById(new DocumentId(3838));
 printTable([
     'ID'           => $document->getId(),
     'Title'        => $document->getTitle(),
+    'Status'       => $document->getStatus(),
     'Reference'    => $document->getReference(),
     'Language'     => $document->getLanguage(),
     'Office'       => $document->getOffice(),
