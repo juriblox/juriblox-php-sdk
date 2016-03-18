@@ -120,12 +120,12 @@ class DocumentsEndpoint extends AbstractEndpoint implements EndpointInterface
         $status = new DocumentRequestStatus($id, DocumentStatus::fromCode($result->status));
         if ($status->getStatus()->getCode() == DocumentStatus::STATUS_GENERATED)
         {
-            if (!isset($result->document))
+            if (!isset($result->documentId))
             {
                 throw new CannotParseResponseException();
             }
 
-            $status->setDocumentId(new DocumentId($result->document->id));
+            $status->setDocumentId(new DocumentId($result->documentId));
         }
 
         return $status;
