@@ -3,6 +3,9 @@
 namespace JuriBlox\Sdk\Domain\Documents\Factories;
 
 use JuriBlox\Sdk\Domain\Documents\Entities\Question;
+use JuriBlox\Sdk\Domain\Documents\Entities\QuestionOption;
+use JuriBlox\Sdk\Domain\Documents\Values\QuestionCondition;
+use JuriBlox\Sdk\Domain\Documents\Values\QuestionOptionId;
 use JuriBlox\Sdk\Domain\Documents\Values\QuestionType;
 
 class QuestionFactory
@@ -22,16 +25,19 @@ class QuestionFactory
         $question->setType(new QuestionType($dto->type));
         $question->setRequired($dto->required);
 
-        // TODO: geen idee wat dit zijn...
+        // Conditional logic for questions
         foreach ($dto->parentAnswers as $entry)
         {
-            print_r($entry); exit();
+            $question->addCondition(new QuestionCondition(new QuestionOptionId($entry->id), $entry->value));
         }
 
-        // TODO: geen idee wat dit zijn...
+        // Allowed options for this questions (they're called answers in the v1 API)
         foreach ($dto->answers as $entry)
         {
-            print_r($entry); exit();
+            $option = QuestionOption::fromIdString($entry->id);
+            $option->setValue($entry->value);
+
+            $question->addOption($option);
         }
 
         return $question;

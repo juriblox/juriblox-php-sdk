@@ -17,11 +17,17 @@ class QuestionType
     const TYPE_SHORT_TEXT = 'short_text';
 
     /**
+     * Boolean (yes/no) input field
+     */
+    const TYPE_BOOLEAN = 'yes_no';
+
+    /**
      * Available question types
      *
      * @var array
      */
     public static $types = [
+        self::TYPE_BOOLEAN      => 'Boolean (yes/no)',
         self::TYPE_RADIO        => 'Radio button',
         self::TYPE_SHORT_TEXT   => 'Short text input'
     ];

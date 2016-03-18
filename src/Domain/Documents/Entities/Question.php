@@ -2,8 +2,8 @@
 
 namespace JuriBlox\Sdk\Domain\Documents\Entities;
 
+use JuriBlox\Sdk\Domain\Documents\Values\QuestionCondition;
 use JuriBlox\Sdk\Domain\Documents\Values\QuestionId;
-use JuriBlox\Sdk\Domain\Documents\Values\QuestionOption;
 use JuriBlox\Sdk\Domain\Documents\Values\QuestionType;
 
 class Question
@@ -11,7 +11,7 @@ class Question
     /**
      * Conditions for this question to appear
      *
-     * @var array
+     * @var array|QuestionCondition[]
      */
     private $conditions;
 
@@ -39,7 +39,7 @@ class Question
     /**
      * List of options
      *
-     * @var array
+     * @var array|QuestionOption[]
      */
     private $options;
 
@@ -96,11 +96,11 @@ class Question
     /**
      * Add a condition
      *
-     * @param QuestionOption $option
+     * @param QuestionCondition $condition
      */
-    public function addCondition(QuestionOption $option)
+    public function addCondition(QuestionCondition $condition)
     {
-        $this->conditions[] = $option;
+        $this->conditions[] = $condition;
     }
 
     /**
@@ -130,7 +130,7 @@ class Question
     }
 
     /**
-     * @return array
+     * @return array|QuestionCondition[]
      */
     public function getConditions()
     {
@@ -162,7 +162,7 @@ class Question
     }
 
     /**
-     * @return array
+     * @return array|QuestionOption[]
      */
     public function getOptions()
     {
