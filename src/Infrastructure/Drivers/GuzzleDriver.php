@@ -8,6 +8,7 @@ use GuzzleHttp\Psr7\Response;
 
 use JuriBlox\Sdk\Client;
 use JuriBlox\Sdk\Exceptions\AuthorizationException;
+use JuriBlox\Sdk\Exceptions\EngineOperationException;
 use JuriBlox\Sdk\Exceptions\EntityNotFoundException;
 use JuriBlox\Sdk\Exceptions\RateLimitingException;
 use JuriBlox\Sdk\Exceptions\CannotParseResponseException;
@@ -23,6 +24,11 @@ class GuzzleDriver implements DriverInterface
      * Resource not found
      */
     const STATUS_NOT_FOUND = 404;
+
+    /**
+     * Unprocessable entity
+     */
+    const STATUS_UNPROCESSABLE_ENTITY = 422;
 
     /**
      * Requests are being throttled due to a requests limit
@@ -110,9 +116,10 @@ class GuzzleDriver implements DriverInterface
      * @param array $body
      *
      * @return object
+     *
      * @throws AuthorizationException
      * @throws CannotParseResponseException
-     * @throws EntityNotFoundException
+     * @throws EngineOperationException
      * @throws RateLimitingException
      */
     private function request($method, $uri, $segments = null, array $body = null)
@@ -138,8 +145,8 @@ class GuzzleDriver implements DriverInterface
         {
             $response = $exception->getResponse();
 
-            $exceptionCode = null;
-            $exceptionMessage = null;
+            $exceptionCode = $exception->getMessage();
+            $exceptionMessage = $exception->getCode();
 
             $result = @json_decode($response->getBody()->getContents());
             if ($result !== false)
@@ -148,19 +155,10 @@ class GuzzleDriver implements DriverInterface
                 $exceptionMessage = $result->error->message;
             }
 
-            // Throw "entity not found" exception
-            if ($response->getStatusCode() == self::STATUS_NOT_FOUND)
-            {
-                $castedException = new EntityNotFoundException($exceptionMessage, $exceptionCode);
-                $castedException->setResponseContext($response);
-
-                throw $castedException;
-            }
-
             // Throw authorization exception
-            elseif ($response->getStatusCode() == self::STATUS_AUTHORIZATION_ERROR)
+            if ($response->getStatusCode() == self::STATUS_AUTHORIZATION_ERROR)
             {
-                $castedException = new AuthorizationException($exceptionMessage, $exceptionCode);
+                $castedException = new AuthorizationException($exceptionMessage, $exceptionCode, $exception);
                 $castedException->setResponseContext($response);
 
                 throw $castedException;
@@ -169,13 +167,32 @@ class GuzzleDriver implements DriverInterface
             // Throw rate limiting exception
             elseif ($response->getStatusCode() == self::STATUS_RATE_LIMITING_ERROR)
             {
-                $castedException = new RateLimitingException($exceptionMessage, $exceptionCode);
+                $castedException = new RateLimitingException($exceptionMessage, $exceptionCode, $exception);
                 $castedException->setResponseContext($response);
 
                 throw $castedException;
             }
 
-            throw $exception;
+            // Unprocessable request
+            elseif ($response->getStatusCode() == self::STATUS_UNPROCESSABLE_ENTITY)
+            {
+                $castedException = new EngineOperationException($exceptionMessage, $exceptionCode, $exception);
+                if ($result !== false && isset($result->error->errors))
+                {
+                    if (is_array($result->error->errors))
+                    {
+                        $castedException->setErrors($result->error->errors);
+                    }
+                    elseif (is_object($result->error->errors))
+                    {
+                        $castedException->setErrors(get_object_vars($result->error->errors));
+                    }
+                }
+
+                throw $castedException;
+            }
+
+            throw new EngineOperationException($exception->getMessage(), $exception->getCode(), $exception);
         }
 
         $result = @json_decode($response->getBody()->getContents());

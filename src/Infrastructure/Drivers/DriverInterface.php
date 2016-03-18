@@ -25,6 +25,7 @@ interface DriverInterface
      *
      * @throws AuthorizationException
      * @throws CannotParseResponseException
+     * @throws EngineOperationException
      * @throws RateLimitingException
      */
     function get($uri, $segments = null);
@@ -40,6 +41,7 @@ interface DriverInterface
      *
      * @throws AuthorizationException
      * @throws CannotParseResponseException
+     * @throws EngineOperationException
      * @throws RateLimitingException
      */
     function post($uri, $segments = null, $body);
