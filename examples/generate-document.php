@@ -10,19 +10,9 @@ use JuriBlox\Sdk\Domain\Documents\Values\TemplateId;
 use JuriBlox\Sdk\Exceptions\EngineOperationException;
 use JuriBlox\Sdk\Infrastructure\Drivers\GuzzleDriver;
 
-require __DIR__  . '/bootstrap.php';
+require __DIR__ . '/bootstrap.php';
 
 $client = new Client(new GuzzleDriver(getenv('JURIBLOX_CLIENT_ID'), getenv('JURIBLOX_CLIENT_KEY')), 'JuriBlox SDK Example');
-
-//    "title": "Optional title", [optional]
-//    "reference": "Optional internal reference code", [optional]
-//    "customer": "customer_reference_key", [optional]
-//    "remarks": "Optional remarks", [optional]
-//    "valid_till": "d-m-Y H:i:s", [optional]
-//    "answers": {
-//        "1": "sdflkfdskldfslkdfskldklsf", [value answer]
-//        "2": "23" [predfined answer id]
-//    }
 
 $request = DocumentRequest::prepare(new TemplateId(634));
 $request->setTitle('Document titel');
@@ -38,7 +28,7 @@ $request->addAnswer($answer);
 
 try
 {
-    $document = $client->documents()->generate($request);
+    $request = $client->documents()->generate($request);
 }
 catch (EngineOperationException $exception)
 {
@@ -49,14 +39,11 @@ catch (EngineOperationException $exception)
 }
 
 printTable([
-    'ID'           => $document->getId(),
-    'Title'        => $document->getTitle(),
-    'Status'       => $document->getStatus(),
-    'Reference'    => $document->getReference(),
-    'Language'     => $document->getLanguage(),
-    'Office'       => $document->getOffice(),
-    'Tags'         => $document->getTags(),
-    'Customer'     => $document->getCustomer(),
-    'Alert date'   => $document->getAlertDate(),
-    'Created date' => $document->getCreatedDatetime(),
-], 'Generated document');
+    'Request ID' => $request->getId(),
+    'Title'      => $request->getTitle(),
+    'Status'     => $request->getStatus(),
+    'Reference'  => $request->getReference(),
+    'Customer'   => $request->getCustomer(),
+    'Remarks'    => $request->getRemarks(),
+    'Alert date' => $request->getAlertDate(),
+], 'Document generation request');

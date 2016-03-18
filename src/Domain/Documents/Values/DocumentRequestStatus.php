@@ -2,67 +2,70 @@
 
 namespace JuriBlox\Sdk\Domain\Documents\Values;
 
-use JuriBlox\Sdk\Validation\Assertion;
-
 class DocumentRequestStatus
 {
     /**
-     * Document has successfully been requested
-     */
-    const STATUS_REQUESTED = 200;
-
-    /**
-     * Available statuses
+     * Document ID
      *
-     * @var array
+     * @var DocumentId
      */
-    public static $statuses = [
-        self::STATUS_REQUESTED => 'Requested'
-    ];
+    private $documentId;
 
     /**
-     * @var string
+     * ID
+     *
+     * @var DocumentRequestId
      */
-    private $code;
+    private $id;
 
     /**
-     * @var string
+     * Status
+     *
+     * @var DocumentStatus
      */
-    private $name;
+    private $status;
 
     /**
-     * @param $code
-     * @param $name
+     * DocumentRequestStatus constructor
+     *
+     * @param DocumentRequestId     $id
+     * @param DocumentStatus $status
      */
-    public function __construct($code, $name)
+    public function __construct(DocumentRequestId $id, DocumentStatus $status)
     {
-        Assertion::keyExists(static::$statuses, $code);
-
-        $this->code = $code;
-        $this->name = $name;
+        $this->id = $id;
+        $this->status = $status;
     }
 
     /**
-     * @return string
+     * @return DocumentId
      */
-    public function __toString()
+    public function getDocumentId()
     {
-        return sprintf('%s [%d]', $this->getName(), $this->getCode());
+        return $this->documentId;
     }
 
     /**
-     * @return string
+     * @return DocumentRequestId
      */
-    public function getCode()
+    public function getId()
     {
-        return $this->code;
+        return $this->id;
     }
 
     /**
-     * @return string
+     * @return DocumentStatus
      */
-    public function getName()
+    public function getStatus()
     {
-        return $this->name;
+        return $this->status;
+    }
+
+    /**
+     * @param DocumentId $documentId
+     */
+    public function setDocumentId(DocumentId $documentId)
+    {
+        $this->documentId = $documentId;
     }
 }

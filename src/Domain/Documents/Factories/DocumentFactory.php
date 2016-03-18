@@ -88,32 +88,4 @@ class DocumentFactory
 
         return $document;
     }
-
-    /**
-     * Create a Document based on a DocumentRequest and the DocumentId returned by the JuriBlox API
-     *
-     * @param DocumentId      $id
-     * @param DocumentRequest $request
-     *
-     * @return Document
-     */
-    public static function createFromRequest(DocumentId $id, DocumentRequest $request)
-    {
-        $document = Document::fromId($id);
-        $document->setStatus(DocumentStatus::fromCode(DocumentStatus::STATUS_PENDING));
-
-        $document->setTitle($request->getTitle());
-        $document->setReference($request->getReference());
-        $document->setCustomer(Customer::fromReference($request->getCustomer()));
-
-        $document->setCreatedDatetime(new \DateTime());
-        $document->setAlertDate($request->getAlertDate());
-
-        foreach ($request->getAnswers() as $answer)
-        {
-            $document->addAnswer($answer);
-        }
-
-        return $document;
-    }
 }

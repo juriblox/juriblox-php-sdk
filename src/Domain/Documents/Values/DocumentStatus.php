@@ -14,7 +14,12 @@ class DocumentStatus
     /**
      * Document is pending generation
      */
-    const STATUS_PENDING = 0;
+    const STATUS_PENDING = 202;
+
+    /**
+     * Document generation failed
+     */
+    const STATUS_FAILED = 500;
 
     /**
      * Available statuses
@@ -23,7 +28,8 @@ class DocumentStatus
      */
     public static $statuses = [
         self::STATUS_PENDING    => 'Pending',
-        self::STATUS_GENERATED  => 'Generated'
+        self::STATUS_GENERATED  => 'Generated',
+        self::STATUS_FAILED     => 'Failed'
     ];
 
     /**

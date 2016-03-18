@@ -2,9 +2,9 @@
 
 namespace JuriBlox\Sdk\Domain\Documents\Entities;
 
-use JuriBlox\Sdk\Domain\Customers\Entities\Customer;
 use JuriBlox\Sdk\Domain\Customers\Values\CustomerReference;
 use JuriBlox\Sdk\Domain\Documents\Values\DocumentReference;
+use JuriBlox\Sdk\Domain\Documents\Values\DocumentRequestId;
 use JuriBlox\Sdk\Domain\Documents\Values\DocumentStatus;
 use JuriBlox\Sdk\Domain\Documents\Values\TemplateId;
 use JuriBlox\Sdk\Validation\Assertion;
@@ -33,6 +33,13 @@ class DocumentRequest
     private $customer;
 
     /**
+     * ID
+     *
+     * @var DocumentRequestId
+     */
+    private $id;
+
+    /**
      * Reference
      *
      * @var DocumentReference
@@ -47,6 +54,13 @@ class DocumentRequest
     private $remarks;
 
     /**
+     * Status
+     *
+     * @var DocumentStatus
+     */
+    private $status;
+
+    /**
      * Template
      *
      * @var TemplateId
@@ -59,6 +73,33 @@ class DocumentRequest
      * @var string
      */
     private $title;
+
+    /**
+     * Create a DocumentRequest entity based on an existing identity
+     *
+     * @param DocumentRequestId $id
+     *
+     * @return DocumentRequest
+     */
+    public static function fromId(DocumentRequestId $id)
+    {
+        $request = new static();
+        $request->id = $id;
+
+        return $request;
+    }
+
+    /**
+     * Create a DocumentRequest entity based on an identity represented as a string
+     *
+     * @param string $id
+     *
+     * @return DocumentRequest
+     */
+    public static function fromIdString($id)
+    {
+        return static::fromId(new DocumentRequestId($id));
+    }
 
     /**
      * Prepare a document generation request
@@ -124,6 +165,14 @@ class DocumentRequest
     }
 
     /**
+     * @return DocumentRequestId
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
      * @return DocumentReference
      */
     public function getReference()
@@ -137,6 +186,14 @@ class DocumentRequest
     public function getRemarks()
     {
         return $this->remarks;
+    }
+
+    /**
+     * @return DocumentStatus
+     */
+    public function getStatus()
+    {
+        return $this->status;
     }
 
     /**
@@ -176,6 +233,14 @@ class DocumentRequest
     }
 
     /**
+     * @param DocumentRequestId $id
+     */
+    public function setId(DocumentRequestId $id)
+    {
+        $this->id = $id;
+    }
+
+    /**
      * @param DocumentReference|null $reference
      */
     public function setReference($reference)
@@ -191,6 +256,14 @@ class DocumentRequest
     public function setRemarks($remarks)
     {
         $this->remarks = $remarks ?: null;
+    }
+
+    /**
+     * @param DocumentStatus $status
+     */
+    public function setStatus(DocumentStatus $status)
+    {
+        $this->status = $status;
     }
 
     /**
