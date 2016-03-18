@@ -8,25 +8,39 @@ require __DIR__  . '/bootstrap.php';
 
 $client = new Client(new GuzzleDriver(getenv('JURIBLOX_CLIENT_ID'), getenv('JURIBLOX_CLIENT_KEY')), 'JuriBlox SDK Example');
 
-$document = $client->documents()->findOneById(new DocumentId(3833));
+$document = $client->documents()->findOneById(new DocumentId(3838));
 
-$table = [
-    'ID'            => $document->getId(),
-    'Reference'     => $document->getReference(),
-    'Title'         => $document->getTitle(),
-    'Tags'          => $document->getTags(),
-    'Customer'      => $document->getCustomer(),
-    'Created'       => $document->getCreatedDatetime(),
-    'Alert'         => $document->getAlertDate()
-];
+printTable([
+    'ID'           => $document->getId(),
+    'Title'        => $document->getTitle(),
+    'Reference'    => $document->getReference(),
+    'Language'     => $document->getLanguage(),
+    'Office'       => $document->getOffice(),
+    'Tags'         => $document->getTags(),
+    'Customer'     => $document->getCustomer(),
+    'Alert date'   => $document->getAlertDate(),
+    'Created date' => $document->getCreatedDatetime(),
+], 'Document');
 
-printTable($table, 'Document properties');
-
+// Answers
 foreach ($document->getAnswers() as $answer)
 {
-    $table = [
+    printTable([
+        'Question ID'   => $answer->getQuestion()->getId(),
+        'Question name' => $answer->getQuestion()->getName(),
 
-    ];
+        'ID'       => $answer->getId(),
+        'Variable' => $answer->getVariable(),
+        'Value'    => $answer->getValue()
+    ], get_class($answer), 1);
+}
 
-    printTable($table);
+// Files
+foreach ($document->getFiles() as $file)
+{
+    printTable([
+        'Type'     => $file->getType(),
+        'Filename' => $file->getFilename(),
+        'URL'      => $file->getUrl()
+    ], get_class($file), 1);
 }

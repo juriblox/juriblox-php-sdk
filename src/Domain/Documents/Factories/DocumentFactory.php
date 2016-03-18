@@ -43,12 +43,12 @@ class DocumentFactory
             $customer = Customer::fromReferenceString($dto->customer->reference);
             $customer->setCompany($dto->customer->company);
 
-            if (isset($dto->contact))
+            if (isset($dto->customer->contact))
             {
-                $contact = new Contact($dto->contact->name);
-                if ($dto->contact->email !== null)
+                $contact = new Contact($dto->customer->contact->name);
+                if ($dto->customer->contact->email !== null)
                 {
-                    $contact->setEmail($dto->contact->email);
+                    $contact->setEmail($dto->customer->contact->email);
                 }
 
                 $customer->setContact($contact);
