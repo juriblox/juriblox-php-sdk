@@ -21,27 +21,4 @@ foreach ($client->documents()->findWithTemplateId(new TemplateId(633)) as $docum
         'Alert date'   => $document->getAlertDate(),
         'Created date' => $document->getCreatedDatetime(),
     ], 'Document');
-
-    // Answers
-    foreach ($document->getAnswers() as $answer)
-    {
-        printTable([
-            'Question ID'   => $answer->getQuestion()->getId(),
-            'Question name' => $answer->getQuestion()->getName(),
-
-            'ID'       => $answer->getId(),
-            'Variable' => $answer->getVariable(),
-            'Value'    => $answer->getValue()
-        ], get_class($answer), 1);
-    }
-
-    // Files
-    foreach ($document->getFiles() as $file)
-    {
-        printTable([
-            'Type'     => $file->getType(),
-            'Filename' => $file->getFilename(),
-            'URL'      => $file->getUrl()
-        ], get_class($file), 1);
-    }
 }
