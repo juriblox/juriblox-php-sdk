@@ -5,8 +5,10 @@ namespace JuriBlox\Sdk\Domain\Documents\Entities;
 use JuriBlox\Sdk\Domain\Customers\Entities\Customer;
 use JuriBlox\Sdk\Domain\Documents\Values\DocumentId;
 use JuriBlox\Sdk\Domain\Documents\Values\DocumentReference;
+use JuriBlox\Sdk\Domain\Documents\Values\DocumentStatus;
 use JuriBlox\Sdk\Domain\Documents\Values\File;
 use JuriBlox\Sdk\Domain\Documents\Values\Language;
+use JuriBlox\Sdk\Domain\Documents\Values\TemplateId;
 use JuriBlox\Sdk\Domain\Offices\Entities\Office;
 
 class Document
@@ -75,11 +77,25 @@ class Document
     private $reference;
 
     /**
+     * Status
+     *
+     * @var DocumentStatus
+     */
+    private $status;
+
+    /**
      * Tags linked to this document
      *
      * @var array
      */
     private $tags;
+
+    /**
+     * Template used to generate this document
+     *
+     * @var TemplateId
+     */
+    private $templateId;
 
     /**
      * Title
@@ -252,11 +268,27 @@ class Document
     }
 
     /**
+     * @return DocumentStatus
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
      * @return array|Tag[]
      */
     public function getTags()
     {
         return $this->tags;
+    }
+
+    /**
+     * @return TemplateId
+     */
+    public function getTemplateId()
+    {
+        return $this->templateId;
     }
 
     /**
@@ -321,6 +353,22 @@ class Document
     public function setReference(DocumentReference $reference)
     {
         $this->reference = $reference;
+    }
+
+    /**
+     * @param DocumentStatus $status
+     */
+    public function setStatus(DocumentStatus $status)
+    {
+        $this->status = $status;
+    }
+
+    /**
+     * @param TemplateId $templateId
+     */
+    public function setTemplateId(TemplateId $templateId)
+    {
+        $this->templateId = $templateId;
     }
 
     /**
