@@ -22,7 +22,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $user = User::fromIdString(self::VALID_USER_ID);
 
         $this->assertInstanceOf(UserId::class, $user->getId());
-        $this->assertEquals(self::VALID_USER_ID, $user->getId()->getId());
+        $this->assertEquals(self::VALID_USER_ID, $user->getId()->getInteger());
         $this->assertEquals(self::VALID_USER_ID, (string) $user->getId());
     }
 
@@ -39,7 +39,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $user = User::fromId(new UserId(self::VALID_USER_ID));
 
         $this->assertInstanceOf(UserId::class, $user->getId());
-        $this->assertEquals(self::VALID_USER_ID, $user->getId()->getId());
+        $this->assertEquals(self::VALID_USER_ID, $user->getId()->getInteger());
         $this->assertEquals(self::VALID_USER_ID, (string) $user->getId());
     }
 

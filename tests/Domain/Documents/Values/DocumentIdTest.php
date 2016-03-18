@@ -18,7 +18,7 @@ class DocumentIdTest extends \PHPUnit_Framework_TestCase
     {
         $documentId = new DocumentId(self::VALID_DOCUMENT_ID);
 
-        $this->assertEquals(self::VALID_DOCUMENT_ID, $documentId->getId());
+        $this->assertEquals(self::VALID_DOCUMENT_ID, $documentId->getInteger());
         $this->assertEquals(self::VALID_DOCUMENT_ID, (string) $documentId);
     }
 }

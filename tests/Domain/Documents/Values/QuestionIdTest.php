@@ -10,7 +10,7 @@ class QuestionIdTest extends \PHPUnit_Framework_TestCase
     {
         $questionId = new QuestionId(self::VALID_QUESTION_ID);
 
-        $this->assertEquals(self::VALID_QUESTION_ID, $questionId->getId());
+        $this->assertEquals(self::VALID_QUESTION_ID, $questionId->getInteger());
         $this->assertEquals(self::VALID_QUESTION_ID, (string) $questionId);
     }
 

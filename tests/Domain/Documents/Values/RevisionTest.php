@@ -32,7 +32,7 @@ class RevisionTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInstanceOf(TemplateId::class, $revision->getDerivedOf());
 
-        $this->assertEquals(self::VALID_TEMPLATE_ID, $revision->getDerivedOf()->getId());
+        $this->assertEquals(self::VALID_TEMPLATE_ID, $revision->getDerivedOf()->getInteger());
         $this->assertEquals(self::VALID_TEMPLATE_ID, (string) $revision->getDerivedOf());
 
         $this->assertEquals(self::VALID_REVISION_VERSION, $revision->getVersion());

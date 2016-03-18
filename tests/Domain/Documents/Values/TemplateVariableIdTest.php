@@ -18,7 +18,7 @@ class TemplateVariableIdTest extends \PHPUnit_Framework_TestCase
     {
         $variableId = new TemplateVariableId(self::VALID_VARIABLE_ID);
 
-        $this->assertEquals(self::VALID_VARIABLE_ID, $variableId->getId());
+        $this->assertEquals(self::VALID_VARIABLE_ID, $variableId->getInteger());
         $this->assertEquals(self::VALID_VARIABLE_ID, (string) $variableId);
     }
 }

@@ -15,7 +15,7 @@ foreach ($client->templates()->findAll() as $template)
         'Language'      => $template->getLanguage(),
         'Status'        => $template->getStatus(),
         'Version'       => $template->getRevision()->getVersion(),
-        'Derived of #'  => $template->getRevision()->getDerivedOf()->getId(),
+        'Derived of #'  => $template->getRevision()->getDerivedOf()->getInteger(),
         'Description'   => $template->getDescription(),
         'Office'        => $template->getOffice(),
         'Last document' => $template->getLastDocument(),

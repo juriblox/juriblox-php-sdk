@@ -18,7 +18,7 @@ class TagIdTest extends \PHPUnit_Framework_TestCase
     {
         $tagId = new TemplateId(self::VALID_TAG_ID);
 
-        $this->assertEquals(self::VALID_TAG_ID, $tagId->getId());
+        $this->assertEquals(self::VALID_TAG_ID, $tagId->getInteger());
         $this->assertEquals(self::VALID_TAG_ID, (string) $tagId);
     }
 }

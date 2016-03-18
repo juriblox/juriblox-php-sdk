@@ -22,7 +22,7 @@ class TagTest extends \PHPUnit_Framework_TestCase
         $tag = Tag::fromIdString(self::VALID_TAG_ID);
 
         $this->assertInstanceOf(TagId::class, $tag->getId());
-        $this->assertEquals(self::VALID_TAG_ID, $tag->getId()->getId());
+        $this->assertEquals(self::VALID_TAG_ID, $tag->getId()->getInteger());
         $this->assertEquals(self::VALID_TAG_ID, (string) $tag->getId());
     }
 
@@ -39,7 +39,7 @@ class TagTest extends \PHPUnit_Framework_TestCase
         $tag = Tag::fromId(new TagId(self::VALID_TAG_ID));
 
         $this->assertInstanceOf(TagId::class, $tag->getId());
-        $this->assertEquals(self::VALID_TAG_ID, $tag->getId()->getId());
+        $this->assertEquals(self::VALID_TAG_ID, $tag->getId()->getInteger());
         $this->assertEquals(self::VALID_TAG_ID, (string) $tag->getId());
     }
 

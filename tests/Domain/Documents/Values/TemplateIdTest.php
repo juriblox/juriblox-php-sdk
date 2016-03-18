@@ -18,7 +18,7 @@ class TemplateIdTest extends \PHPUnit_Framework_TestCase
     {
         $templateId = new TemplateId(self::VALID_TEMPLATE_ID);
 
-        $this->assertEquals(self::VALID_TEMPLATE_ID, $templateId->getId());
+        $this->assertEquals(self::VALID_TEMPLATE_ID, $templateId->getInteger());
         $this->assertEquals(self::VALID_TEMPLATE_ID, (string) $templateId);
     }
 }

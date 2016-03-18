@@ -30,7 +30,7 @@ class TemplatesEndpoint extends AbstractEndpoint implements EndpointInterface
     public function findOneById(TemplateId $id)
     {
         $result = $this->driver->get('templates/{id}', [
-            'id' => $id->getId()
+            'id' => $id->getInteger()
         ]);
 
         return TemplateFactory::createFromDto($result);

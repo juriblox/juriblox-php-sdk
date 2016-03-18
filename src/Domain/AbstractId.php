@@ -26,13 +26,13 @@ abstract class AbstractId implements IdInterface
      */
     public function __toString()
     {
-        return (string) $this->getId();
+        return (string) $this->getInteger();
     }
 
     /**
      * @return int
      */
-    public function getId()
+    public function getInteger()
     {
         return $this->id;
     }

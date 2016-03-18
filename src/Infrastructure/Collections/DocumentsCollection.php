@@ -35,7 +35,7 @@ class DocumentsCollection extends AbstractPagedCollection
         $this->setKey('documents');
         $this->setUri('documents');
 
-        $this->setParameter('reference', $reference->getReference());
+        $this->setParameter('reference', $reference->getString());
 
         return $this;
     }
@@ -51,7 +51,7 @@ class DocumentsCollection extends AbstractPagedCollection
     {
         $this->setKey('documents');
         $this->setUri('templates/{template}/documents', [
-            'template' => $templateId->getId()
+            'template' => $templateId->getInteger()
         ]);
 
         return $this;

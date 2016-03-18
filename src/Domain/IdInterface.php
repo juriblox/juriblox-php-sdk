@@ -17,5 +17,5 @@ interface IdInterface
     /**
      * @return string
      */
-    function getId();
+    function getInteger();
 }

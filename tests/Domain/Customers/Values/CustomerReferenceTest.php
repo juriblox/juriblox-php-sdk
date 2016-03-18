@@ -12,7 +12,7 @@ class CustomerReferenceTest extends \PHPUnit_Framework_TestCase
 
         $reference = new CustomerReference($uuid);
 
-        $this->assertEquals($uuid, $reference->getReference());
+        $this->assertEquals($uuid, $reference->getString());
         $this->assertEquals($uuid, (string) $reference);
     }
 }

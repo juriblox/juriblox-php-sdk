@@ -22,7 +22,7 @@ class OfficeTest extends \PHPUnit_Framework_TestCase
         $office = Office::fromIdString(self::VALID_OFFICE_ID);
 
         $this->assertInstanceOf(OfficeId::class, $office->getId());
-        $this->assertEquals(self::VALID_OFFICE_ID, $office->getId()->getId());
+        $this->assertEquals(self::VALID_OFFICE_ID, $office->getId()->getInteger());
         $this->assertEquals(self::VALID_OFFICE_ID, (string) $office->getId());
     }
 
@@ -39,7 +39,7 @@ class OfficeTest extends \PHPUnit_Framework_TestCase
         $office = Office::fromId(new OfficeId(self::VALID_OFFICE_ID));
 
         $this->assertInstanceOf(OfficeId::class, $office->getId());
-        $this->assertEquals(self::VALID_OFFICE_ID, $office->getId()->getId());
+        $this->assertEquals(self::VALID_OFFICE_ID, $office->getId()->getInteger());
         $this->assertEquals(self::VALID_OFFICE_ID, (string) $office->getId());
     }
 

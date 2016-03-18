@@ -18,7 +18,7 @@ class OfficeIdTest extends \PHPUnit_Framework_TestCase
     {
         $officeId = new OfficeId(self::VALID_OFFICE_ID);
 
-        $this->assertEquals(self::VALID_OFFICE_ID, $officeId->getId());
+        $this->assertEquals(self::VALID_OFFICE_ID, $officeId->getInteger());
         $this->assertEquals(self::VALID_OFFICE_ID, (string) $officeId);
     }
 }

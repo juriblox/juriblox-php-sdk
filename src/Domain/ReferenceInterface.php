@@ -17,5 +17,5 @@ interface ReferenceInterface
     /**
      * @return string
      */
-    function getReference();
+    function getString();
 }

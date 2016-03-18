@@ -12,7 +12,7 @@ class DocumentReferenceTest extends \PHPUnit_Framework_TestCase
 
         $reference = new DocumentReference($uuid);
 
-        $this->assertEquals($uuid, $reference->getReference());
+        $this->assertEquals($uuid, $reference->getString());
         $this->assertEquals($uuid, (string) $reference);
     }
 }

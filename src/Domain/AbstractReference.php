@@ -22,13 +22,13 @@ abstract class AbstractReference implements ReferenceInterface
      */
     public function __toString()
     {
-        return (string) $this->getReference();
+        return (string) $this->getString();
     }
 
     /**
      * @return string
      */
-    public function getReference()
+    public function getString()
     {
         return $this->reference;
     }

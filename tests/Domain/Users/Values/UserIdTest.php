@@ -18,7 +18,7 @@ class UserIdTest extends \PHPUnit_Framework_TestCase
     {
         $userId = new UserId(self::VALID_USER_ID);
 
-        $this->assertEquals(self::VALID_USER_ID, $userId->getId());
+        $this->assertEquals(self::VALID_USER_ID, $userId->getInteger());
         $this->assertEquals(self::VALID_USER_ID, (string) $userId);
     }
 }
