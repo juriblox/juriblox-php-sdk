@@ -23,8 +23,9 @@ $dotenv->required(['JURIBLOX_CLIENT_ID', 'JURIBLOX_CLIENT_KEY']);
  *
  * @param      $table
  * @param null $title
+ * @param int   $indent
  */
-function printTable($table, $title = null)
+function printTable($table, $title = null, $indent = 0)
 {
     $keyLength = 20;
     $valueLength = 30;
@@ -69,17 +70,40 @@ function printTable($table, $title = null)
     $keyTotalLength = $keyLength + 2;
     $valueLength = min(60, $valueLength);
 
+    // Indention
+    $indentSpacing = ($indent > 0) ? str_repeat('   ', $indent) : '';
+    if ($indent > 0)
+    {
+        if ($indent > 1)
+        {
+            print mb_substr($indentSpacing, 0, -3) . "└──┐\n";
+        }
+
+        print $indentSpacing . "│  \n";
+    }
+    else
+    {
+        print "\n";
+    }
+
     // Print header
-    print "\n";
     if ($title !== null)
     {
-        print mb_strtoupper($title) . "\n";
-        print str_repeat('-', $keyTotalLength + $valueLength) . "\n";
+        if ($indent == 0)
+        {
+            print mb_strtoupper($title) . "\n";
+            print str_repeat('-', $keyTotalLength + $valueLength) . "\n";
+        }
+        else
+        {
+            print sprintf("%s├── [%s]\n", $indentSpacing, $title);
+        }
     }
 
     /*
      * Print values
      */
+    $first = true;
     foreach ($table as $key => $value)
     {
         // Format an array
@@ -119,8 +143,21 @@ function printTable($table, $title = null)
             $wrapped = wordwrap($value, $valueLength, "\n" . str_repeat(' ', $keyTotalLength));
         }
 
-        printf('%-' . $keyLength . "s: %s\n", mb_substr($key, 0, $keyLength), $wrapped);
-    }
+        $indentText = '';
 
-    print "\n";
+        if ($first)
+        {
+            $first = false;
+            if ($indent > 0)
+            {
+                $indentText = $indentSpacing . (($title === null) ? "├── " : "│   ");
+            }
+        }
+        elseif ($indent > 0)
+        {
+            $indentText = $indentSpacing . "│   ";
+        }
+
+        printf($indentText . '%-' . $keyLength . "s: %s\n", mb_substr($key, 0, $keyLength), $wrapped);
+    }
 }
