@@ -38,6 +38,18 @@ class DocumentStatus
 
     /**
      * @param $code
+     *
+     * @return DocumentStatus
+     */
+    public static function fromCode($code)
+    {
+        Assertion::keyExists(static::$statuses, $code);
+
+        return new static($code, self::$statuses[$code]);
+    }
+
+    /**
+     * @param $code
      * @param $name
      */
     public function __construct($code, $name)
@@ -53,7 +65,7 @@ class DocumentStatus
      */
     public function __toString()
     {
-        return (string) $this->getCode();
+        return sprintf('%s [%d]', $this->getName(), $this->getCode());
     }
 
     /**
