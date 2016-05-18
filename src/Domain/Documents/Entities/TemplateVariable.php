@@ -42,6 +42,22 @@ class TemplateVariable
     private $value;
 
     /**
+     * Varifable constructor
+     */
+    private function __construct()
+    {
+
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->name;
+    }
+
+    /**
      * Create a variable entity based on an existing identity
      *
      * @param TemplateVariableId $id
@@ -66,14 +82,6 @@ class TemplateVariable
     public static function fromIdString($id)
     {
         return static::fromId(new TemplateVariableId($id));
-    }
-
-    /**
-     * Varifable constructor
-     */
-    private function __construct()
-    {
-
     }
 
     /**

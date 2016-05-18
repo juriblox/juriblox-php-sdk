@@ -1,6 +1,11 @@
 <?php
 
 use Dotenv\Dotenv;
+use JuriBlox\Sdk\Client;
+use JuriBlox\Sdk\Infrastructure\Drivers\DriverInterface;
+use JuriBlox\Sdk\Infrastructure\Drivers\GuzzleDriver;
+use Monolog\Handler\StreamHandler;
+use Monolog\Logger;
 
 require __DIR__ . '/../vendor/autoload.php';
 
@@ -17,6 +22,55 @@ if (file_exists(__DIR__ . '/../.env'))
 }
 
 $dotenv->required(['JURIBLOX_CLIENT_ID', 'JURIBLOX_CLIENT_KEY']);
+
+/**
+ * "application" class to use in our examples
+ */
+class Application
+{
+    /**
+     * @var Client
+     */
+    private $client;
+
+    /**
+     * @var DriverInterface
+     */
+    private $driver;
+
+    /**
+     * Application constructor
+     */
+    public function __construct()
+    {
+        // Logger aanmaken
+        $logger = new Logger('JuriBlox');
+        $logger->pushHandler(new StreamHandler(__DIR__ . '/juriblox-sdk-client.log', Logger::DEBUG));
+
+        // Driver
+        $this->driver = new GuzzleDriver(getenv('JURIBLOX_CLIENT_ID'), getenv('JURIBLOX_CLIENT_KEY'));
+
+        // Client aanmaken
+        $this->client = Client::fromDriverWithName($this->driver, 'JuriBlox SDK Testcase');
+        $this->client->setLogger($logger);
+    }
+
+    /**
+     * @return Client
+     */
+    public function getClient()
+    {
+        return $this->client;
+    }
+
+    /**
+     * @return DriverInterface
+     */
+    public function getDriver()
+    {
+        return $this->driver;
+    }
+}
 
 /**
  * Helper method that outputs a properly aligned name => value table

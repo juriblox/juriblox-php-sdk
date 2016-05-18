@@ -6,7 +6,8 @@ use JuriBlox\Sdk\Infrastructure\Drivers\GuzzleDriver;
 
 require __DIR__  . '/bootstrap.php';
 
-$client = new Client(new GuzzleDriver(getenv('JURIBLOX_CLIENT_ID'), getenv('JURIBLOX_CLIENT_KEY')), 'JuriBlox SDK Example');
+$application = new Application();
+$client = $application->getClient();
 
 /** @var Template $template */
 foreach ($client->customTemplates()->findAll() as $template)

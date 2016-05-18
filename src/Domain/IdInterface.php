@@ -15,7 +15,7 @@ interface IdInterface
     function __toString();
 
     /**
-     * @return string
+     * @return int
      */
     function getInteger();
 }

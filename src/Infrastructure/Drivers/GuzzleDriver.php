@@ -4,14 +4,19 @@ namespace JuriBlox\Sdk\Infrastructure\Drivers;
 
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\HandlerStack;
+use GuzzleHttp\MessageFormatter;
+use GuzzleHttp\Middleware;
 use GuzzleHttp\Psr7\Response;
 
 use JuriBlox\Sdk\Client;
 use JuriBlox\Sdk\Exceptions\AuthorizationException;
 use JuriBlox\Sdk\Exceptions\EngineOperationException;
-use JuriBlox\Sdk\Exceptions\EntityNotFoundException;
 use JuriBlox\Sdk\Exceptions\RateLimitingException;
 use JuriBlox\Sdk\Exceptions\CannotParseResponseException;
+use JuriBlox\Sdk\Validation\Assertion;
+use Psr\Log\LoggerInterface;
+use Psr\Log\LogLevel;
 
 class GuzzleDriver implements DriverInterface
 {
@@ -41,23 +46,38 @@ class GuzzleDriver implements DriverInterface
     const STATUS_SUCCESS = 200;
 
     /**
-     * @var GuzzleClient
-     */
-    private $client;
-
-    /**
      * @var string
      */
     private $applicationName;
 
     /**
+     * @var string
+     */
+    private $baseUri;
+
+    /**
+     * @var GuzzleClient
+     */
+    private $client;
+
+    /**
+     * @var LoggerInterface
+     */
+    private $logger;
+
+    /**
+     * @var HandlerStack
+     */
+    private $stack;
+
+    /**
      * {@inheritdoc}
      */
-    public function __construct($clientId, $clientKey)
+    public function __construct($clientId, $clientKey, $baseUri = null)
     {
-        $this->client = new GuzzleClient([
-            'base_uri'  => 'https://api.juriblox.nl/v1/',
+        $this->stack = HandlerStack::create();
 
+        $this->client = new GuzzleClient([
             'headers'   => [
                 'User-Agent'    => $this->buildUserAgent(),
 
@@ -65,6 +85,8 @@ class GuzzleDriver implements DriverInterface
                 'X-JuriBlox-Client-Key' => $clientKey
             ]
         ]);
+
+        $this->setBaseUri($baseUri ?: 'https://api.juriblox.nl/v1/');
     }
 
     /**
@@ -89,6 +111,27 @@ class GuzzleDriver implements DriverInterface
     public function setApplicationName($applicationName)
     {
         $this->applicationName = $applicationName ?: null;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setBaseUri($baseUri)
+    {
+        Assertion::url($baseUri);
+
+        $this->baseUri = trim($baseUri, '/') . '/';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setLogger(LoggerInterface $logger)
+    {
+        $this->logger = $logger;
+
+        $this->stack->remove('logger');
+        $this->stack->push(Middleware::log($logger, new MessageFormatter('{method} {target} HTTP/{version} - {code} {res_header_Content-Length}'), LogLevel::INFO), 'logger');
     }
 
     /**
@@ -134,6 +177,9 @@ class GuzzleDriver implements DriverInterface
         {
             /** @var Response $response */
             $response = $this->client->request($method, $uri, [
+                'handler'  => $this->stack,
+                'base_uri' => $this->baseUri,
+
                 'headers' => [
                     'User-Agent' => $this->buildUserAgent(),
                 ],

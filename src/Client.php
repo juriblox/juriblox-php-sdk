@@ -9,6 +9,7 @@ use JuriBlox\Sdk\Infrastructure\Endpoints\CustomersEndpoint;
 use JuriBlox\Sdk\Infrastructure\Endpoints\CustomTemplatesEndpoint;
 use JuriBlox\Sdk\Infrastructure\Endpoints\DocumentsEndpoint;
 use JuriBlox\Sdk\Infrastructure\Endpoints\TemplatesEndpoint;
+use Psr\Log\LoggerInterface;
 
 class Client
 {
@@ -18,25 +19,26 @@ class Client
     const VERSION = '0.0.1';
 
     /**
-     * @var null|string
+     * @var LoggerInterface
      */
-    private $applicationName;
+    private $logger;
 
     /**
-     * @var Driver
+     * @var null|string
+     */
+    private $name;
+
+    /**
+     * @var DriverInterface
      */
     private $driver;
 
     /**
      * @param DriverInterface $driver
-     * @param string          $applicationName Web application's name for easier identification in logs
      */
-    public function __construct(DriverInterface $driver, $applicationName = null)
+    private function __construct(DriverInterface $driver)
     {
-        $this->applicationName = $applicationName;
-
         $this->driver = $driver;
-        $this->driver->setApplicationName($applicationName);
     }
 
     /**
@@ -70,6 +72,30 @@ class Client
     }
 
     /**
+     * @param DriverInterface $driver
+     *
+     * @return Client
+     */
+    public static function fromDriver(DriverInterface $driver)
+    {
+        return new static($driver);
+    }
+
+    /**
+     * @param DriverInterface $driver
+     * @param                 $name
+     *
+     * @return Client
+     */
+    public static function fromDriverWithName(DriverInterface $driver, $name)
+    {
+        $client = static::fromDriver($driver);
+        $client->setName($name);
+
+        return $client;
+    }
+
+    /**
      * Get an endpoint for working with templates
      *
      * @return TemplatesEndpoint
@@ -77,5 +103,28 @@ class Client
     public function templates()
     {
         return TemplatesEndpoint::fromDriver($this->driver);
+    }
+
+    /**
+     * Set the application's name
+     *
+     * @param $name
+     */
+    private function setName($name)
+    {
+        $this->name = $name;
+        $this->driver->setApplicationName($name);
+    }
+
+    /**
+     * Set a PSR-3 logger
+     *
+     * @param LoggerInterface $logger
+     */
+    public function setLogger(LoggerInterface $logger)
+    {
+        $this->logger = $logger;
+
+        $this->driver->setLogger($logger);
     }
 }

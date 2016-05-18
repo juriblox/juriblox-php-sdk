@@ -3,17 +3,21 @@
 namespace JuriBlox\Sdk\Infrastructure\Drivers;
 
 use JuriBlox\Sdk\Exceptions\AuthorizationException;
+use JuriBlox\Sdk\Exceptions\CannotParseResponseException;
+use JuriBlox\Sdk\Exceptions\EngineOperationException;
 use JuriBlox\Sdk\Exceptions\RateLimitingException;
+use Psr\Log\LoggerInterface;
 
 interface DriverInterface
 {
     /**
      * GuzzleDriver constructor
      *
-     * @param   string  $clientId      JuriBlox API client ID
-     * @param   string  $clientKey     JuriBlox API client key
+     * @param string        $clientId   JuriBlox API client ID
+     * @param string        $clientKey  JuriBlox API client key
+     * @param string|null   $baseUri    Custom base URI
      */
-    function __construct($clientId, $clientKey);
+    function __construct($clientId, $clientKey, $baseUri = null);
 
     /**
      * Send GET request
@@ -52,4 +56,20 @@ interface DriverInterface
      * @param $name
      */
     function setApplicationName($name);
+
+    /**
+     * Override the base URI
+     *
+     * @param $baseUri
+     *
+     * @return mixed
+     */
+    function setBaseUri($baseUri);
+
+    /**
+     * Set PSR-3 logger
+     *
+     * @param LoggerInterface $logger
+     */
+    function setLogger(LoggerInterface $logger);
 }

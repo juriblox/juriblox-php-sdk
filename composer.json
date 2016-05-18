@@ -10,7 +10,7 @@
     "authors": [
         {
             "name": "Vic D'Elfant",
-            "email": "vicdelfant@midd.ag"
+            "email": "vic@wijzijnmiddag.nl"
         }
     ],
 
@@ -39,6 +39,7 @@
     },
 
     "require-dev": {
+        "monolog/monolog": "^1.19",
         "phpunit/phpunit": "5.1.*",
         "vlucas/phpdotenv": "^2.2"
     },
