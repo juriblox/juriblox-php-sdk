@@ -17,7 +17,7 @@ interface DriverInterface
      * @param string        $clientKey  JuriBlox API client key
      * @param string|null   $baseUri    Custom base URI
      */
-    function __construct($clientId, $clientKey, $baseUri = null);
+    public function __construct($clientId, $clientKey, $baseUri = null);
 
     /**
      * Send GET request
@@ -32,7 +32,7 @@ interface DriverInterface
      * @throws EngineOperationException
      * @throws RateLimitingException
      */
-    function get($uri, $segments = null);
+    public function get($uri, $segments = null);
 
     /**
      * Send POST request
@@ -48,14 +48,14 @@ interface DriverInterface
      * @throws EngineOperationException
      * @throws RateLimitingException
      */
-    function post($uri, $segments = null, $body);
+    public function post($uri, $segments = null, $body);
 
     /**
      * Sets the application's name for easier identification in server logs
      *
      * @param $name
      */
-    function setApplicationName($name);
+    public function setApplicationName($name);
 
     /**
      * Override the base URI
@@ -64,12 +64,12 @@ interface DriverInterface
      *
      * @return mixed
      */
-    function setBaseUri($baseUri);
+    public function setBaseUri($baseUri);
 
     /**
      * Set PSR-3 logger
      *
      * @param LoggerInterface $logger
      */
-    function setLogger(LoggerInterface $logger);
+    public function setLogger(LoggerInterface $logger);
 }

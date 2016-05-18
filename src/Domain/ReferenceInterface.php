@@ -7,15 +7,15 @@ interface ReferenceInterface
     /**
      * @param $reference
      */
-    function __construct($reference);
+    public function __construct($reference);
 
     /**
      * @return string
      */
-    function __toString();
+    public function __toString();
 
     /**
      * @return string
      */
-    function getString();
+    public function getString();
 }

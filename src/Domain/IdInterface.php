@@ -7,15 +7,15 @@ interface IdInterface
     /**
      * @param $id
      */
-    function __construct($id);
+    public function __construct($id);
 
     /**
      * @return string
      */
-    function __toString();
+    public function __toString();
 
     /**
      * @return int
      */
-    function getInteger();
+    public function getInteger();
 }

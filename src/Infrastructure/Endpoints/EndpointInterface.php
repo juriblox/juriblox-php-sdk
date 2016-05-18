@@ -12,12 +12,12 @@ interface EndpointInterface
      *
      * @return AbstractEndpoint
      */
-    static function fromDriver(DriverInterface $driver);
+    public static function fromDriver(DriverInterface $driver);
 
     /**
      * Get current Driver object
      *
      * @return DriverInterface
      */
-    function getDriver();
+    public function getDriver();
 }
