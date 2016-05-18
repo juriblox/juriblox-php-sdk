@@ -1,6 +1,6 @@
 <?php
 
-namespace JuriBlox\Sdk\Infrastructure\Factories\Documents;
+namespace JuriBlox\Sdk\Infrastructure\Transformers\Documents;
 
 use JuriBlox\Sdk\Domain\Documents\Entities\Tag;
 use JuriBlox\Sdk\Domain\Documents\Entities\Template;
@@ -14,7 +14,7 @@ use JuriBlox\Sdk\Domain\Documents\Values\TemplateStatus;
 use JuriBlox\Sdk\Domain\Offices\Entities\Office;
 use JuriBlox\Sdk\Domain\Users\Entities\User;
 
-class TemplateFactory
+class TemplateTransformer
 {
     /**
      * Create a Template from a DTO returned by the JuriBlox API
@@ -23,7 +23,7 @@ class TemplateFactory
      *
      * @return Template
      */
-    public static function createFromDto($dto)
+    public static function read($dto)
     {
         $template = Template::fromIdString($dto->id);
         $template->setName($dto->name);

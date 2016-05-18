@@ -1,11 +1,12 @@
 <?php
 
-namespace JuriBlox\Sdk\Infrastructure\Factories\Documents;
+namespace JuriBlox\Sdk\Infrastructure\Transformers\Documents;
 
 use JuriBlox\Sdk\Domain\Documents\Entities\QuestionAnswer;
 use JuriBlox\Sdk\Domain\Documents\Entities\TemplateVariable;
+use JuriBlox\Sdk\Infrastructure\Transformers\Documents\QuestionTransformer;
 
-class QuestionAnswerFactory
+class QuestionAnswerTransformer
 {
     /**
      * Create a QuestionAnswer from a DTO returned by the JuriBlox API
@@ -14,11 +15,11 @@ class QuestionAnswerFactory
      *
      * @return QuestionAnswer
      */
-    public static function createFromDto($dto)
+    public static function read($dto)
     {
         $answer = QuestionAnswer::fromIdString(/* TODO: $dto->id */0);
-        $answer->setQuestion(QuestionFactory::createFromDto($dto->question));
-        $answer->setMostRecentQuestion(QuestionFactory::createFromDto($dto->mostRecentQuestion));
+        $answer->setQuestion(QuestionTransformer::read($dto->question));
+        $answer->setMostRecentQuestion(QuestionTransformer::read($dto->mostRecentQuestion));
 
         $variable = TemplateVariable::fromIdString($dto->variable->id);
         $variable->setName($dto->variable->name);

@@ -4,7 +4,7 @@ namespace JuriBlox\Sdk\Infrastructure\Collections;
 
 use JuriBlox\Sdk\Domain\Customers\Entities\Customer;
 use JuriBlox\Sdk\Infrastructure\Endpoints\CustomersEndpoint;
-use JuriBlox\Sdk\Infrastructure\Factories\Customers\CustomerFactory;
+use JuriBlox\Sdk\Infrastructure\Transformers\Customers\CustomerTransformer;
 
 class CustomersCollection extends AbstractPagedCollection
 {
@@ -25,6 +25,6 @@ class CustomersCollection extends AbstractPagedCollection
      */
     protected function createEntityFromData($dto)
     {
-        return CustomerFactory::createFromDto($dto);
+        return CustomerTransformer::read($dto);
     }
 }

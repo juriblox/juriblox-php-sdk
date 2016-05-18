@@ -3,7 +3,7 @@
 namespace JuriBlox\Sdk\Infrastructure\Collections;
 
 use JuriBlox\Sdk\Domain\Documents\Entities\Document;
-use JuriBlox\Sdk\Infrastructure\Factories\Documents\DocumentFactory;
+use JuriBlox\Sdk\Infrastructure\Transformers\Documents\DocumentTransformer;
 use JuriBlox\Sdk\Domain\Documents\Values\DocumentReference;
 use JuriBlox\Sdk\Domain\Documents\Values\TemplateId;
 use JuriBlox\Sdk\Infrastructure\Endpoints\DocumentsEndpoint;
@@ -64,6 +64,6 @@ class DocumentsCollection extends AbstractPagedCollection
      */
     protected function createEntityFromData($dto)
     {
-        return DocumentFactory::createFromDto($dto);
+        return DocumentTransformer::read($dto);
     }
 }

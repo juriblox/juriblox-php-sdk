@@ -3,7 +3,7 @@
 namespace JuriBlox\Sdk\Infrastructure\Collections;
 
 use JuriBlox\Sdk\Domain\Documents\Entities\Template;
-use JuriBlox\Sdk\Infrastructure\Factories\Documents\TemplateFactory;
+use JuriBlox\Sdk\Infrastructure\Transformers\Documents\TemplateTransformer;
 
 class QuestionsCollection extends AbstractCollection
 {
@@ -14,6 +14,6 @@ class QuestionsCollection extends AbstractCollection
      */
     protected function createEntityFromData($dto)
     {
-        return TemplateFactory::createFromDto($dto);
+        return TemplateTransformer::read($dto);
     }
 }

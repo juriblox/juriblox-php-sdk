@@ -10,10 +10,10 @@ use JuriBlox\Sdk\Domain\Documents\Values\DocumentReference;
 use JuriBlox\Sdk\Domain\Documents\Values\File;
 use JuriBlox\Sdk\Domain\Documents\Values\Language;
 use JuriBlox\Sdk\Domain\Offices\Entities\Office;
-use JuriBlox\Sdk\Infrastructure\Factories\Documents\QuestionAnswerFactory;
+use JuriBlox\Sdk\Infrastructure\Transformers\Documents\QuestionAnswerTransformer;
 use JuriBlox\Sdk\Validation\Assertion;
 
-class DocumentFactory
+class DocumentTransformer
 {
     /**
      * Create a Document from a DTO returned by the JuriBlox API
@@ -22,7 +22,7 @@ class DocumentFactory
      *
      * @return Document
      */
-    public static function createFromDto($dto)
+    public static function read($dto)
     {
         Assertion::nullOrDateTimeString($dto->validTill);
         Assertion::nullOrDateTimeString($dto->createdAt);
@@ -80,7 +80,7 @@ class DocumentFactory
         {
             foreach ($dto->answers as $entry)
             {
-                $document->addAnswer(QuestionAnswerFactory::createFromDto($entry));
+                $document->addAnswer(QuestionAnswerTransformer::read($entry));
             }
         }
 

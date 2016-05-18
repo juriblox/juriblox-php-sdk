@@ -4,7 +4,7 @@ namespace JuriBlox\Sdk\Infrastructure\Endpoints;
 
 use JuriBlox\Sdk\Domain\Documents\Entities\Document;
 use JuriBlox\Sdk\Domain\Documents\Entities\DocumentRequest;
-use JuriBlox\Sdk\Infrastructure\Factories\Documents\DocumentFactory;
+use JuriBlox\Sdk\Infrastructure\Transformers\Documents\DocumentTransformer;
 use JuriBlox\Sdk\Domain\Documents\Values\DocumentId;
 use JuriBlox\Sdk\Domain\Documents\Values\DocumentReference;
 use JuriBlox\Sdk\Domain\Documents\Values\DocumentRequestId;
@@ -43,7 +43,7 @@ class DocumentsEndpoint extends AbstractEndpoint implements EndpointInterface
             'id' => $id->getInteger()
         ]);
 
-        return DocumentFactory::createFromDto($result);
+        return DocumentTransformer::read($result);
     }
 
     /**

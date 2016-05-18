@@ -3,7 +3,7 @@
 namespace JuriBlox\Sdk\Infrastructure\Endpoints;
 
 use JuriBlox\Sdk\Domain\Documents\Entities\Template;
-use JuriBlox\Sdk\Infrastructure\Factories\Documents\TemplateFactory;
+use JuriBlox\Sdk\Infrastructure\Transformers\Documents\TemplateTransformer;
 use JuriBlox\Sdk\Domain\Documents\Values\TemplateId;
 use JuriBlox\Sdk\Infrastructure\Collections\TemplatesCollection;
 use JuriBlox\Sdk\Infrastructure\Endpoints\Templates\QuestionnaireEndpoint;
@@ -33,7 +33,7 @@ class TemplatesEndpoint extends AbstractEndpoint implements EndpointInterface
             'id' => $id->getInteger()
         ]);
 
-        return TemplateFactory::createFromDto($result);
+        return TemplateTransformer::read($result);
     }
 
     /**

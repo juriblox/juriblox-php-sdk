@@ -2,7 +2,7 @@
 
 namespace JuriBlox\Sdk\Infrastructure\Endpoints\Templates;
 
-use JuriBlox\Sdk\Infrastructure\Factories\Documents\QuestionnaireFactory;
+use JuriBlox\Sdk\Infrastructure\Transformers\Documents\QuestionnaireTransformer;
 use JuriBlox\Sdk\Domain\Documents\Values\Questionnaire;
 use JuriBlox\Sdk\Domain\Documents\Values\TemplateId;
 use JuriBlox\Sdk\Infrastructure\Endpoints\AbstractEndpoint;
@@ -44,6 +44,6 @@ class QuestionnaireEndpoint extends AbstractEndpoint implements EndpointInterfac
             'templateId' => $this->templateId
         ]);
 
-        return QuestionnaireFactory::createFromDto($result);
+        return QuestionnaireTransformer::read($result);
     }
 }

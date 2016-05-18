@@ -1,10 +1,11 @@
 <?php
 
-namespace JuriBlox\Sdk\Infrastructure\Factories\Documents;
+namespace JuriBlox\Sdk\Infrastructure\Transformers\Documents;
 
 use JuriBlox\Sdk\Domain\Documents\Entities\QuestionnaireStep;
+use JuriBlox\Sdk\Infrastructure\Transformers\Documents\QuestionTransformer;
 
-class QuestionnaireStepFactory
+class QuestionnaireStepTransformer
 {
     /**
      * Create a QuestionnaireStep from a DTO returned by the JuriBlox API
@@ -13,7 +14,7 @@ class QuestionnaireStepFactory
      *
      * @return QuestionnaireStep
      */
-    public static function createFromDto($dto)
+    public static function read($dto)
     {
         $step = QuestionnaireStep::fromIdString($dto->id);
         $step->setName($dto->name);
@@ -21,7 +22,7 @@ class QuestionnaireStepFactory
 
         foreach ($dto->questions->questions as $entry)
         {
-            $step->addQuestion(QuestionFactory::createFromDto($entry));
+            $step->addQuestion(QuestionTransformer::read($entry));
         }
 
         return $step;
