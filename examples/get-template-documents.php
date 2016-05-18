@@ -1,8 +1,6 @@
 <?php
 
-use JuriBlox\Sdk\Client;
 use JuriBlox\Sdk\Domain\Documents\Values\TemplateId;
-use JuriBlox\Sdk\Infrastructure\Drivers\GuzzleDriver;
 
 require __DIR__ . '/bootstrap.php';
 

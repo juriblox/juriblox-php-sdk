@@ -1,6 +1,5 @@
 <?php
 
-use JuriBlox\Sdk\Client;
 use JuriBlox\Sdk\Domain\Customers\Values\CustomerReference;
 use JuriBlox\Sdk\Domain\Documents\Entities\DocumentRequest;
 use JuriBlox\Sdk\Domain\Documents\Entities\QuestionAnswer;
@@ -8,7 +7,6 @@ use JuriBlox\Sdk\Domain\Documents\Values\DocumentReference;
 use JuriBlox\Sdk\Domain\Documents\Values\QuestionId;
 use JuriBlox\Sdk\Domain\Documents\Values\TemplateId;
 use JuriBlox\Sdk\Exceptions\EngineOperationException;
-use JuriBlox\Sdk\Infrastructure\Drivers\GuzzleDriver;
 
 require __DIR__ . '/bootstrap.php';
 

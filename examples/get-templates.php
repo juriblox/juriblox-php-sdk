@@ -1,8 +1,5 @@
 <?php
 
-use JuriBlox\Sdk\Client;
-use JuriBlox\Sdk\Infrastructure\Drivers\GuzzleDriver;
-
 require __DIR__  . '/bootstrap.php';
 
 $application = new Application();

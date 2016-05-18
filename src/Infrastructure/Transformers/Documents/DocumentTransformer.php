@@ -1,6 +1,6 @@
 <?php
 
-namespace JuriBlox\Sdk\Infrastructure\Factories\Documents;
+namespace JuriBlox\Sdk\Infrastructure\Transformers\Documents;
 
 use JuriBlox\Sdk\Domain\Customers\Entities\Customer;
 use JuriBlox\Sdk\Domain\Customers\Values\Contact;
@@ -10,6 +10,7 @@ use JuriBlox\Sdk\Domain\Documents\Values\DocumentReference;
 use JuriBlox\Sdk\Domain\Documents\Values\File;
 use JuriBlox\Sdk\Domain\Documents\Values\Language;
 use JuriBlox\Sdk\Domain\Offices\Entities\Office;
+use JuriBlox\Sdk\Infrastructure\Factories\Documents\QuestionAnswerFactory;
 use JuriBlox\Sdk\Validation\Assertion;
 
 class DocumentFactory
