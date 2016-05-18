@@ -17,17 +17,21 @@ class QuestionAnswerTransformer
      */
     public static function read($dto)
     {
-        $answer = QuestionAnswer::fromIdString(/* TODO: $dto->id */0);
+        $answer = QuestionAnswer::fromIdString($dto->id);
         $answer->setQuestion(QuestionTransformer::read($dto->question));
+        $answer->setValue($dto->value);
+
         $answer->setMostRecentQuestion(QuestionTransformer::read($dto->mostRecentQuestion));
 
-        $variable = TemplateVariable::fromIdString($dto->variable->id);
-        $variable->setName($dto->variable->name);
-        $variable->setTitle($dto->variable->title);
-        $variable->setDescription($dto->variable->description);
+        if (isset($dto->variable))
+        {
+            $variable = TemplateVariable::fromIdString($dto->variable->id);
+            $variable->setName($dto->variable->name);
+            $variable->setTitle($dto->variable->title);
+            $variable->setDescription($dto->variable->description);
 
-        $answer->setVariable($variable);
-        $answer->setValue($dto->value);
+            $answer->setVariable($variable);
+        }
 
         return $answer;
     }
