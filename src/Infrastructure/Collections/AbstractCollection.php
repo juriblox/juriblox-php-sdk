@@ -163,9 +163,7 @@ abstract class AbstractCollection implements \Iterator, \Countable
     protected function fetch()
     {
         $result = $this->endpoint->getDriver()->get($this->uri);
-
-        print_r($result); exit();
-
+        
         if (!isset($result->{$this->key}))
         {
             throw new CannotParseResponseException(sprintf('The "%s" key does not exist in the result returned by the API', $this->key));
