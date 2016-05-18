@@ -2,8 +2,8 @@
 
 namespace JuriBlox\Sdk\Infrastructure\Collections;
 
-use JuriBlox\Sdk\Domain\Documents\Entities\Template;
-use JuriBlox\Sdk\Domain\Documents\Factories\DocumentFactory;
+use JuriBlox\Sdk\Domain\Documents\Entities\Document;
+use JuriBlox\Sdk\Infrastructure\Factories\Documents\DocumentFactory;
 use JuriBlox\Sdk\Domain\Documents\Values\DocumentReference;
 use JuriBlox\Sdk\Domain\Documents\Values\TemplateId;
 use JuriBlox\Sdk\Infrastructure\Endpoints\DocumentsEndpoint;

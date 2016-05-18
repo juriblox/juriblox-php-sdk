@@ -10,7 +10,7 @@ use Assert\Assertion as BaseAssertion;
  * @author Vic D'Elfant <vicdelfant@midd.ag>
  *
  * METHODSTART
- * @method static void nullOrDateTimeString($value, $value2, $message = null, $propertyPath = null)
+ * @method static void nullOrDateTimeString($value, $message = null, $propertyPath = null)
  * METHODEND
  */
 class Assertion extends BaseAssertion

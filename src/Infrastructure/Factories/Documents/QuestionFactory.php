@@ -1,6 +1,6 @@
 <?php
 
-namespace JuriBlox\Sdk\Domain\Documents\Factories;
+namespace JuriBlox\Sdk\Infrastructure\Factories\Documents;
 
 use JuriBlox\Sdk\Domain\Documents\Entities\Question;
 use JuriBlox\Sdk\Domain\Documents\Entities\QuestionOption;

@@ -2,7 +2,7 @@
 
 namespace JuriBlox\Sdk\Infrastructure\Endpoints\Templates;
 
-use JuriBlox\Sdk\Domain\Documents\Factories\QuestionnaireFactory;
+use JuriBlox\Sdk\Infrastructure\Factories\Documents\QuestionnaireFactory;
 use JuriBlox\Sdk\Domain\Documents\Values\Questionnaire;
 use JuriBlox\Sdk\Domain\Documents\Values\TemplateId;
 use JuriBlox\Sdk\Infrastructure\Endpoints\AbstractEndpoint;

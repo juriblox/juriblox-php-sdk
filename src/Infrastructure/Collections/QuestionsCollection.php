@@ -3,9 +3,7 @@
 namespace JuriBlox\Sdk\Infrastructure\Collections;
 
 use JuriBlox\Sdk\Domain\Documents\Entities\Template;
-use JuriBlox\Sdk\Domain\Documents\Factories\TemplateFactory;
-use JuriBlox\Sdk\Infrastructure\Endpoints\EndpointInterface;
-use JuriBlox\Sdk\Infrastructure\Endpoints\TemplatesEndpoint;
+use JuriBlox\Sdk\Infrastructure\Factories\Documents\TemplateFactory;
 
 class QuestionsCollection extends AbstractCollection
 {

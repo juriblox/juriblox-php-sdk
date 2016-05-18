@@ -1,6 +1,6 @@
 <?php
 
-namespace JuriBlox\Sdk\Domain\Documents\Factories;
+namespace JuriBlox\Sdk\Infrastructure\Factories\Documents;
 
 use JuriBlox\Sdk\Domain\Documents\Values\Questionnaire;
 

@@ -5,6 +5,7 @@ namespace JuriBlox\Sdk\Infrastructure\Collections;
 use JuriBlox\Sdk\Domain\Customers\Entities\Customer;
 use JuriBlox\Sdk\Domain\Customers\Values\Contact;
 use JuriBlox\Sdk\Infrastructure\Endpoints\CustomersEndpoint;
+use JuriBlox\Sdk\Infrastructure\Factories\Customers\CustomerFactory;
 
 class CustomersCollection extends AbstractPagedCollection
 {
@@ -25,10 +26,6 @@ class CustomersCollection extends AbstractPagedCollection
      */
     protected function createEntityFromData($dto)
     {
-        $customer = Customer::fromReferenceString($dto->reference);
-        $customer->setCompany($dto->company);
-        $customer->setContact(new Contact($dto->contact->name, $dto->contact->email));
-
-        return $customer;
+        return CustomerFactory::createFromDto($dto);
     }
 }

@@ -4,7 +4,7 @@ namespace JuriBlox\Sdk\Infrastructure\Endpoints;
 
 use JuriBlox\Sdk\Domain\Documents\Entities\Document;
 use JuriBlox\Sdk\Domain\Documents\Entities\DocumentRequest;
-use JuriBlox\Sdk\Domain\Documents\Factories\DocumentFactory;
+use JuriBlox\Sdk\Infrastructure\Factories\Documents\DocumentFactory;
 use JuriBlox\Sdk\Domain\Documents\Values\DocumentId;
 use JuriBlox\Sdk\Domain\Documents\Values\DocumentReference;
 use JuriBlox\Sdk\Domain\Documents\Values\DocumentRequestId;
