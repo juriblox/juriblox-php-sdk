@@ -2,6 +2,7 @@
 
 namespace JuriBlox\Sdk\Infrastructure\Endpoints;
 
+use JuriBlox\Sdk\Domain\Customers\Values\CustomerReference;
 use JuriBlox\Sdk\Domain\Documents\Entities\Document;
 use JuriBlox\Sdk\Domain\Documents\Entities\DocumentRequest;
 use JuriBlox\Sdk\Infrastructure\Transformers\Documents\DocumentTransformer;
@@ -18,6 +19,20 @@ use JuriBlox\Sdk\Utils\DateTimeConvertor;
 
 class DocumentsEndpoint extends AbstractEndpoint implements EndpointInterface
 {
+    /**
+     * Get all documents generated for a specific customer
+     *
+     * @param CustomerReference $reference
+     *
+     * @return DocumentsCollection|Document[]
+     */
+    public function findByCustomer(CustomerReference $reference)
+    {
+        return DocumentsCollection::fromEndpointWithSettings($this, '/customers/{reference}/documents', 'documents', [
+            'reference' => $reference->getString()
+        ]);
+    }
+    
     /**
      * Get all documents with a specific reference
      *
