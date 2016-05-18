@@ -190,6 +190,6 @@ class QuestionnaireStep implements \Iterator, \Countable
      */
     public function valid()
     {
-        return isset($this->steps[$this->questionsIndex]);
+        return isset($this->questions[$this->questionsIndex]);
     }
 }

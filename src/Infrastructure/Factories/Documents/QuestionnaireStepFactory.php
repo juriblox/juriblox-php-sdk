@@ -3,7 +3,6 @@
 namespace JuriBlox\Sdk\Infrastructure\Factories\Documents;
 
 use JuriBlox\Sdk\Domain\Documents\Entities\QuestionnaireStep;
-use JuriBlox\Sdk\Domain\Documents\Values\Questionnaire;
 
 class QuestionnaireStepFactory
 {

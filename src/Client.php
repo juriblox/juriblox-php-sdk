@@ -3,7 +3,6 @@
 namespace JuriBlox\Sdk;
 
 use JuriBlox\Sdk\Infrastructure\Collections\CustomTemplatesCollection;
-use JuriBlox\Sdk\Infrastructure\Drivers\Driver;
 use JuriBlox\Sdk\Infrastructure\Drivers\DriverInterface;
 use JuriBlox\Sdk\Infrastructure\Endpoints\CustomersEndpoint;
 use JuriBlox\Sdk\Infrastructure\Endpoints\CustomTemplatesEndpoint;

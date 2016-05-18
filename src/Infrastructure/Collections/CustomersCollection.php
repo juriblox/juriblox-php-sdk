@@ -3,7 +3,6 @@
 namespace JuriBlox\Sdk\Infrastructure\Collections;
 
 use JuriBlox\Sdk\Domain\Customers\Entities\Customer;
-use JuriBlox\Sdk\Domain\Customers\Values\Contact;
 use JuriBlox\Sdk\Infrastructure\Endpoints\CustomersEndpoint;
 use JuriBlox\Sdk\Infrastructure\Factories\Customers\CustomerFactory;
 

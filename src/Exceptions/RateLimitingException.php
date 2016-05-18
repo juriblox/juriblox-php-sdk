@@ -2,8 +2,6 @@
 
 namespace JuriBlox\Sdk\Exceptions;
 
-use GuzzleHttp\Psr7\Response;
-
 class RateLimitingException extends RequestFailedException
 {
     const HEADER_LIMIT_RESET = 'X-Rate-Limit-Reset';

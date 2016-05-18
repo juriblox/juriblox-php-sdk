@@ -7,8 +7,6 @@ use JuriBlox\Sdk\Domain\Documents\Values\Questionnaire;
 use JuriBlox\Sdk\Domain\Documents\Values\TemplateId;
 use JuriBlox\Sdk\Infrastructure\Endpoints\AbstractEndpoint;
 use JuriBlox\Sdk\Infrastructure\Endpoints\EndpointInterface;
-use JuriBlox\Sdk\Infrastructure\Endpoints\TemplateQuestionnaireFactory;
-use JuriBlox\Sdk\Infrastructure\Endpoints\TemplateQuestionsEndpoint;
 use JuriBlox\Sdk\Infrastructure\Endpoints\TemplatesEndpoint;
 
 class QuestionnaireEndpoint extends AbstractEndpoint implements EndpointInterface

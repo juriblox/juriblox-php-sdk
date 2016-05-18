@@ -2,8 +2,6 @@
 
 namespace JuriBlox\Sdk\Domain\Documents\Entities;
 
-use JuriBlox\Sdk\Domain\Documents\Values\AnswerId;
-use JuriBlox\Sdk\Domain\Documents\Values\QuestionAnswerId;
 use JuriBlox\Sdk\Domain\Documents\Values\QuestionOptionId;
 
 class QuestionOption
