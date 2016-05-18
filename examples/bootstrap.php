@@ -48,10 +48,10 @@ class Application
         $logger->pushHandler(new StreamHandler(__DIR__ . '/juriblox-sdk-client.log', Logger::DEBUG));
 
         // Driver
-        $this->driver = new GuzzleDriver(getenv('JURIBLOX_CLIENT_ID'), getenv('JURIBLOX_CLIENT_KEY'));
+        $this->driver = new GuzzleDriver(getenv('JURIBLOX_CLIENT_ID'), getenv('JURIBLOX_CLIENT_KEY'), getenv('JURIBLOX_API_URL'));
 
         // Client aanmaken
-        $this->client = Client::fromDriverWithName($this->driver, 'JuriBlox SDK Testcase');
+        $this->client = Client::fromDriverWithName($this->driver, 'JuriBlox SDK Samples');
         $this->client->setLogger($logger);
     }
 

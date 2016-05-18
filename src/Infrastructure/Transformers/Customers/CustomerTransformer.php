@@ -25,14 +25,12 @@ class CustomerTransformer
 
     public static function write(Customer $customer)
     {
-        return (object) [
-            'reference'     => $customer->getReference()->getString(),
-            'company'       => $customer->getCompany(),
+        return [
+            'reference'  => $customer->getReference()->getString(),
 
-            'contact'   => (object) [
-                'name'  => $customer->getContact()->getName(),
-                'email' => $customer->getContact()->getEmail()
-            ]
+            'company'   => $customer->getCompany(),
+            'name'      => $customer->getContact()->getName(),
+            'email'     => $customer->getContact()->getEmail()
         ];
     }
 }

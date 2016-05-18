@@ -100,6 +100,16 @@ class GuzzleDriver implements DriverInterface
     /**
      * {@inheritdoc}
      */
+    public function patch($uri, $segments = null, $body)
+    {
+        return $this->request('POST', $uri, $segments, array_merge($body, [
+            '_method' => 'PATCH'
+        ]));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function post($uri, $segments = null, $body)
     {
         return $this->request('POST', $uri, $segments, $body);

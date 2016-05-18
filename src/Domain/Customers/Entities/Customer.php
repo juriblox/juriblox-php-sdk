@@ -27,6 +27,39 @@ class Customer
     private $reference;
 
     /**
+     * Customer constructor
+     */
+    public function __construct()
+    {
+
+    }
+
+    /**
+     * @return Contact|string
+     */
+    public function __toString()
+    {
+        if ($this->contact !== null)
+        {
+            $output = $this->contact;
+            if ($this->company !== null)
+            {
+                $output .= sprintf(' (%s) [%s]', $this->company, $this->getReference()->getString());
+            }
+        }
+        elseif ($this->company !== null)
+        {
+            $output = sprintf('%s [%s]', $this->company, $this->getReference()->getString());
+        }
+        else
+        {
+            $output = sprintf('[%s]', $this->getReference()->getString());
+        }
+
+        return $output;
+    }
+
+    /**
      * Create a customer entity based on an existing identity
      *
      * @param CustomerReference $reference
@@ -51,14 +84,6 @@ class Customer
     public static function fromReferenceString($reference)
     {
         return static::fromReference(new CustomerReference($reference));
-    }
-
-    /**
-     * Customer constructor
-     */
-    private function __construct()
-    {
-
     }
 
     /**
@@ -101,25 +126,11 @@ class Customer
         $this->contact = $contact;
     }
 
-    public function __toString()
+    /**
+     * @param CustomerReference $reference
+     */
+    public function setReference($reference)
     {
-        if ($this->contact !== null)
-        {
-            $output = $this->contact;
-            if ($this->company !== null)
-            {
-                $output .= sprintf(' (%s) [%s]', $this->company, $this->getReference()->getString());
-            }
-        }
-        elseif ($this->company !== null)
-        {
-            $output = sprintf('%s [%s]', $this->company, $this->getReference()->getString());
-        }
-        else
-        {
-            $output = sprintf('[%s]', $this->getReference()->getString());
-        }
-
-        return $output;
+        $this->reference = $reference ?: null;
     }
 }

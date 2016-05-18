@@ -35,6 +35,22 @@ interface DriverInterface
     public function get($uri, $segments = null);
 
     /**
+     * Send PATCH request
+     *
+     * @param      $uri
+     * @param null $segments
+     * @param      $body
+     *
+     * @return object
+     *
+     * @throws AuthorizationException
+     * @throws CannotParseResponseException
+     * @throws EngineOperationException
+     * @throws RateLimitingException
+     */
+    public function patch($uri, $segments = null, $body);
+
+    /**
      * Send POST request
      *
      * @param      $uri

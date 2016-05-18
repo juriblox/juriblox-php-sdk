@@ -6,17 +6,31 @@ use JuriBlox\Sdk\Domain\Customers\Entities\Customer;
 use JuriBlox\Sdk\Domain\Customers\Values\CustomerReference;
 use JuriBlox\Sdk\Infrastructure\Collections\CustomersCollection;
 use JuriBlox\Sdk\Infrastructure\Transformers\Customers\CustomerTransformer;
-use Ramsey\Uuid\Uuid;
 
 class CustomersEndpoint extends AbstractEndpoint implements EndpointInterface
 {
+    /**
+     * Create a remote Customer entity
+     *
+     * @param Customer $customer
+     *
+     * @return Customer
+     */
     public function create(Customer $customer)
     {
-        $customer->setReference(new CustomerReference(Uuid::uuid4()->toString()));
+        $result = $this->driver->post('customers', null, CustomerTransformer::write($customer));
 
-        $result = $this->driver->post('customers', CustomerTransformer::write($customer));
+        // Save UUID
+        $customer->setReference(new CustomerReference($result->reference));
 
         return $customer;
+    }
+
+    public function update(Customer $customer)
+    {
+        $this->driver->patch('customers/{reference}', [
+            'reference' => $customer->getReference()->getString()
+        ], CustomerTransformer::write($customer));
     }
 
     /**
