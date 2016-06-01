@@ -60,6 +60,9 @@ class Request
             case DocumentGenerationRequest::EVENT_FAILED:
                 return DocumentGenerationRequest::fromRequest($request);
 
+            case TemplatePublishRequest::EVENT_PUBLISHED:
+                return TemplatePublishRequest::fromRequest($request);
+
             default:
                 return $request;
         }
