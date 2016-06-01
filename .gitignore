@@ -3,4 +3,6 @@
 
 /build
 /examples/*.log
+/examples/downloads/*.*
+
 /vendor

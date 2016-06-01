@@ -17,6 +17,16 @@ class FileType
     const TYPE_WORD2007 = 'Word2007';
 
     /**
+     * File extensions
+     *
+     * @var array
+     */
+    public static $extensions = [
+        self::TYPE_PDF          => 'pdf',
+        self::TYPE_WORD2007     => 'docx'
+    ];
+
+    /**
      * Supported file types
      *
      * @var array
@@ -49,6 +59,14 @@ class FileType
     public function __toString()
     {
         return (string) $this->getType();
+    }
+
+    /**
+     * @return string
+     */
+    public function getExtension()
+    {
+        return self::$extensions[$this->type];
     }
 
     /**

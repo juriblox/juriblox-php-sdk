@@ -94,7 +94,15 @@ class GuzzleDriver implements DriverInterface
      */
     public function get($uri, $segments = null)
     {
-        return $this->request('GET', $uri, $segments);
+        return $this->jsonRequest('GET', $uri, $segments);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getRaw($uri, $segments = null)
+    {
+        return $this->request('GET', $uri, $segments)->getBody()->getContents();
     }
 
     /**
@@ -102,7 +110,7 @@ class GuzzleDriver implements DriverInterface
      */
     public function patch($uri, $segments = null, $body)
     {
-        return $this->request('POST', $uri, $segments, array_merge($body, [
+        return $this->jsonRequest('POST', $uri, $segments, array_merge($body, [
             '_method' => 'PATCH'
         ]));
     }
@@ -112,7 +120,7 @@ class GuzzleDriver implements DriverInterface
      */
     public function post($uri, $segments = null, $body)
     {
-        return $this->request('POST', $uri, $segments, $body);
+        return $this->jsonRequest('POST', $uri, $segments, $body);
     }
 
     /**
@@ -161,14 +169,45 @@ class GuzzleDriver implements DriverInterface
     }
 
     /**
-     * Send a request to the JuriBlox API and return the response as an object
+     * Send a request to the JuriBlox API and parse the resulting JSON
+     *
+     * @param            $method
+     * @param            $uri
+     * @param null       $segments
+     * @param array|null $body
+     *
+     * @return object
+     *
+     * @throws AuthorizationException
+     * @throws CannotParseResponseException
+     * @throws EngineOperationException
+     * @throws RateLimitingException
+     */
+    private function jsonRequest($method, $uri, $segments = null, array $body = null)
+    {
+        $response = $this->request($method, $uri, $segments, $body);
+
+        $result = @json_decode($response->getBody()->getContents());
+        if ($result === false)
+        {
+            $castedException = new CannotParseResponseException();
+            $castedException->setResponseContext($response);
+
+            throw $castedException;
+        }
+
+        return $result;
+    }
+
+    /**
+     * Send a request to the JuriBlox API and return the response
      *
      * @param       $method
      * @param       $uri
      * @param null  $segments
      * @param array $body
      *
-     * @return object
+     * @return Response
      *
      * @throws AuthorizationException
      * @throws CannotParseResponseException
@@ -251,15 +290,6 @@ class GuzzleDriver implements DriverInterface
             throw new EngineOperationException($exception->getMessage(), $exception->getCode(), $exception);
         }
 
-        $result = @json_decode($response->getBody()->getContents());
-        if ($result === false)
-        {
-            $castedException = new CannotParseResponseException();
-            $castedException->setResponseContext($response);
-
-            throw $castedException;
-        }
-
-        return $result;
+        return $response;
     }
 }

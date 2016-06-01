@@ -20,7 +20,7 @@ interface DriverInterface
     public function __construct($clientId, $clientKey, $baseUri = null);
 
     /**
-     * Send GET request
+     * Send GET request and parse the returned JSON
      *
      * @param      $uri
      * @param null $segments
@@ -35,7 +35,22 @@ interface DriverInterface
     public function get($uri, $segments = null);
 
     /**
-     * Send PATCH request
+     * Send GET request and return the raw contents
+     *
+     * @param      $uri
+     * @param null $segments
+     *
+     * @return object
+     *
+     * @throws AuthorizationException
+     * @throws CannotParseResponseException
+     * @throws EngineOperationException
+     * @throws RateLimitingException
+     */
+    public function getRaw($uri, $segments = null);
+
+    /**
+     * Send PATCH request and parse the returned JSON
      *
      * @param      $uri
      * @param null $segments
@@ -51,7 +66,7 @@ interface DriverInterface
     public function patch($uri, $segments = null, $body);
 
     /**
-     * Send POST request
+     * Send POST request and parse the returned JSON
      *
      * @param      $uri
      * @param null $segments
