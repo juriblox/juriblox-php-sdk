@@ -23,10 +23,17 @@ class CustomerTransformer
         return $customer;
     }
 
+    /**
+     * Generate a DTO from an existing Customer object
+     *
+     * @param Customer $customer
+     *
+     * @return array
+     */
     public static function write(Customer $customer)
     {
         return [
-            'reference'  => $customer->getReference()->getString(),
+            'reference'  => (!$customer->getReference()) ?: $customer->getReference()->getString(),
 
             'company'   => $customer->getCompany(),
             'name'      => $customer->getContact()->getName(),

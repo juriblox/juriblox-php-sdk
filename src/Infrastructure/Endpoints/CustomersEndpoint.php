@@ -26,6 +26,11 @@ class CustomersEndpoint extends AbstractEndpoint implements EndpointInterface
         return $customer;
     }
 
+    /**
+     * Update a remote Customer entity
+     *
+     * @param Customer $customer
+     */
     public function update(Customer $customer)
     {
         $this->driver->patch('customers/{reference}', [
