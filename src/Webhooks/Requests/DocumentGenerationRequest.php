@@ -6,6 +6,7 @@ namespace JuriBlox\Sdk\Webhooks\Requests;
 use JuriBlox\Sdk\Domain\Documents\Values\DocumentId;
 use JuriBlox\Sdk\Domain\Documents\Values\DocumentReference;
 use JuriBlox\Sdk\Domain\Documents\Values\DocumentRequestId;
+use JuriBlox\Sdk\Validation\Assertion;
 use JuriBlox\Sdk\Webhooks\Request;
 
 class DocumentGenerationRequest extends Request
@@ -55,6 +56,8 @@ class DocumentGenerationRequest extends Request
      */
     public static function fromRequest(Request $request)
     {
+        Assertion::inArray($request->getEvent()->getString(), [self::EVENT_SUCCEEDED, self::EVENT_FAILED]);
+
         $castedRequest = new static();
         $castedRequest->success = ($request->getEvent()->getString() == self::EVENT_SUCCEEDED);
 
