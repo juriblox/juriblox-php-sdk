@@ -21,16 +21,6 @@ class DocumentGenerationRequest extends Request
     const EVENT_SUCCEEDED = 'document.generation.succeeded';
 
     /**
-     * @var bool
-     */
-    private $success;
-
-    /**
-     * @var DocumentRequestId
-     */
-    private $requestId;
-
-    /**
      * @var DocumentId
      */
     private $documentId;
@@ -39,6 +29,24 @@ class DocumentGenerationRequest extends Request
      * @var DocumentReference
      */
     private $documentReference;
+
+    /**
+     * @var DocumentRequestId
+     */
+    private $requestId;
+
+    /**
+     * @var bool
+     */
+    private $success;
+
+    /**
+     * DocumentGenerationRequest constructor
+     */
+    private function __construct()
+    {
+
+    }
 
     /**
      * @param Request $request
@@ -67,10 +75,26 @@ class DocumentGenerationRequest extends Request
     }
 
     /**
-     * DocumentGenerationRequest constructor
+     * @return DocumentId
      */
-    private function __construct()
+    public function getDocumentId()
     {
+        return $this->documentId;
+    }
 
+    /**
+     * @return DocumentReference
+     */
+    public function getDocumentReference()
+    {
+        return $this->documentReference;
+    }
+
+    /**
+     * @return DocumentRequestId
+     */
+    public function getRequestId()
+    {
+        return $this->requestId;
     }
 }
