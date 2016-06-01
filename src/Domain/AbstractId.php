@@ -4,7 +4,7 @@ namespace JuriBlox\Sdk\Domain;
 
 use JuriBlox\Sdk\Validation\Assertion;
 
-abstract class AbstractId implements IdInterface
+abstract class AbstractId extends AbstractValue implements IdInterface
 {
     /**
      * @var int

@@ -2,7 +2,7 @@
 
 namespace JuriBlox\Sdk\Domain;
 
-abstract class AbstractReference implements ReferenceInterface
+abstract class AbstractReference extends AbstractValue implements ReferenceInterface
 {
     /**
      * @var string
