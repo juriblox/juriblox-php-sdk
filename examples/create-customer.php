@@ -12,4 +12,10 @@ $customer = new Customer();
 $customer->setCompany('TEST');
 $customer->setContact(new Contact('Vic', 'vic@wijzijnmiddag.nl'));
 
-$client->customers()->create($customer);
+$customer = $client->customers()->create($customer);
+
+printTable([
+    'Reference'     => $customer->getReference(),
+    'Company'       => $customer->getCompany(),
+    'Contact'       => $customer->getContact()
+]);
