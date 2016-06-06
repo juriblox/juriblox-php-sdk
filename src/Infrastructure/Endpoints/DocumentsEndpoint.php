@@ -28,7 +28,7 @@ class DocumentsEndpoint extends AbstractEndpoint implements EndpointInterface
      */
     public function findByCustomer(CustomerReference $reference)
     {
-        return DocumentsCollection::fromEndpointWithSettings($this, '/customers/{reference}/documents', 'documents', [
+        return DocumentsCollection::fromEndpointWithSettings($this, 'customers/{reference}/documents', 'documents', [
             'reference' => $reference->getString()
         ]);
     }
