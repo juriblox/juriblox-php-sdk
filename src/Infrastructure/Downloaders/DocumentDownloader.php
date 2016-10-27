@@ -10,7 +10,7 @@ use JuriBlox\Sdk\Infrastructure\Drivers\DriverInterface;
 abstract class DocumentDownloader
 {
     /**
-     * Download a document
+     * Download a document.
      *
      * @param DriverInterface $driver
      * @param DocumentId      $documentId
@@ -20,15 +20,12 @@ abstract class DocumentDownloader
      */
     public static function download(DriverInterface $driver, DocumentId $documentId, FileType $type)
     {
-        try
-        {
+        try {
             $contents = $driver->getRaw('documents/{documentId}/download/{extension}', [
                 'documentId' => $documentId,
-                'extension'  => $type->getExtension()
+                'extension'  => $type->getExtension(),
             ]);
-        }
-        catch (\Exception $exception)
-        {
+        } catch (\Exception $exception) {
             throw new DocumentDownloadException($exception->getMessage(), $exception->getCode(), $exception);
         }
 

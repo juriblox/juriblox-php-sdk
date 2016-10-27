@@ -5,7 +5,6 @@ namespace JuriBlox\Sdk\Infrastructure\Endpoints;
 use JuriBlox\Sdk\Domain\Customers\Values\CustomerReference;
 use JuriBlox\Sdk\Domain\Documents\Entities\Document;
 use JuriBlox\Sdk\Domain\Documents\Entities\DocumentRequest;
-use JuriBlox\Sdk\Infrastructure\Transformers\Documents\DocumentTransformer;
 use JuriBlox\Sdk\Domain\Documents\Values\DocumentId;
 use JuriBlox\Sdk\Domain\Documents\Values\DocumentReference;
 use JuriBlox\Sdk\Domain\Documents\Values\DocumentRequestId;
@@ -15,12 +14,13 @@ use JuriBlox\Sdk\Domain\Documents\Values\TemplateId;
 use JuriBlox\Sdk\Exceptions\CannotParseResponseException;
 use JuriBlox\Sdk\Exceptions\DocumentRequestException;
 use JuriBlox\Sdk\Infrastructure\Collections\DocumentsCollection;
+use JuriBlox\Sdk\Infrastructure\Transformers\Documents\DocumentTransformer;
 use JuriBlox\Sdk\Utils\DateTimeConvertor;
 
 class DocumentsEndpoint extends AbstractEndpoint implements EndpointInterface
 {
     /**
-     * Get all documents generated for a specific customer
+     * Get all documents generated for a specific customer.
      *
      * @param CustomerReference $reference
      *
@@ -29,12 +29,12 @@ class DocumentsEndpoint extends AbstractEndpoint implements EndpointInterface
     public function findByCustomer(CustomerReference $reference)
     {
         return DocumentsCollection::fromEndpointWithSettings($this, 'customers/{reference}/documents', 'documents', [
-            'reference' => $reference->getString()
+            'reference' => $reference->getString(),
         ]);
     }
-    
+
     /**
-     * Get all documents with a specific reference
+     * Get all documents with a specific reference.
      *
      * @param DocumentReference $reference
      *
@@ -46,7 +46,7 @@ class DocumentsEndpoint extends AbstractEndpoint implements EndpointInterface
     }
 
     /**
-     * Get a document by its ID
+     * Get a document by its ID.
      *
      * @param DocumentId $id
      *
@@ -55,14 +55,14 @@ class DocumentsEndpoint extends AbstractEndpoint implements EndpointInterface
     public function findOneById(DocumentId $id)
     {
         $result = $this->driver->get('documents/{id}', [
-            'id' => $id->getInteger()
+            'id' => $id->getInteger(),
         ]);
 
         return DocumentTransformer::read($result);
     }
 
     /**
-     * Get all documents based on a specific template ID
+     * Get all documents based on a specific template ID.
      *
      * @param TemplateId $templateId
      *
@@ -74,11 +74,12 @@ class DocumentsEndpoint extends AbstractEndpoint implements EndpointInterface
     }
 
     /**
-     * Request a document to be generated
+     * Request a document to be generated.
      *
      * @param DocumentRequest $request
      *
      * @return DocumentRequest
+     *
      * @throws DocumentRequestException
      */
     public function generate(DocumentRequest $request)
@@ -89,12 +90,11 @@ class DocumentsEndpoint extends AbstractEndpoint implements EndpointInterface
             'customer'   => $request->getCustomer()->getString(),
             'remarks'    => $request->getRemarks(),
             'valid_till' => $request->getAlertDate() ? DateTimeConvertor::toVendorFormat($request->getAlertDate()) : null,
-            'answers'    => []
+            'answers'    => [],
         ];
 
         // Add the answers
-        foreach ($request->getAnswers() as $answer)
-        {
+        foreach ($request->getAnswers() as $answer) {
             $data['answers'][$answer->getQuestion()->getId()->getInteger()] = $answer->getValue();
         }
 
@@ -102,12 +102,11 @@ class DocumentsEndpoint extends AbstractEndpoint implements EndpointInterface
          * Request the document
          */
         $result = $this->driver->post('templates/{templateId}/generate', [
-            'templateId' => $request->getTemplateId()
+            'templateId' => $request->getTemplateId(),
         ], $data);
 
         // Check result code
-        if ($result->status == DocumentStatus::STATUS_FAILED)
-        {
+        if ($result->status == DocumentStatus::STATUS_FAILED) {
             throw new DocumentRequestException($result->message);
         }
 
@@ -119,24 +118,23 @@ class DocumentsEndpoint extends AbstractEndpoint implements EndpointInterface
     }
 
     /**
-     * Get the current status for a requested document
+     * Get the current status for a requested document.
      *
      * @param DocumentRequestId $id
      *
      * @return DocumentRequestStatus
+     *
      * @throws CannotParseResponseException
      */
     public function getRequestStatus(DocumentRequestId $id)
     {
         $result = $this->driver->get('documents/{id}/status', [
-            'id' => $id->getInteger()
+            'id' => $id->getInteger(),
         ]);
 
         $status = new DocumentRequestStatus($id, DocumentStatus::fromCode($result->status));
-        if ($status->getStatus()->getCode() == DocumentStatus::STATUS_GENERATED)
-        {
-            if (!isset($result->documentId))
-            {
+        if ($status->getStatus()->getCode() == DocumentStatus::STATUS_GENERATED) {
+            if (!isset($result->documentId)) {
                 throw new CannotParseResponseException();
             }
 

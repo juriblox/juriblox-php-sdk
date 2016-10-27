@@ -3,10 +3,10 @@
 namespace JuriBlox\Sdk\Infrastructure\Collections;
 
 use JuriBlox\Sdk\Domain\Documents\Entities\Document;
-use JuriBlox\Sdk\Infrastructure\Transformers\Documents\DocumentTransformer;
 use JuriBlox\Sdk\Domain\Documents\Values\DocumentReference;
 use JuriBlox\Sdk\Domain\Documents\Values\TemplateId;
 use JuriBlox\Sdk\Infrastructure\Endpoints\DocumentsEndpoint;
+use JuriBlox\Sdk\Infrastructure\Transformers\Documents\DocumentTransformer;
 
 class DocumentsCollection extends AbstractPagedCollection
 {
@@ -24,7 +24,7 @@ class DocumentsCollection extends AbstractPagedCollection
     }
 
     /**
-     * Return documents with a specific reference
+     * Return documents with a specific reference.
      *
      * @param DocumentReference $reference
      *
@@ -41,7 +41,7 @@ class DocumentsCollection extends AbstractPagedCollection
     }
 
     /**
-     * Return only documents based on a specific template
+     * Return only documents based on a specific template.
      *
      * @param TemplateId $templateId
      *
@@ -51,7 +51,7 @@ class DocumentsCollection extends AbstractPagedCollection
     {
         $this->setKey('documents');
         $this->setUri('templates/{template}/documents', [
-            'template' => $templateId->getInteger()
+            'template' => $templateId->getInteger(),
         ]);
 
         return $this;

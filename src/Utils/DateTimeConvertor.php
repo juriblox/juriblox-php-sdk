@@ -5,7 +5,7 @@ namespace JuriBlox\Sdk\Utils;
 class DateTimeConvertor
 {
     /**
-     * Convert a DateTime object to a string representation as expected by the vendor
+     * Convert a DateTime object to a string representation as expected by the vendor.
      *
      * @param \DateTime $dateTime
      *

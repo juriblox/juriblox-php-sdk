@@ -18,15 +18,14 @@ class Request
     private $payload;
 
     /**
-     * Request constructor
+     * Request constructor.
      */
-    private  function __construct()
+    private function __construct()
     {
-
     }
 
     /**
-     * Generate a WebhookRequest based on what we got from php://input
+     * Generate a WebhookRequest based on what we got from php://input.
      *
      * @return Request|DocumentGenerationRequest|TemplatePublishRequest
      */
@@ -36,7 +35,7 @@ class Request
     }
 
     /**
-     * Generate a WebhookRequest based on a JSON string
+     * Generate a WebhookRequest based on a JSON string.
      *
      * @param $json
      *
@@ -45,8 +44,7 @@ class Request
     public static function fromJson($json)
     {
         $payload = json_decode($json);
-        if ($payload === null)
-        {
+        if ($payload === null) {
             throw new \InvalidArgumentException();
         }
 
@@ -54,8 +52,7 @@ class Request
         $request->event = new RequestEvent($payload->event);
         $request->payload = $payload;
 
-        switch ($request->event->getString())
-        {
+        switch ($request->event->getString()) {
             case DocumentGenerationRequest::EVENT_SUCCEEDED:
             case DocumentGenerationRequest::EVENT_FAILED:
                 return DocumentGenerationRequest::fromRequest($request);

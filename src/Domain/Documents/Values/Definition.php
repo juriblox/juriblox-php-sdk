@@ -5,28 +5,28 @@ namespace JuriBlox\Sdk\Domain\Documents\Values;
 class Definition
 {
     /**
-     * Description/explanation
+     * Description/explanation.
      *
      * @var string
      */
     private $description;
 
     /**
-     * Name (human-readable)
+     * Name (human-readable).
      *
      * @var string
      */
     private $name;
 
     /**
-     * Visible
+     * Visible.
      *
      * @var bool
      */
     private $visible;
 
     /**
-     * Definition constructor
+     * Definition constructor.
      *
      * @param string $name
      * @param string $description
@@ -56,7 +56,7 @@ class Definition
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isVisible()
     {

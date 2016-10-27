@@ -6,5 +6,4 @@ use JuriBlox\Sdk\Domain\AbstractId;
 
 class DocumentId extends AbstractId
 {
-
 }

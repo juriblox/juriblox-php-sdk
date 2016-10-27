@@ -8,7 +8,7 @@ use JuriBlox\Sdk\Domain\Customers\Values\Contact;
 class CustomerTransformer
 {
     /**
-     * Create a Customer from a DTO returned by the JuriBlox API
+     * Create a Customer from a DTO returned by the JuriBlox API.
      *
      * @param $dto
      *
@@ -24,7 +24,7 @@ class CustomerTransformer
     }
 
     /**
-     * Generate a DTO from an existing Customer object
+     * Generate a DTO from an existing Customer object.
      *
      * @param Customer $customer
      *
@@ -37,7 +37,7 @@ class CustomerTransformer
 
             'company'   => $customer->getCompany(),
             'name'      => $customer->getContact()->getName(),
-            'email'     => $customer->getContact()->getEmail()
+            'email'     => $customer->getContact()->getEmail(),
         ];
     }
 }

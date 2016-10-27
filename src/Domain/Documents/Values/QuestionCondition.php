@@ -5,21 +5,21 @@ namespace JuriBlox\Sdk\Domain\Documents\Values;
 class QuestionCondition
 {
     /**
-     * Linked QuestionOptionId for this condition
+     * Linked QuestionOptionId for this condition.
      *
      * @var QuestionOptionId
      */
     private $id;
 
     /**
-     * Desired value
+     * Desired value.
      *
      * @var mixed
      */
     private $value;
 
     /**
-     * QuestionCondition constructor
+     * QuestionCondition constructor.
      *
      * @param QuestionOptionId $id
      * @param                  $value

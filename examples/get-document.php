@@ -2,7 +2,7 @@
 
 use JuriBlox\Sdk\Domain\Documents\Values\DocumentId;
 
-require __DIR__  . '/bootstrap.php';
+require __DIR__ . '/bootstrap.php';
 
 $application = new Application();
 $client = $application->getClient();
@@ -23,24 +23,22 @@ printTable([
 ], 'Document');
 
 // Answers
-foreach ($document->getAnswers() as $answer)
-{
+foreach ($document->getAnswers() as $answer) {
     printTable([
         'Question ID'   => $answer->getQuestion()->getId(),
         'Question name' => $answer->getQuestion()->getName(),
 
         'ID'       => $answer->getId(),
         'Variable' => $answer->getVariable(),
-        'Value'    => $answer->getValue()
+        'Value'    => $answer->getValue(),
     ], get_class($answer), 1);
 }
 
 // Files
-foreach ($document->getFiles() as $file)
-{
+foreach ($document->getFiles() as $file) {
     printTable([
         'Type'     => $file->getType(),
         'Filename' => $file->getFilename(),
-        'URL'      => $file->getUrl()
+        'URL'      => $file->getUrl(),
     ], get_class($file), 1);
 }

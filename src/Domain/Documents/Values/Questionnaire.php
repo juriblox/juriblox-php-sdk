@@ -2,7 +2,6 @@
 
 namespace JuriBlox\Sdk\Domain\Documents\Values;
 
-use Countable;
 use JuriBlox\Sdk\Domain\Documents\Entities\QuestionnaireStep;
 
 class Questionnaire implements \Iterator, \Countable
@@ -18,7 +17,7 @@ class Questionnaire implements \Iterator, \Countable
     private $stepsIndex;
 
     /**
-     * Questionnaire constructor
+     * Questionnaire constructor.
      */
     public function __construct()
     {
@@ -26,7 +25,7 @@ class Questionnaire implements \Iterator, \Countable
     }
 
     /**
-     * Link a step to this questionnaire
+     * Link a step to this questionnaire.
      *
      * @param QuestionnaireStep $step
      */
@@ -36,7 +35,7 @@ class Questionnaire implements \Iterator, \Countable
     }
 
     /**
-     * Clear the steps linked to this questionnaire
+     * Clear the steps linked to this questionnaire.
      */
     public function clearSteps()
     {
@@ -48,7 +47,7 @@ class Questionnaire implements \Iterator, \Countable
      */
     public function count()
     {
-        return sizeof($this->steps);
+        return count($this->steps);
     }
 
     /**
@@ -56,8 +55,7 @@ class Questionnaire implements \Iterator, \Countable
      */
     public function current()
     {
-        if (!$this->valid())
-        {
+        if (!$this->valid()) {
             return null;
         }
 
@@ -77,7 +75,7 @@ class Questionnaire implements \Iterator, \Countable
      */
     public function next()
     {
-        $this->stepsIndex++;
+        ++$this->stepsIndex;
     }
 
     /**

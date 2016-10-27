@@ -18,8 +18,8 @@ class Revision
     private $version;
 
     /**
-     * @param   IdInterface $derivedOf
-     * @param   int         $version
+     * @param IdInterface $derivedOf
+     * @param int         $version
      */
     public function __construct(IdInterface $derivedOf, $version)
     {

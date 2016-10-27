@@ -11,28 +11,28 @@ class RateLimitingException extends RequestFailedException
     const HEADER_REQUESTS_REMAINING = 'X-Rate-Limit-Remaining';
 
     /**
-     * Minutes until the request limit gets reset
+     * Minutes until the request limit gets reset.
      *
      * @var int
      */
     private $limitResetMinutes;
 
     /**
-     * Maximum number of requests
+     * Maximum number of requests.
      *
      * @var int
      */
     private $requestsLimit;
 
     /**
-     * Number of requests remaining till we reach the limit
+     * Number of requests remaining till we reach the limit.
      *
      * @var int
      */
     private $requestsRemaining;
 
     /**
-     * Get the number of minutes until the request limit gets reset
+     * Get the number of minutes until the request limit gets reset.
      *
      * @return int
      */
@@ -42,7 +42,7 @@ class RateLimitingException extends RequestFailedException
     }
 
     /**
-     * Get the timestamp the request limit gets reset
+     * Get the timestamp the request limit gets reset.
      *
      * @return \DateTime
      */
@@ -55,7 +55,7 @@ class RateLimitingException extends RequestFailedException
     }
 
     /**
-     * Get the maximim number of requests
+     * Get the maximim number of requests.
      *
      * @return int
      */
@@ -65,7 +65,7 @@ class RateLimitingException extends RequestFailedException
     }
 
     /**
-     * Get the number of requests remaining till we reach the limit
+     * Get the number of requests remaining till we reach the limit.
      *
      * @return int
      */

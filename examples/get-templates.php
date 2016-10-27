@@ -1,12 +1,11 @@
 <?php
 
-require __DIR__  . '/bootstrap.php';
+require __DIR__ . '/bootstrap.php';
 
 $application = new Application();
 $client = $application->getClient();
 
-foreach ($client->templates()->findAll() as $template)
-{
+foreach ($client->templates()->findAll() as $template) {
     printTable([
         'ID'            => $template->getId(),
         'Name'          => $template->getName(),
@@ -21,6 +20,6 @@ foreach ($client->templates()->findAll() as $template)
         'Variables'     => $template->getVariables(),
         'Definitions'   => $template->getDefinitions(),
         'Created at'    => $template->getCreatedDatetime(),
-        'Created by'    => $template->getCreator()
+        'Created by'    => $template->getCreator(),
     ], 'Template details');
 }

@@ -9,7 +9,7 @@ use JuriBlox\Sdk\Infrastructure\Collections\TemplatesCollection;
 class CustomTemplatesEndpoint extends AbstractEndpoint implements EndpointInterface
 {
     /**
-     * Get all templates
+     * Get all templates.
      *
      * @return TemplatesCollection|Template[]
      */

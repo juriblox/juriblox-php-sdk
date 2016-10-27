@@ -12,5 +12,5 @@ $status = $client->documents()->getRequestStatus(new DocumentRequestId(17));
 printTable([
     'Request ID'  => $status->getId(),
     'Document ID' => $status->getDocumentId() ? $status->getDocumentId()->getInteger() : null,
-    'Status'      => $status->getStatus()
+    'Status'      => $status->getStatus(),
 ], 'Document request status');

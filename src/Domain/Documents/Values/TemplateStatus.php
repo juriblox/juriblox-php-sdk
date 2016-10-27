@@ -7,17 +7,17 @@ use JuriBlox\Sdk\Validation\Assertion;
 class TemplateStatus
 {
     /**
-     * Template has been published
+     * Template has been published.
      */
     const STATUS_PUBLISHED = 1;
 
     /**
-     * Available statuses
+     * Available statuses.
      *
      * @var array
      */
     public static $statuses = [
-        self::STATUS_PUBLISHED => 'Published'
+        self::STATUS_PUBLISHED => 'Published',
     ];
 
     /**
@@ -29,18 +29,6 @@ class TemplateStatus
      * @var string
      */
     private $name;
-
-    /**
-     * @param $code
-     *
-     * @return TemplateStatus
-     */
-    public static function fromCode($code)
-    {
-        Assertion::keyExists(static::$statuses, $code);
-
-        return new static($code, self::$statuses[$code]);
-    }
 
     /**
      * @param $code
@@ -60,6 +48,18 @@ class TemplateStatus
     public function __toString()
     {
         return sprintf('%s [%d]', $this->getName(), $this->getCode());
+    }
+
+    /**
+     * @param $code
+     *
+     * @return TemplateStatus
+     */
+    public static function fromCode($code)
+    {
+        Assertion::keyExists(static::$statuses, $code);
+
+        return new static($code, self::$statuses[$code]);
     }
 
     /**

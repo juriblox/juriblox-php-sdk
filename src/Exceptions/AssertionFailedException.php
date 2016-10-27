@@ -6,5 +6,4 @@ use Assert\InvalidArgumentException as BaseException;
 
 class AssertionFailedException extends BaseException
 {
-
 }

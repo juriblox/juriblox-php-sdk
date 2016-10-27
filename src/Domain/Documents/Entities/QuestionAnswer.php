@@ -8,7 +8,7 @@ use JuriBlox\Sdk\Domain\Documents\Values\QuestionId;
 class QuestionAnswer
 {
     /**
-     * ID
+     * ID.
      *
      * @var QuestionAnswerId
      */
@@ -22,28 +22,35 @@ class QuestionAnswer
     private $mostRecentQuestion;
 
     /**
-     * Question linked to this answer
+     * Question linked to this answer.
      *
      * @var Question
      */
     private $question;
 
     /**
-     * Value
+     * Value.
      *
      * @var mixed
      */
     private $value;
 
     /**
-     * The variable this answer belongs to
+     * The variable this answer belongs to.
      *
      * @var TemplateVariable
      */
     private $variable;
 
     /**
-     * Create a QuestionAnswer for answering a given QuestionId
+     * QuestionAnswer constructor.
+     */
+    private function __construct()
+    {
+    }
+
+    /**
+     * Create a QuestionAnswer for answering a given QuestionId.
      *
      * @param QuestionId $questionId
      *
@@ -58,7 +65,7 @@ class QuestionAnswer
     }
 
     /**
-     * Create a QuestionAnswer entity based on an existing identity
+     * Create a QuestionAnswer entity based on an existing identity.
      *
      * @param QuestionAnswerId $id
      *
@@ -73,7 +80,7 @@ class QuestionAnswer
     }
 
     /**
-     * Create a QuestionAnswer entity based on an identity represented as a string
+     * Create a QuestionAnswer entity based on an identity represented as a string.
      *
      * @param string $id
      *
@@ -82,14 +89,6 @@ class QuestionAnswer
     public static function fromIdString($id)
     {
         return static::fromId(new QuestionAnswerId($id));
-    }
-
-    /**
-     * QuestionAnswer constructor
-     */
-    private function __construct()
-    {
-
     }
 
     /**

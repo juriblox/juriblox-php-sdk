@@ -31,8 +31,7 @@ class DocumentStatusTest extends \PHPUnit_Framework_TestCase
     public function availableStatusesProvider()
     {
         $statuses = [];
-        foreach (DocumentStatus::$statuses as $code => $name)
-        {
+        foreach (DocumentStatus::$statuses as $code => $name) {
             $statuses[] = [$code, $name];
         }
 

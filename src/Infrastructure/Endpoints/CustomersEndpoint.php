@@ -10,7 +10,7 @@ use JuriBlox\Sdk\Infrastructure\Transformers\Customers\CustomerTransformer;
 class CustomersEndpoint extends AbstractEndpoint implements EndpointInterface
 {
     /**
-     * Create a remote Customer entity
+     * Create a remote Customer entity.
      *
      * @param Customer $customer
      *
@@ -27,19 +27,19 @@ class CustomersEndpoint extends AbstractEndpoint implements EndpointInterface
     }
 
     /**
-     * Update a remote Customer entity
+     * Update a remote Customer entity.
      *
      * @param Customer $customer
      */
     public function update(Customer $customer)
     {
         $this->driver->patch('customers/{reference}', [
-            'reference' => $customer->getReference()->getString()
+            'reference' => $customer->getReference()->getString(),
         ], CustomerTransformer::write($customer));
     }
 
     /**
-     * Get all customers
+     * Get all customers.
      *
      * @return CustomersCollection|Customer[]
      */
@@ -49,7 +49,7 @@ class CustomersEndpoint extends AbstractEndpoint implements EndpointInterface
     }
 
     /**
-     * Find a customer by reference
+     * Find a customer by reference.
      *
      * @param CustomerReference $reference
      *
@@ -58,7 +58,7 @@ class CustomersEndpoint extends AbstractEndpoint implements EndpointInterface
     public function findOneByReference(CustomerReference $reference)
     {
         $result = $this->driver->get('customers/{reference}', [
-            'reference' => $reference->getString()
+            'reference' => $reference->getString(),
         ]);
 
         return CustomerTransformer::read($result);

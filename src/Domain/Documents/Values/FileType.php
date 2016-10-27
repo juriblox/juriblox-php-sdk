@@ -7,33 +7,33 @@ use JuriBlox\Sdk\Validation\Assertion;
 class FileType
 {
     /**
-     * PDF file
+     * PDF file.
      */
     const TYPE_PDF = 'PDF';
 
     /**
-     * Word2007 file
+     * Word2007 file.
      */
     const TYPE_WORD2007 = 'Word2007';
 
     /**
-     * File extensions
+     * File extensions.
      *
      * @var array
      */
     public static $extensions = [
         self::TYPE_PDF          => 'pdf',
-        self::TYPE_WORD2007     => 'docx'
+        self::TYPE_WORD2007     => 'docx',
     ];
 
     /**
-     * Supported file types
+     * Supported file types.
      *
      * @var array
      */
     public static $types = [
         self::TYPE_PDF          => 'PDF',
-        self::TYPE_WORD2007     => 'Word 2007'
+        self::TYPE_WORD2007     => 'Word 2007',
     ];
 
     /**
@@ -42,7 +42,7 @@ class FileType
     private $type;
 
     /**
-     * FileType constructor
+     * FileType constructor.
      *
      * @param $type
      */

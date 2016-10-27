@@ -7,29 +7,29 @@ use JuriBlox\Sdk\Validation\Assertion;
 class DocumentStatus
 {
     /**
-     * Document has successfully been generated
+     * Document has successfully been generated.
      */
     const STATUS_GENERATED = 200;
 
     /**
-     * Document is pending generation
+     * Document is pending generation.
      */
     const STATUS_PENDING = 202;
 
     /**
-     * Document generation failed
+     * Document generation failed.
      */
     const STATUS_FAILED = 500;
 
     /**
-     * Available statuses
+     * Available statuses.
      *
      * @var array
      */
     public static $statuses = [
         self::STATUS_PENDING    => 'Pending',
         self::STATUS_GENERATED  => 'Generated',
-        self::STATUS_FAILED     => 'Failed'
+        self::STATUS_FAILED     => 'Failed',
     ];
 
     /**
@@ -41,18 +41,6 @@ class DocumentStatus
      * @var string
      */
     private $name;
-
-    /**
-     * @param $code
-     *
-     * @return DocumentStatus
-     */
-    public static function fromCode($code)
-    {
-        Assertion::keyExists(static::$statuses, $code);
-
-        return new static($code, self::$statuses[$code]);
-    }
 
     /**
      * @param $code
@@ -72,6 +60,18 @@ class DocumentStatus
     public function __toString()
     {
         return sprintf('%s [%d]', $this->getName(), $this->getCode());
+    }
+
+    /**
+     * @param $code
+     *
+     * @return DocumentStatus
+     */
+    public static function fromCode($code)
+    {
+        Assertion::keyExists(static::$statuses, $code);
+
+        return new static($code, self::$statuses[$code]);
     }
 
     /**

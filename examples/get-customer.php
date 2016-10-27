@@ -2,7 +2,7 @@
 
 use JuriBlox\Sdk\Domain\Customers\Values\CustomerReference;
 
-require __DIR__  . '/bootstrap.php';
+require __DIR__ . '/bootstrap.php';
 
 $application = new Application();
 $client = $application->getClient();
@@ -12,5 +12,5 @@ $customer = $client->customers()->findOneByReference(new CustomerReference('add7
 printTable([
     'Reference'     => $customer->getReference(),
     'Company'       => $customer->getCompany(),
-    'Contact'       => $customer->getContact()
+    'Contact'       => $customer->getContact(),
 ]);

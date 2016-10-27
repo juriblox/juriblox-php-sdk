@@ -7,21 +7,28 @@ use JuriBlox\Sdk\Domain\Documents\Values\QuestionOptionId;
 class QuestionOption
 {
     /**
-     * ID
+     * ID.
      *
      * @var QuestionOptionId
      */
     private $id;
 
     /**
-     * Value
+     * Value.
      *
      * @var mixed
      */
     private $value;
 
     /**
-     * Create a QuestionOption entity based on an existing identity
+     * QuestionOption constructor.
+     */
+    private function __construct()
+    {
+    }
+
+    /**
+     * Create a QuestionOption entity based on an existing identity.
      *
      * @param QuestionOptionId $id
      *
@@ -36,7 +43,7 @@ class QuestionOption
     }
 
     /**
-     * Create a QuestionOption entity based on an identity represented as a string
+     * Create a QuestionOption entity based on an identity represented as a string.
      *
      * @param string $id
      *
@@ -45,14 +52,6 @@ class QuestionOption
     public static function fromIdString($id)
     {
         return static::fromId(new QuestionOptionId($id));
-    }
-
-    /**
-     * QuestionOption constructor
-     */
-    private function __construct()
-    {
-
     }
 
     /**

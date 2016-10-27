@@ -11,16 +11,16 @@ use Psr\Log\LoggerInterface;
 interface DriverInterface
 {
     /**
-     * GuzzleDriver constructor
+     * GuzzleDriver constructor.
      *
-     * @param string        $clientId   JuriBlox API client ID
-     * @param string        $clientKey  JuriBlox API client key
-     * @param string|null   $baseUri    Custom base URI
+     * @param string      $clientId  JuriBlox API client ID
+     * @param string      $clientKey JuriBlox API client key
+     * @param string|null $baseUri   Custom base URI
      */
     public function __construct($clientId, $clientKey, $baseUri = null);
 
     /**
-     * Send GET request and parse the returned JSON
+     * Send GET request and parse the returned JSON.
      *
      * @param      $uri
      * @param null $segments
@@ -35,7 +35,7 @@ interface DriverInterface
     public function get($uri, $segments = null);
 
     /**
-     * Send GET request and return the raw contents
+     * Send GET request and return the raw contents.
      *
      * @param      $uri
      * @param null $segments
@@ -50,7 +50,7 @@ interface DriverInterface
     public function getRaw($uri, $segments = null);
 
     /**
-     * Send PATCH request and parse the returned JSON
+     * Send PATCH request and parse the returned JSON.
      *
      * @param      $uri
      * @param null $segments
@@ -63,10 +63,10 @@ interface DriverInterface
      * @throws EngineOperationException
      * @throws RateLimitingException
      */
-    public function patch($uri, $segments = null, $body);
+    public function patch($uri, $segments, $body);
 
     /**
-     * Send POST request and parse the returned JSON
+     * Send POST request and parse the returned JSON.
      *
      * @param      $uri
      * @param null $segments
@@ -79,17 +79,17 @@ interface DriverInterface
      * @throws EngineOperationException
      * @throws RateLimitingException
      */
-    public function post($uri, $segments = null, $body);
+    public function post($uri, $segments, $body);
 
     /**
-     * Sets the application's name for easier identification in server logs
+     * Sets the application's name for easier identification in server logs.
      *
      * @param $name
      */
     public function setApplicationName($name);
 
     /**
-     * Override the base URI
+     * Override the base URI.
      *
      * @param $baseUri
      *
@@ -98,7 +98,7 @@ interface DriverInterface
     public function setBaseUri($baseUri);
 
     /**
-     * Set PSR-3 logger
+     * Set PSR-3 logger.
      *
      * @param LoggerInterface $logger
      */

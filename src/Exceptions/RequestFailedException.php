@@ -7,14 +7,14 @@ use GuzzleHttp\Psr7\Response;
 class RequestFailedException extends \Exception
 {
     /**
-     * Linked Response object
+     * Linked Response object.
      *
      * @var Response
      */
     protected $response;
 
     /**
-     * Set the context for this exception so we know what Response caused it
+     * Set the context for this exception so we know what Response caused it.
      *
      * @param Response $response
      *
@@ -29,10 +29,9 @@ class RequestFailedException extends \Exception
     }
 
     /**
-     * Load the necessary information from the response context for this specific exception type
+     * Load the necessary information from the response context for this specific exception type.
      */
     protected function loadResponseContext()
     {
-        
     }
 }

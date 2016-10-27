@@ -2,12 +2,12 @@
 
 namespace JuriBlox\Sdk\Infrastructure\Endpoints\Templates;
 
-use JuriBlox\Sdk\Infrastructure\Transformers\Documents\QuestionnaireTransformer;
 use JuriBlox\Sdk\Domain\Documents\Values\Questionnaire;
 use JuriBlox\Sdk\Domain\Documents\Values\TemplateId;
 use JuriBlox\Sdk\Infrastructure\Endpoints\AbstractEndpoint;
 use JuriBlox\Sdk\Infrastructure\Endpoints\EndpointInterface;
 use JuriBlox\Sdk\Infrastructure\Endpoints\TemplatesEndpoint;
+use JuriBlox\Sdk\Infrastructure\Transformers\Documents\QuestionnaireTransformer;
 
 class QuestionnaireEndpoint extends AbstractEndpoint implements EndpointInterface
 {
@@ -17,7 +17,7 @@ class QuestionnaireEndpoint extends AbstractEndpoint implements EndpointInterfac
     private $templateId;
 
     /**
-     * Create an endpoint based on a parent endpoint
+     * Create an endpoint based on a parent endpoint.
      *
      * @param TemplatesEndpoint $parent
      * @param TemplateId        $id
@@ -34,14 +34,14 @@ class QuestionnaireEndpoint extends AbstractEndpoint implements EndpointInterfac
     }
 
     /**
-     * Get the questionnaire belonging to the template
+     * Get the questionnaire belonging to the template.
      *
      * @return Questionnaire
      */
     public function get()
     {
         $result = $this->driver->get('templates/{templateId}/questions', [
-            'templateId' => $this->templateId
+            'templateId' => $this->templateId,
         ]);
 
         return QuestionnaireTransformer::read($result);

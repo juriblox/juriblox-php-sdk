@@ -7,8 +7,7 @@ class FileTypeTest extends \PHPUnit_Framework_TestCase
     public function availableTypesProvider()
     {
         $types = [];
-        foreach (FileType::$types as $type => $name)
-        {
+        foreach (FileType::$types as $type => $name) {
             $types[] = [$type, $name];
         }
 

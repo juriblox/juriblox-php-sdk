@@ -7,17 +7,17 @@ use GuzzleHttp\Psr7\Response;
 class RateLimitingExceptionTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * Requests limit
+     * Requests limit.
      */
     const REQUEST_LIMIT = 180;
 
     /**
-     * Number of requests remaining
+     * Number of requests remaining.
      */
     const REQUEST_REMAINING = 20;
 
     /**
-     * Minutes until the requests counter gets reset
+     * Minutes until the requests counter gets reset.
      */
     const REQUEST_LIMIT_RESET = 10;
 

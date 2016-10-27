@@ -10,21 +10,19 @@ use Monolog\Logger;
 require __DIR__ . '/../vendor/autoload.php';
 
 $vendors = @include __DIR__ . '/../vendor/autoload.php';
-if (!$vendors)
-{
+if (!$vendors) {
     die("Could not load vendors, run 'composer install' first\n");
 }
 
 $dotenv = new Dotenv(__DIR__ . '/..');
-if (file_exists(__DIR__ . '/../.env'))
-{
+if (file_exists(__DIR__ . '/../.env')) {
     $dotenv->load();
 }
 
 $dotenv->required(['JURIBLOX_CLIENT_ID', 'JURIBLOX_CLIENT_KEY']);
 
 /**
- * "application" class to use in our examples
+ * "application" class to use in our examples.
  */
 class Application
 {
@@ -39,7 +37,7 @@ class Application
     private $driver;
 
     /**
-     * Application constructor
+     * Application constructor.
      */
     public function __construct()
     {
@@ -73,11 +71,11 @@ class Application
 }
 
 /**
- * Helper method that outputs a properly aligned name => value table
+ * Helper method that outputs a properly aligned name => value table.
  *
  * @param      $table
  * @param null $title
- * @param int   $indent
+ * @param int  $indent
  */
 function printTable($table, $title = null, $indent = 0)
 {
@@ -87,36 +85,26 @@ function printTable($table, $title = null, $indent = 0)
     /*
      * Determine column widths
      */
-    foreach ($table as $key => $value)
-    {
-        if (mb_strlen($key) > $keyLength)
-        {
+    foreach ($table as $key => $value) {
+        if (mb_strlen($key) > $keyLength) {
             $keyLength = mb_strlen($key);
         }
 
-        if (is_array($value))
-        {
+        if (is_array($value)) {
             $length = 0;
-            foreach ($value as $item)
-            {
-                if (mb_strlen($item) > $length)
-                {
+            foreach ($value as $item) {
+                if (mb_strlen($item) > $length) {
                     $length = mb_strlen($item);
                 }
             }
-        }
-        elseif ($value instanceof DateTime)
-        {
+        } elseif ($value instanceof DateTime) {
             $table[$key] = $value->format('r');
             $length = mb_strlen($table[$key]);
-        }
-        else
-        {
+        } else {
             $length = mb_strlen($table[$key]);
         }
 
-        if ($length > $valueLength)
-        {
+        if ($length > $valueLength) {
             $valueLength = $length;
         }
     }
@@ -126,31 +114,23 @@ function printTable($table, $title = null, $indent = 0)
 
     // Indention
     $indentSpacing = ($indent > 0) ? str_repeat('   ', $indent) : '';
-    if ($indent > 0)
-    {
-        if ($indent > 1)
-        {
-            print mb_substr($indentSpacing, 0, -3) . "└──┐\n";
+    if ($indent > 0) {
+        if ($indent > 1) {
+            echo mb_substr($indentSpacing, 0, -3) . "└──┐\n";
         }
 
-        print $indentSpacing . "│  \n";
-    }
-    else
-    {
-        print "\n";
+        echo $indentSpacing . "│  \n";
+    } else {
+        echo "\n";
     }
 
     // Print header
-    if ($title !== null)
-    {
-        if ($indent == 0)
-        {
-            print mb_strtoupper($title) . "\n";
-            print str_repeat('-', $keyTotalLength + $valueLength) . "\n";
-        }
-        else
-        {
-            print sprintf("%s├── [%s]\n", $indentSpacing, $title);
+    if ($title !== null) {
+        if ($indent == 0) {
+            echo mb_strtoupper($title) . "\n";
+            echo str_repeat('-', $keyTotalLength + $valueLength) . "\n";
+        } else {
+            echo sprintf("%s├── [%s]\n", $indentSpacing, $title);
         }
     }
 
@@ -158,20 +138,14 @@ function printTable($table, $title = null, $indent = 0)
      * Print values
      */
     $first = true;
-    foreach ($table as $key => $value)
-    {
+    foreach ($table as $key => $value) {
         // Format an array
-        if (is_array($value))
-        {
-            if (sizeof($value) == 0)
-            {
+        if (is_array($value)) {
+            if (count($value) == 0) {
                 $wrapped = '[]';
-            }
-            else
-            {
+            } else {
                 $rows = [];
-                foreach ($value as $row)
-                {
+                foreach ($value as $row) {
                     $rows[] = wordwrap($row, $valueLength, "\n" . str_repeat(' ', $keyTotalLength));
                 }
 
@@ -180,36 +154,29 @@ function printTable($table, $title = null, $indent = 0)
         }
 
         // Check for NULL
-        elseif ($value === null)
-        {
+        elseif ($value === null) {
             $wrapped = 'NULL';
         }
 
         // Check whether we can display the value
-        elseif (!is_scalar($value) && (!is_object($value) || !method_exists($value, '__toString')))
-        {
+        elseif (!is_scalar($value) && (!is_object($value) || !method_exists($value, '__toString'))) {
             throw new \InvalidArgumentException(sprintf('The value for "%s" (a %s) cannot be converted to a string representation', $key, get_class($value)));
         }
 
         // Perform simple wordwrapping on the value
-        else
-        {
+        else {
             $wrapped = wordwrap($value, $valueLength, "\n" . str_repeat(' ', $keyTotalLength));
         }
 
         $indentText = '';
 
-        if ($first)
-        {
+        if ($first) {
             $first = false;
-            if ($indent > 0)
-            {
-                $indentText = $indentSpacing . (($title === null) ? "├── " : "│   ");
+            if ($indent > 0) {
+                $indentText = $indentSpacing . (($title === null) ? '├── ' : '│   ');
             }
-        }
-        elseif ($indent > 0)
-        {
-            $indentText = $indentSpacing . "│   ";
+        } elseif ($indent > 0) {
+            $indentText = $indentSpacing . '│   ';
         }
 
         printf($indentText . '%-' . $keyLength . "s: %s\n", mb_substr($key, 0, $keyLength), $wrapped);

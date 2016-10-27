@@ -6,5 +6,4 @@ use JuriBlox\Sdk\Domain\AbstractReference;
 
 class DocumentReference extends AbstractReference
 {
-
 }

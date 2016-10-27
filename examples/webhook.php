@@ -2,7 +2,7 @@
 
 use JuriBlox\Sdk\Webhooks\Request;
 
-require __DIR__  . '/bootstrap.php';
+require __DIR__ . '/bootstrap.php';
 
 $request = Request::fromInput();
 

@@ -2,7 +2,7 @@
 
 use JuriBlox\Sdk\Domain\Documents\Values\TemplateId;
 
-require __DIR__  . '/bootstrap.php';
+require __DIR__ . '/bootstrap.php';
 
 $application = new Application();
 $client = $application->getClient();
@@ -35,38 +35,34 @@ $templateId = new TemplateId(630);
  * Questionnaire
  */
 $steps = $client->templates()->questionnaire($templateId)->get();
-foreach ($steps as $step)
-{
+foreach ($steps as $step) {
     printTable([
         'ID'            => $step->getId(),
         'Name'          => $step->getName(),
-        'Description'   => $step->getDescription()
+        'Description'   => $step->getDescription(),
     ], 'Step details');
 
-    foreach ($step->getQuestions() as $question)
-    {
+    foreach ($step->getQuestions() as $question) {
         printTable([
             'ID'    => $question->getId(),
             'Name'  => $question->getName(),
             'Type'  => $question->getType(),
-            'Info'  => $question->getInfo()
+            'Info'  => $question->getInfo(),
         ], get_class($question), 1);
 
         // Options
-        foreach ($question->getOptions() as $option)
-        {
+        foreach ($question->getOptions() as $option) {
             printTable([
                 'ID'    => $option->getId(),
-                'Value' => $option->getValue()
+                'Value' => $option->getValue(),
             ], 'Value', 2);
         }
 
         // Conditions
-        foreach ($question->getConditions() as $condition)
-        {
+        foreach ($question->getConditions() as $condition) {
             printTable([
                 'ID'    => $condition->getId(),
-                'Value' => $condition->getValue()
+                'Value' => $condition->getValue(),
             ], 'Condition', 2);
         }
     }
