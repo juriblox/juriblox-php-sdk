@@ -86,7 +86,7 @@ class GuzzleDriver implements DriverInterface
             ]
         ]);
 
-        $this->setBaseUri($baseUri ?: 'https://api.juriblox.nl/v1/');
+        $this->setBaseUri($baseUri ?: 'https://api.juriblox.nl/');
     }
 
     /**
@@ -138,7 +138,7 @@ class GuzzleDriver implements DriverInterface
     {
         Assertion::url($baseUri);
 
-        $this->baseUri = trim($baseUri, '/') . '/';
+        $this->baseUri = trim($baseUri, '/') . '/v1/';
     }
 
     /**
