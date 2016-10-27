@@ -14,105 +14,117 @@ use JuriBlox\Sdk\Domain\Users\Entities\User;
 class Template
 {
     /**
-     * Creation date and time
+     * Creation date and time.
      *
      * @var \DateTime
      */
     private $createdDatetime;
 
     /**
-     * User that created the template
+     * User that created the template.
      *
      * @var User
      */
     private $creator;
 
     /**
-     * Custom template
+     * Custom template.
      *
      * @var bool
      */
     private $custom;
 
     /**
-     * Definitions
+     * Definitions.
      *
      * @var array
      */
     private $definitions;
 
     /**
-     * Description
+     * Description.
      *
      * @var string
      */
     private $description;
 
     /**
-     * Template ID
+     * Template ID.
      *
      * @var TemplateId
      */
     private $id;
 
     /**
-     * Language this template is written in
+     * Language this template is written in.
      *
      * @var Language
      */
     private $language;
 
     /**
-     * Most recent document generated using this template
+     * Most recent document generated using this template.
      *
      * @var DocumentId
      */
     private $lastDocument;
 
     /**
-     * Template name
+     * Template name.
      *
      * @var string
      */
     private $name;
 
     /**
-     * Office this template belongs to
+     * Office this template belongs to.
      *
      * @var Office
      */
     private $office;
 
     /**
-     * Current revision
+     * Current revision.
      *
      * @var Revision
      */
     private $revision;
 
     /**
-     * Current status
+     * Current status.
      *
      * @var TemplateStatus
      */
     private $status;
 
     /**
-     * Linked tags
+     * Linked tags.
      *
      * @var array
      */
     private $tags;
 
     /**
-     * Template variables
+     * Template variables.
      *
      * @var array
      */
     private $variables;
 
     /**
-     * Create a template entity based on an existing identity
+     * Template constructor.
+     */
+    private function __construct()
+    {
+        $this->custom = false;
+
+        $this->clearTags();
+        $this->clearDefinitions();
+        $this->clearVariables();
+    }
+
+    /**
+     * Create a template entity based on an existing identity.
      *
      * @param TemplateId $id
      *
@@ -127,7 +139,7 @@ class Template
     }
 
     /**
-     * Create a template entity based on an identity represented as a string
+     * Create a template entity based on an identity represented as a string.
      *
      * @param string $id
      *
@@ -139,19 +151,7 @@ class Template
     }
 
     /**
-     * Template constructor
-     */
-    private function __construct()
-    {
-        $this->custom = false;
-
-        $this->clearTags();
-        $this->clearDefinitions();
-        $this->clearVariables();
-    }
-
-    /**
-     * Add a definition
+     * Add a definition.
      *
      * @param Definition $definition
      */
@@ -161,7 +161,7 @@ class Template
     }
 
     /**
-     * Add a tag
+     * Add a tag.
      *
      * @param Tag $tag
      */
@@ -171,7 +171,7 @@ class Template
     }
 
     /**
-     * Add a variable
+     * Add a variable.
      *
      * @param TemplateVariable $variable
      */
@@ -181,7 +181,7 @@ class Template
     }
 
     /**
-     * Clear the template's definitions
+     * Clear the template's definitions.
      */
     public function clearDefinitions()
     {
@@ -189,7 +189,7 @@ class Template
     }
 
     /**
-     * Clear the linked tags
+     * Clear the linked tags.
      */
     public function clearTags()
     {
@@ -197,7 +197,7 @@ class Template
     }
 
     /**
-     * Clear the template's variables
+     * Clear the template's variables.
      */
     public function clearVariables()
     {

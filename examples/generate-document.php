@@ -25,13 +25,10 @@ $answer->setValue('Voornaam');
 
 $request->addAnswer($answer);
 
-try
-{
+try {
     $request = $client->documents()->generate($request);
-}
-catch (EngineOperationException $exception)
-{
-    print 'Exception: ' . $exception->getMessage() . "\n\n";
+} catch (EngineOperationException $exception) {
+    echo 'Exception: ' . $exception->getMessage() . "\n\n";
     print_r($exception->getErrors());
 
     exit();

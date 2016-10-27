@@ -14,48 +14,57 @@ abstract class AbstractCollection implements \Iterator, \Countable
     protected $endpoint;
 
     /**
-     * Index within the current page
+     * Index within the current page.
      *
      * @var int
      */
     protected $index;
 
     /**
-     * Current page with records
+     * Current page with records.
      *
      * @var array
      */
     protected $records;
 
     /**
-     * Key used in the result returned by the API
+     * Key used in the result returned by the API.
      *
      * @var string
      */
     private $key;
 
     /**
-     * GET parameters in the URL
+     * GET parameters in the URL.
      *
      * @var array
      */
     private $parameters;
 
     /**
-     * URL to retrieve entities from (for example, /templates)
+     * URL to retrieve entities from (for example, /templates).
      *
      * @var string
      */
     private $uri;
 
     /**
-     * Initiate a collection along with the URI and key
+     * AbstractCollection constructor.
+     */
+    protected function __construct()
+    {
+        $this->index = 0;
+        $this->records = [];
+
+        $this->clearParameters();
+    }
+
+    /**
+     * Initiate a collection along with the URI and key.
      *
      * @param EndpointInterface $endpoint
-     *
      * @param string            $uri
      * @param string            $key
-     *
      * @param array             $segments
      *
      * @return AbstractCollection
@@ -75,22 +84,11 @@ abstract class AbstractCollection implements \Iterator, \Countable
     }
 
     /**
-     * AbstractCollection constructor
-     */
-    protected function __construct()
-    {
-        $this->index = 0;
-        $this->records = [];
-
-        $this->clearParameters();
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function count()
     {
-        return sizeof($this->records);
+        return count($this->records);
     }
 
     /**
@@ -98,8 +96,7 @@ abstract class AbstractCollection implements \Iterator, \Countable
      */
     public function current()
     {
-        if (!$this->valid())
-        {
+        if (!$this->valid()) {
             return null;
         }
 
@@ -119,7 +116,7 @@ abstract class AbstractCollection implements \Iterator, \Countable
      */
     public function next()
     {
-        $this->index++;
+        ++$this->index;
     }
 
     /**
@@ -140,7 +137,7 @@ abstract class AbstractCollection implements \Iterator, \Countable
     }
 
     /**
-     * Clear the URI parameters we have defined
+     * Clear the URI parameters we have defined.
      */
     protected function clearParameters()
     {
@@ -148,7 +145,7 @@ abstract class AbstractCollection implements \Iterator, \Countable
     }
 
     /**
-     * Create an entity based on a DTO object
+     * Create an entity based on a DTO object.
      *
      * @param $dto
      */
@@ -158,14 +155,13 @@ abstract class AbstractCollection implements \Iterator, \Countable
     }
 
     /**
-     * Fetch resultset
+     * Fetch resultset.
      */
     protected function fetch()
     {
         $result = $this->endpoint->getDriver()->get($this->uri);
-        
-        if (!isset($result->{$this->key}))
-        {
+
+        if (!isset($result->{$this->key})) {
             throw new CannotParseResponseException(sprintf('The "%s" key does not exist in the result returned by the API', $this->key));
         }
 
@@ -177,8 +173,7 @@ abstract class AbstractCollection implements \Iterator, \Countable
      */
     protected function getCombinedUri()
     {
-        if (sizeof($this->parameters) == 0)
-        {
+        if (count($this->parameters) == 0) {
             return $this->getUri();
         }
 
@@ -202,28 +197,26 @@ abstract class AbstractCollection implements \Iterator, \Countable
     }
 
     /**
-     * Merge the URI parameters
+     * Merge the URI parameters.
      *
      * @param $parameters
      */
     protected function mergeParameters($parameters)
     {
-        foreach ($parameters as $name => $value)
-        {
+        foreach ($parameters as $name => $value) {
             $this->setParameter($name, $value);
         }
     }
 
     /**
-     * Replace the value of an existing URI parameter
+     * Replace the value of an existing URI parameter.
      *
      * @param $name
      * @param $value
      */
     protected function replaceParameter($name, $value)
     {
-        if (!array_key_exists($name, $this->parameters))
-        {
+        if (!array_key_exists($name, $this->parameters)) {
             throw new \InvalidArgumentException(sprintf('The URI parameter "%s" is unknown. Use setUriParameter() if this is by design', $name));
         }
 
@@ -244,7 +237,7 @@ abstract class AbstractCollection implements \Iterator, \Countable
      */
     protected function setUri($uri, array $segments = [])
     {
-        array_walk($segments, function($value, $name) use (&$uri) {
+        array_walk($segments, function ($value, $name) use (&$uri) {
             $uri = str_replace('{' . $name . '}', $value, $uri);
         }, $uri);
 
@@ -252,7 +245,7 @@ abstract class AbstractCollection implements \Iterator, \Countable
     }
 
     /**
-     * Add or replace the value of a URI parameter
+     * Add or replace the value of a URI parameter.
      *
      * @param $name
      * @param $value
@@ -263,7 +256,7 @@ abstract class AbstractCollection implements \Iterator, \Countable
     }
 
     /**
-     * Set the URI parameters
+     * Set the URI parameters.
      *
      * @param array $parameters
      */

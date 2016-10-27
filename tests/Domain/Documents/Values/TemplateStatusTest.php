@@ -31,8 +31,7 @@ class TemplateStatusTest extends \PHPUnit_Framework_TestCase
     public function availableStatusesProvider()
     {
         $statuses = [];
-        foreach (TemplateStatus::$statuses as $code => $name)
-        {
+        foreach (TemplateStatus::$statuses as $code => $name) {
             $statuses[] = [$code, $name];
         }
 

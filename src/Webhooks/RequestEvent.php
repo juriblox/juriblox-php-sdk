@@ -1,6 +1,5 @@
 <?php
 
-
 namespace JuriBlox\Sdk\Webhooks;
 
 class RequestEvent
@@ -11,7 +10,7 @@ class RequestEvent
     private $event;
 
     /**
-     * RequestEvent constructor
+     * RequestEvent constructor.
      *
      * @param $event
      */

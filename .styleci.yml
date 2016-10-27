@@ -1,0 +1,15 @@
+preset: symfony
+
+risky: false
+
+enabled:
+  - align_double_arrow
+  - concat_with_spaces
+  - ordered_class_elements
+  - ordered_imports
+
+disabled:
+  - concat_without_spaces
+  - phpdoc_to_comment
+  - simplified_null_return
+  - unalign_double_arrow

@@ -6,5 +6,4 @@ use JuriBlox\Sdk\Domain\AbstractId;
 
 class QuestionOptionId extends AbstractId
 {
-
 }

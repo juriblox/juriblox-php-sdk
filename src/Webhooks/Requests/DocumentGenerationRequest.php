@@ -1,6 +1,5 @@
 <?php
 
-
 namespace JuriBlox\Sdk\Webhooks\Requests;
 
 use JuriBlox\Sdk\Domain\Documents\Values\DocumentId;
@@ -12,12 +11,12 @@ use JuriBlox\Sdk\Webhooks\Request;
 class DocumentGenerationRequest extends Request
 {
     /**
-     * Document generation has failed
+     * Document generation has failed.
      */
     const EVENT_FAILED = 'document.generation.failed';
 
     /**
-     * Document generation has succeeded
+     * Document generation has succeeded.
      */
     const EVENT_SUCCEEDED = 'document.generation.succeeded';
 
@@ -42,11 +41,10 @@ class DocumentGenerationRequest extends Request
     private $success;
 
     /**
-     * DocumentGenerationRequest constructor
+     * DocumentGenerationRequest constructor.
      */
     private function __construct()
     {
-
     }
 
     /**
@@ -63,13 +61,11 @@ class DocumentGenerationRequest extends Request
 
         $payload = $request->getPayload();
 
-        if (isset($payload->requestId))
-        {
+        if (isset($payload->requestId)) {
             $castedRequest->requestId = DocumentRequestId::fromOptional($payload->requestId);
         }
 
-        if (isset($payload->document))
-        {
+        if (isset($payload->document)) {
             $castedRequest->documentId = DocumentId::fromOptional($payload->document->id);
             $castedRequest->documentReference = DocumentId::fromOptional($payload->document->reference);
         }

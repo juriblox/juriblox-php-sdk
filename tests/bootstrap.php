@@ -3,14 +3,12 @@
 use Dotenv\Dotenv;
 
 $vendors = @include __DIR__ . '/../vendor/autoload.php';
-if (!$vendors)
-{
+if (!$vendors) {
     die("Could not load vendors, run 'composer install' first\n");
 }
 
 $dotenv = new Dotenv(__DIR__ . '/..');
-if (file_exists(__DIR__ . '/../.env'))
-{
+if (file_exists(__DIR__ . '/../.env')) {
     $dotenv->load();
 }
 

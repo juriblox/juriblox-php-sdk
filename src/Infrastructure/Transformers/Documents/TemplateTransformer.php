@@ -17,7 +17,7 @@ use JuriBlox\Sdk\Domain\Users\Entities\User;
 class TemplateTransformer
 {
     /**
-     * Create a Template from a DTO returned by the JuriBlox API
+     * Create a Template from a DTO returned by the JuriBlox API.
      *
      * @param $dto
      *
@@ -29,8 +29,7 @@ class TemplateTransformer
         $template->setName($dto->name);
         $template->setDescription($dto->description);
 
-        if ($dto->lastDocument !== null)
-        {
+        if ($dto->lastDocument !== null) {
             $template->setLastDocument(new DocumentId($dto->lastDocument));
         }
 
@@ -49,8 +48,7 @@ class TemplateTransformer
         $template->setStatus(new TemplateStatus($dto->status->code, $dto->status->name));
         $template->setRevision(new Revision(new TemplateId($dto->revision->derivedOf), $dto->revision->version));
 
-        foreach ($dto->variables as $entry)
-        {
+        foreach ($dto->variables as $entry) {
             $variable = TemplateVariable::fromIdString($entry->id);
             $variable->setName($entry->name);
             $variable->setTitle($entry->title);
@@ -60,13 +58,11 @@ class TemplateTransformer
             $template->addVariable($variable);
         }
 
-        foreach ($dto->definitions as $entry)
-        {
+        foreach ($dto->definitions as $entry) {
             $template->addDefinition(new Definition($entry->name, $entry->description, $entry->visible));
         }
 
-        foreach ($dto->tags as $entry)
-        {
+        foreach ($dto->tags as $entry) {
             $tag = Tag::fromIdString($entry->id);
             $tag->setName($entry->name);
 

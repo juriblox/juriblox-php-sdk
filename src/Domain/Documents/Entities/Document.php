@@ -14,98 +14,108 @@ use JuriBlox\Sdk\Domain\Offices\Entities\Office;
 class Document
 {
     /**
-     * Alert date/time
+     * Alert date/time.
      *
      * @var \DateTime
      */
     private $alertDate;
 
     /**
-     * Answers provided when generating this document
+     * Answers provided when generating this document.
      *
      * @var array
      */
     private $answers;
 
     /**
-     * Creation date/time
+     * Creation date/time.
      *
      * @var \DateTime
      */
     private $createdDatetime;
 
     /**
-     * Customer this document is for
+     * Customer this document is for.
      *
      * @var Customer
      */
     private $customer;
 
     /**
-     * Files generated for this document
+     * Files generated for this document.
      *
      * @var array
      */
     private $files;
 
     /**
-     * Document ID
+     * Document ID.
      *
      * @var DocumentId
      */
     private $id;
 
     /**
-     * Document's language
+     * Document's language.
      *
      * @var Language
      */
     private $language;
 
     /**
-     * Office this document belongs to
+     * Office this document belongs to.
      *
      * @var Office
      */
     private $office;
 
     /**
-     * Reference
+     * Reference.
      *
      * @var DocumentReference
      */
     private $reference;
 
     /**
-     * Status
+     * Status.
      *
      * @var DocumentStatus
      */
     private $status;
 
     /**
-     * Tags linked to this document
+     * Tags linked to this document.
      *
      * @var array
      */
     private $tags;
 
     /**
-     * Template used to generate this document
+     * Template used to generate this document.
      *
      * @var TemplateId
      */
     private $templateId;
 
     /**
-     * Title
+     * Title.
      *
      * @var string
      */
     private $title;
 
     /**
-     * Create a document entity based on an existing identity
+     * Document constructor.
+     */
+    private function __construct()
+    {
+        $this->clearAnswers();
+        $this->clearFiles();
+        $this->clearTags();
+    }
+
+    /**
+     * Create a document entity based on an existing identity.
      *
      * @param DocumentId $id
      *
@@ -120,7 +130,7 @@ class Document
     }
 
     /**
-     * Create a document entity based on an identity represented as a string
+     * Create a document entity based on an identity represented as a string.
      *
      * @param string $id
      *
@@ -132,17 +142,7 @@ class Document
     }
 
     /**
-     * Document constructor
-     */
-    private function __construct()
-    {
-        $this->clearAnswers();
-        $this->clearFiles();
-        $this->clearTags();
-    }
-
-    /**
-     * Add an answer
+     * Add an answer.
      *
      * @param QuestionAnswer $answer
      */
@@ -152,7 +152,7 @@ class Document
     }
 
     /**
-     * Add a linked file
+     * Add a linked file.
      *
      * @param File $file
      */
@@ -162,7 +162,7 @@ class Document
     }
 
     /**
-     * Add a linked tag
+     * Add a linked tag.
      *
      * @param Tag $tag
      */
@@ -172,7 +172,7 @@ class Document
     }
 
     /**
-     * Clear answers
+     * Clear answers.
      */
     public function clearAnswers()
     {
@@ -180,7 +180,7 @@ class Document
     }
 
     /**
-     * Clear generated files
+     * Clear generated files.
      */
     public function clearFiles()
     {
@@ -188,7 +188,7 @@ class Document
     }
 
     /**
-     * Clear linked tags
+     * Clear linked tags.
      */
     public function clearTags()
     {

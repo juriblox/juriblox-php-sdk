@@ -1,6 +1,5 @@
 <?php
 
-
 namespace JuriBlox\Sdk\Webhooks\Requests;
 
 use JuriBlox\Sdk\Domain\Documents\Values\TemplateId;
@@ -10,7 +9,7 @@ use JuriBlox\Sdk\Webhooks\Request;
 class TemplatePublishRequest extends Request
 {
     /**
-     * A new template version has been published
+     * A new template version has been published.
      */
     const EVENT_PUBLISHED = 'template.published';
 
@@ -18,6 +17,13 @@ class TemplatePublishRequest extends Request
      * @var TemplateId
      */
     private $templateId;
+
+    /**
+     * TemplatePublishRequest constructor.
+     */
+    private function __construct()
+    {
+    }
 
     /**
      * @param Request $request
@@ -32,19 +38,10 @@ class TemplatePublishRequest extends Request
 
         $payload = $request->getPayload();
 
-        if (isset($payload->template))
-        {
+        if (isset($payload->template)) {
             $castedRequest->templateId = TemplateId::fromOptional($payload->template->id);
         }
 
         return $castedRequest;
-    }
-
-    /**
-     * TemplatePublishRequest constructor
-     */
-    private function __construct()
-    {
-
     }
 }

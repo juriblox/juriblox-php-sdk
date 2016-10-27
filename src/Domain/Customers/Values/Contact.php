@@ -17,7 +17,7 @@ class Contact
     private $name;
 
     /**
-     * Contact constructor
+     * Contact constructor.
      *
      * @param $name
      * @param $email
@@ -33,8 +33,7 @@ class Contact
      */
     public function __toString()
     {
-        if ($this->getEmail() === null)
-        {
+        if ($this->getEmail() === null) {
             return $this->getName();
         }
 

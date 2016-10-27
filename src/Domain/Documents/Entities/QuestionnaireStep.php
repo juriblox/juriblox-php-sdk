@@ -7,28 +7,28 @@ use JuriBlox\Sdk\Domain\Documents\Values\QuestionnaireStepId;
 class QuestionnaireStep implements \Iterator, \Countable
 {
     /**
-     * Description
+     * Description.
      *
      * @var string
      */
     private $description;
 
     /**
-     * ID
+     * ID.
      *
      * @var QuestionnaireStepId
      */
     private $id;
 
     /**
-     * Name
+     * Name.
      *
      * @var string
      */
     private $name;
 
     /**
-     * Questions in this step
+     * Questions in this step.
      *
      * @var array|Question[]
      */
@@ -40,7 +40,15 @@ class QuestionnaireStep implements \Iterator, \Countable
     private $questionsIndex;
 
     /**
-     * Create a QuestionnaireStep entity based on an existing identity
+     * Question constructor.
+     */
+    private function __construct()
+    {
+        $this->clearQuestions();
+    }
+
+    /**
+     * Create a QuestionnaireStep entity based on an existing identity.
      *
      * @param QuestionnaireStepId $id
      *
@@ -55,7 +63,7 @@ class QuestionnaireStep implements \Iterator, \Countable
     }
 
     /**
-     * Create a QuestionnaireStep entity based on an identity represented as a string
+     * Create a QuestionnaireStep entity based on an identity represented as a string.
      *
      * @param string $id
      *
@@ -67,15 +75,7 @@ class QuestionnaireStep implements \Iterator, \Countable
     }
 
     /**
-     * Question constructor
-     */
-    private function __construct()
-    {
-        $this->clearQuestions();
-    }
-
-    /**
-     * Link a question to this step
+     * Link a question to this step.
      *
      * @param Question $question
      */
@@ -85,7 +85,7 @@ class QuestionnaireStep implements \Iterator, \Countable
     }
 
     /**
-     * Clear the questions linked to this step
+     * Clear the questions linked to this step.
      */
     public function clearQuestions()
     {
@@ -97,7 +97,7 @@ class QuestionnaireStep implements \Iterator, \Countable
      */
     public function count()
     {
-        return sizeof($this->questions);
+        return count($this->questions);
     }
 
     /**
@@ -105,8 +105,7 @@ class QuestionnaireStep implements \Iterator, \Countable
      */
     public function current()
     {
-        if (!$this->valid())
-        {
+        if (!$this->valid()) {
             return null;
         }
 
@@ -158,7 +157,7 @@ class QuestionnaireStep implements \Iterator, \Countable
      */
     public function next()
     {
-        $this->questionsIndex++;
+        ++$this->questionsIndex;
     }
 
     /**

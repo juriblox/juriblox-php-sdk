@@ -17,7 +17,26 @@ class User
     private $name;
 
     /**
-     * Create a User entity based on an existing identity
+     * Office constructor.
+     */
+    private function __construct()
+    {
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        if ($this->name !== null) {
+            return sprintf('%s (#%s)', $this->name, $this->id);
+        }
+
+        return '#' . $this->id;
+    }
+
+    /**
+     * Create a User entity based on an existing identity.
      *
      * @param UserId $id
      *
@@ -32,7 +51,7 @@ class User
     }
 
     /**
-     * Create a User entity based on an identity represented as a string
+     * Create a User entity based on an identity represented as a string.
      *
      * @param string $id
      *
@@ -41,27 +60,6 @@ class User
     public static function fromIdString($id)
     {
         return static::fromId(new UserId($id));
-    }
-
-    /**
-     * Office constructor
-     */
-    private function __construct()
-    {
-
-    }
-
-    /**
-     * @return string
-     */
-    public function __toString()
-    {
-        if ($this->name !== null)
-        {
-            return sprintf('%s (#%s)', $this->name, $this->id);
-        }
-
-        return '#' . $this->id;
     }
 
     /**

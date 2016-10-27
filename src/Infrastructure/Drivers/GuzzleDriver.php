@@ -8,12 +8,11 @@ use GuzzleHttp\HandlerStack;
 use GuzzleHttp\MessageFormatter;
 use GuzzleHttp\Middleware;
 use GuzzleHttp\Psr7\Response;
-
 use JuriBlox\Sdk\Client;
 use JuriBlox\Sdk\Exceptions\AuthorizationException;
+use JuriBlox\Sdk\Exceptions\CannotParseResponseException;
 use JuriBlox\Sdk\Exceptions\EngineOperationException;
 use JuriBlox\Sdk\Exceptions\RateLimitingException;
-use JuriBlox\Sdk\Exceptions\CannotParseResponseException;
 use JuriBlox\Sdk\Validation\Assertion;
 use Psr\Log\LoggerInterface;
 use Psr\Log\LogLevel;
@@ -21,27 +20,27 @@ use Psr\Log\LogLevel;
 class GuzzleDriver implements DriverInterface
 {
     /**
-     * Authorization error
+     * Authorization error.
      */
     const STATUS_AUTHORIZATION_ERROR = 403;
 
     /**
-     * Resource not found
+     * Resource not found.
      */
     const STATUS_NOT_FOUND = 404;
 
     /**
-     * Unprocessable entity
+     * Unprocessable entity.
      */
     const STATUS_UNPROCESSABLE_ENTITY = 422;
 
     /**
-     * Requests are being throttled due to a requests limit
+     * Requests are being throttled due to a requests limit.
      */
     const STATUS_RATE_LIMITING_ERROR = 429;
 
     /**
-     * Request successfully executed
+     * Request successfully executed.
      */
     const STATUS_SUCCESS = 200;
 
@@ -82,8 +81,8 @@ class GuzzleDriver implements DriverInterface
                 'User-Agent'    => $this->buildUserAgent(),
 
                 'X-JuriBlox-Client-Id'  => $clientId,
-                'X-JuriBlox-Client-Key' => $clientKey
-            ]
+                'X-JuriBlox-Client-Key' => $clientKey,
+            ],
         ]);
 
         $this->setBaseUri($baseUri ?: 'https://api.juriblox.nl/');
@@ -108,17 +107,17 @@ class GuzzleDriver implements DriverInterface
     /**
      * {@inheritdoc}
      */
-    public function patch($uri, $segments = null, $body)
+    public function patch($uri, $segments, $body)
     {
         return $this->jsonRequest('POST', $uri, $segments, array_merge($body, [
-            '_method' => 'PATCH'
+            '_method' => 'PATCH',
         ]));
     }
 
     /**
      * {@inheritdoc}
      */
-    public function post($uri, $segments = null, $body)
+    public function post($uri, $segments, $body)
     {
         return $this->jsonRequest('POST', $uri, $segments, $body);
     }
@@ -153,15 +152,14 @@ class GuzzleDriver implements DriverInterface
     }
 
     /**
-     * Build a pretty user agent string
+     * Build a pretty user agent string.
      *
      * @return string
      */
     private function buildUserAgent()
     {
         $userAgent = 'juriblox/php-sdk ' . Client::VERSION;
-        if ($this->applicationName !== null)
-        {
+        if ($this->applicationName !== null) {
             $userAgent .= ' (' . $this->applicationName . ')';
         }
 
@@ -169,7 +167,7 @@ class GuzzleDriver implements DriverInterface
     }
 
     /**
-     * Send a request to the JuriBlox API and parse the resulting JSON
+     * Send a request to the JuriBlox API and parse the resulting JSON.
      *
      * @param            $method
      * @param            $uri
@@ -188,8 +186,7 @@ class GuzzleDriver implements DriverInterface
         $response = $this->request($method, $uri, $segments, $body);
 
         $result = @json_decode($response->getBody()->getContents());
-        if ($result === false)
-        {
+        if ($result === false) {
             $castedException = new CannotParseResponseException();
             $castedException->setResponseContext($response);
 
@@ -200,7 +197,7 @@ class GuzzleDriver implements DriverInterface
     }
 
     /**
-     * Send a request to the JuriBlox API and return the response
+     * Send a request to the JuriBlox API and return the response.
      *
      * @param       $method
      * @param       $uri
@@ -218,12 +215,11 @@ class GuzzleDriver implements DriverInterface
     {
         $segments = ($segments === null) ? [] : $segments;
 
-        array_walk($segments, function($value, $name) use (&$uri) {
+        array_walk($segments, function ($value, $name) use (&$uri) {
             $uri = str_replace('{' . $name . '}', $value, $uri);
         }, $uri);
 
-        try
-        {
+        try {
             /** @var Response $response */
             $response = $this->client->request($method, $uri, [
                 'handler'  => $this->stack,
@@ -233,26 +229,22 @@ class GuzzleDriver implements DriverInterface
                     'User-Agent' => $this->buildUserAgent(),
                 ],
 
-                'form_params' => $body
+                'form_params' => $body,
             ]);
-        }
-        catch (ClientException $exception)
-        {
+        } catch (ClientException $exception) {
             $response = $exception->getResponse();
 
             $exceptionCode = $exception->getMessage();
             $exceptionMessage = $exception->getCode();
 
             $result = @json_decode($response->getBody()->getContents());
-            if ($result !== false)
-            {
+            if ($result !== false) {
                 $exceptionCode = $result->error->code;
                 $exceptionMessage = $result->error->message;
             }
 
             // Throw authorization exception
-            if ($response->getStatusCode() == self::STATUS_AUTHORIZATION_ERROR)
-            {
+            if ($response->getStatusCode() == self::STATUS_AUTHORIZATION_ERROR) {
                 $castedException = new AuthorizationException($exceptionMessage, $exceptionCode, $exception);
                 $castedException->setResponseContext($response);
 
@@ -260,8 +252,7 @@ class GuzzleDriver implements DriverInterface
             }
 
             // Throw rate limiting exception
-            elseif ($response->getStatusCode() == self::STATUS_RATE_LIMITING_ERROR)
-            {
+            elseif ($response->getStatusCode() == self::STATUS_RATE_LIMITING_ERROR) {
                 $castedException = new RateLimitingException($exceptionMessage, $exceptionCode, $exception);
                 $castedException->setResponseContext($response);
 
@@ -269,17 +260,12 @@ class GuzzleDriver implements DriverInterface
             }
 
             // Unprocessable request
-            elseif ($response->getStatusCode() == self::STATUS_UNPROCESSABLE_ENTITY)
-            {
+            elseif ($response->getStatusCode() == self::STATUS_UNPROCESSABLE_ENTITY) {
                 $castedException = new EngineOperationException($exceptionMessage, $exceptionCode, $exception);
-                if ($result !== false && isset($result->error->errors))
-                {
-                    if (is_array($result->error->errors))
-                    {
+                if ($result !== false && isset($result->error->errors)) {
+                    if (is_array($result->error->errors)) {
                         $castedException->setErrors($result->error->errors);
-                    }
-                    elseif (is_object($result->error->errors))
-                    {
+                    } elseif (is_object($result->error->errors)) {
                         $castedException->setErrors(get_object_vars($result->error->errors));
                     }
                 }

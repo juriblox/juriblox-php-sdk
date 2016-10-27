@@ -1,16 +1,13 @@
 <?php
 
-use JuriBlox\Sdk\Client;
 use JuriBlox\Sdk\Domain\Documents\Values\DocumentReference;
-use JuriBlox\Sdk\Infrastructure\Drivers\GuzzleDriver;
 
-require __DIR__  . '/bootstrap.php';
+require __DIR__ . '/bootstrap.php';
 
 $application = new Application();
 $client = $application->getClient();
 
-foreach ($client->documents()->findByReference(new DocumentReference('Test')) as $document)
-{
+foreach ($client->documents()->findByReference(new DocumentReference('Test')) as $document) {
     printTable([
         'ID'           => $document->getId(),
         'Title'        => $document->getTitle(),

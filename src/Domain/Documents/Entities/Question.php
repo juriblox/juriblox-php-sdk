@@ -9,56 +9,65 @@ use JuriBlox\Sdk\Domain\Documents\Values\QuestionType;
 class Question
 {
     /**
-     * Conditions for this question to appear
+     * Conditions for this question to appear.
      *
      * @var array|QuestionCondition[]
      */
     private $conditions;
 
     /**
-     * ID
+     * ID.
      *
      * @var QuestionId
      */
     private $id;
 
     /**
-     * Information
+     * Information.
      *
      * @var string
      */
     private $info;
 
     /**
-     * Question name
+     * Question name.
      *
      * @var string
      */
     private $name;
 
     /**
-     * List of options
+     * List of options.
      *
      * @var array|QuestionOption[]
      */
     private $options;
 
     /**
-     * Required field
+     * Required field.
      *
      * @var bool
      */
     private $required;
 
     /**
-     * Question type
+     * Question type.
      *
      * @var QuestionType
      */
     private $type;
 
     /**
-     * Create a Question entity based on an existing identity
+     * Question constructor.
+     */
+    private function __construct()
+    {
+        $this->clearConditions();
+        $this->clearOptions();
+    }
+
+    /**
+     * Create a Question entity based on an existing identity.
      *
      * @param QuestionId $id
      *
@@ -73,7 +82,7 @@ class Question
     }
 
     /**
-     * Create a Question entity based on an identity represented as a string
+     * Create a Question entity based on an identity represented as a string.
      *
      * @param string $id
      *
@@ -85,16 +94,7 @@ class Question
     }
 
     /**
-     * Question constructor
-     */
-    private function __construct()
-    {
-        $this->clearConditions();
-        $this->clearOptions();
-    }
-
-    /**
-     * Add a condition
+     * Add a condition.
      *
      * @param QuestionCondition $condition
      */
@@ -104,7 +104,7 @@ class Question
     }
 
     /**
-     * Add an option
+     * Add an option.
      *
      * @param QuestionOption $option
      */
@@ -114,7 +114,7 @@ class Question
     }
 
     /**
-     * Clear the linked conditions
+     * Clear the linked conditions.
      */
     public function clearConditions()
     {
@@ -122,7 +122,7 @@ class Question
     }
 
     /**
-     * Clear the question's options
+     * Clear the question's options.
      */
     public function clearOptions()
     {
@@ -178,7 +178,7 @@ class Question
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isRequired()
     {
@@ -202,7 +202,7 @@ class Question
     }
 
     /**
-     * @param boolean $required
+     * @param bool $required
      */
     public function setRequired($required)
     {

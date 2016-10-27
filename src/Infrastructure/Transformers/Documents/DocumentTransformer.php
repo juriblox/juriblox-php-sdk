@@ -10,13 +10,12 @@ use JuriBlox\Sdk\Domain\Documents\Values\DocumentReference;
 use JuriBlox\Sdk\Domain\Documents\Values\File;
 use JuriBlox\Sdk\Domain\Documents\Values\Language;
 use JuriBlox\Sdk\Domain\Offices\Entities\Office;
-use JuriBlox\Sdk\Infrastructure\Transformers\Documents\QuestionAnswerTransformer;
 use JuriBlox\Sdk\Validation\Assertion;
 
 class DocumentTransformer
 {
     /**
-     * Create a Document from a DTO returned by the JuriBlox API
+     * Create a Document from a DTO returned by the JuriBlox API.
      *
      * @param $dto
      *
@@ -39,16 +38,13 @@ class DocumentTransformer
 
         $document->setOffice($office);
 
-        if ($dto->customer !== [])
-        {
+        if ($dto->customer !== []) {
             $customer = Customer::fromReferenceString($dto->customer->reference);
             $customer->setCompany($dto->customer->company);
 
-            if (isset($dto->customer->contact))
-            {
+            if (isset($dto->customer->contact)) {
                 $contact = new Contact($dto->customer->contact->name);
-                if ($dto->customer->contact->email !== null)
-                {
+                if ($dto->customer->contact->email !== null) {
                     $contact->setEmail($dto->customer->contact->email);
                 }
 
@@ -61,14 +57,12 @@ class DocumentTransformer
         $document->setLanguage(new Language($dto->language->code, $dto->language->name));
 
         // Files
-        foreach ($dto->files as $entry)
-        {
+        foreach ($dto->files as $entry) {
             $document->addFile(File::fromText($entry->url, $entry->filename, $entry->type));
         }
 
         // Tags
-        foreach ($dto->tags as $entry)
-        {
+        foreach ($dto->tags as $entry) {
             $tag = Tag::fromIdString($entry->id);
             $tag->setName($entry->name);
 
@@ -76,10 +70,8 @@ class DocumentTransformer
         }
 
         // Answers
-        if (isset($dto->answers))
-        {
-            foreach ($dto->answers as $entry)
-            {
+        if (isset($dto->answers)) {
+            foreach ($dto->answers as $entry) {
                 $document->addAnswer(QuestionAnswerTransformer::read($entry));
             }
         }

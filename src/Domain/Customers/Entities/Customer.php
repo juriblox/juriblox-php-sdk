@@ -8,7 +8,7 @@ use JuriBlox\Sdk\Domain\Customers\Values\CustomerReference;
 class Customer
 {
     /**
-     * Company name
+     * Company name.
      *
      * @var string
      */
@@ -20,18 +20,17 @@ class Customer
     private $contact;
 
     /**
-     * Customer reference
+     * Customer reference.
      *
      * @var CustomerReference
      */
     private $reference;
 
     /**
-     * Customer constructor
+     * Customer constructor.
      */
     public function __construct()
     {
-
     }
 
     /**
@@ -39,20 +38,14 @@ class Customer
      */
     public function __toString()
     {
-        if ($this->contact !== null)
-        {
+        if ($this->contact !== null) {
             $output = $this->contact;
-            if ($this->company !== null)
-            {
+            if ($this->company !== null) {
                 $output .= sprintf(' (%s) [%s]', $this->company, $this->getReference()->getString());
             }
-        }
-        elseif ($this->company !== null)
-        {
+        } elseif ($this->company !== null) {
             $output = sprintf('%s [%s]', $this->company, $this->getReference()->getString());
-        }
-        else
-        {
+        } else {
             $output = sprintf('[%s]', $this->getReference()->getString());
         }
 
@@ -60,7 +53,7 @@ class Customer
     }
 
     /**
-     * Create a customer entity based on an existing identity
+     * Create a customer entity based on an existing identity.
      *
      * @param CustomerReference $reference
      *
@@ -75,7 +68,7 @@ class Customer
     }
 
     /**
-     * Create a customer entity based on an existing identity
+     * Create a customer entity based on an existing identity.
      *
      * @param string $reference
      *

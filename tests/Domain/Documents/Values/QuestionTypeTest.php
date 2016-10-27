@@ -7,8 +7,7 @@ class QuestionTypeTest extends \PHPUnit_Framework_TestCase
     public function availableTypesProvider()
     {
         $types = [];
-        foreach (QuestionType::$types as $code => $name)
-        {
+        foreach (QuestionType::$types as $code => $name) {
             $types[] = [$code, $name];
         }
 

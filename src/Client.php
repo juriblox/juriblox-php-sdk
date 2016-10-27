@@ -13,7 +13,7 @@ use Psr\Log\LoggerInterface;
 class Client
 {
     /**
-     * Client version
+     * Client version.
      */
     const VERSION = '1.0.2';
 
@@ -41,7 +41,7 @@ class Client
     }
 
     /**
-     * Get an endpoint for working with the custom templates
+     * Get an endpoint for working with the custom templates.
      *
      * @return CustomTemplatesCollection
      */
@@ -51,7 +51,7 @@ class Client
     }
 
     /**
-     * Get an endpoint for working with customers
+     * Get an endpoint for working with customers.
      *
      * @return CustomersEndpoint
      */
@@ -61,7 +61,7 @@ class Client
     }
 
     /**
-     * Get an endpoint for working with documents
+     * Get an endpoint for working with documents.
      *
      * @return DocumentsEndpoint
      */
@@ -95,7 +95,7 @@ class Client
     }
 
     /**
-     * Get an endpoint for working with templates
+     * Get an endpoint for working with templates.
      *
      * @return TemplatesEndpoint
      */
@@ -105,18 +105,7 @@ class Client
     }
 
     /**
-     * Set the application's name
-     *
-     * @param $name
-     */
-    private function setName($name)
-    {
-        $this->name = $name;
-        $this->driver->setApplicationName($name);
-    }
-
-    /**
-     * Set a PSR-3 logger
+     * Set a PSR-3 logger.
      *
      * @param LoggerInterface $logger
      */
@@ -125,5 +114,16 @@ class Client
         $this->logger = $logger;
 
         $this->driver->setLogger($logger);
+    }
+
+    /**
+     * Set the application's name.
+     *
+     * @param $name
+     */
+    private function setName($name)
+    {
+        $this->name = $name;
+        $this->driver->setApplicationName($name);
     }
 }

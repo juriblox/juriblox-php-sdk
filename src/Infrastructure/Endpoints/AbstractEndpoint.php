@@ -12,7 +12,17 @@ abstract class AbstractEndpoint
     protected $driver;
 
     /**
-     * Create an endpoint using an existing Driver object
+     * AbstractEndpoint constructor.
+     *
+     * @param DriverInterface $driver
+     */
+    protected function __construct(DriverInterface $driver)
+    {
+        $this->driver = $driver;
+    }
+
+    /**
+     * Create an endpoint using an existing Driver object.
      *
      * @param DriverInterface $driver
      *
@@ -24,7 +34,7 @@ abstract class AbstractEndpoint
     }
 
     /**
-     * Create an endpoint using an existing (parent) endpoint
+     * Create an endpoint using an existing (parent) endpoint.
      *
      * @param EndpointInterface $endpoint
      *
@@ -33,16 +43,6 @@ abstract class AbstractEndpoint
     public static function fromEndpoint(EndpointInterface $endpoint)
     {
         return static::fromDriver($endpoint->getDriver());
-    }
-
-    /**
-     * AbstractEndpoint constructor
-     *
-     * @param DriverInterface $driver
-     */
-    protected function __construct(DriverInterface $driver)
-    {
-        $this->driver = $driver;
     }
 
     /**

@@ -5,31 +5,31 @@ namespace JuriBlox\Sdk\Domain\Documents\Values;
 class DocumentRequestStatus
 {
     /**
-     * Document ID
+     * Document ID.
      *
      * @var DocumentId
      */
     private $documentId;
 
     /**
-     * ID
+     * ID.
      *
      * @var DocumentRequestId
      */
     private $id;
 
     /**
-     * Status
+     * Status.
      *
      * @var DocumentStatus
      */
     private $status;
 
     /**
-     * DocumentRequestStatus constructor
+     * DocumentRequestStatus constructor.
      *
-     * @param DocumentRequestId     $id
-     * @param DocumentStatus $status
+     * @param DocumentRequestId $id
+     * @param DocumentStatus    $status
      */
     public function __construct(DocumentRequestId $id, DocumentStatus $status)
     {

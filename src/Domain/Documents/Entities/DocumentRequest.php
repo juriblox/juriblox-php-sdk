@@ -12,70 +12,78 @@ use JuriBlox\Sdk\Validation\Assertion;
 class DocumentRequest
 {
     /**
-     * Alert date
+     * Alert date.
      *
      * @var \DateTime
      */
     private $alertDate;
 
     /**
-     * Answer
+     * Answer.
      *
      * @var array|QuestionAnswer[]
      */
     private $answers;
 
     /**
-     * Customer
+     * Customer.
      *
      * @var CustomerReference
      */
     private $customer;
 
     /**
-     * ID
+     * ID.
      *
      * @var DocumentRequestId
      */
     private $id;
 
     /**
-     * Reference
+     * Reference.
      *
      * @var DocumentReference
      */
     private $reference;
 
     /**
-     * Remarks
+     * Remarks.
      *
      * @var string
      */
     private $remarks;
 
     /**
-     * Status
+     * Status.
      *
      * @var DocumentStatus
      */
     private $status;
 
     /**
-     * Template
+     * Template.
      *
      * @var TemplateId
      */
     private $templateId;
 
     /**
-     * Document title
+     * Document title.
      *
      * @var string
      */
     private $title;
 
     /**
-     * Create a DocumentRequest entity based on an existing identity
+     * DocumentRequest constructor.
+     */
+    private function __construct()
+    {
+        $this->clearAnswers();
+    }
+
+    /**
+     * Create a DocumentRequest entity based on an existing identity.
      *
      * @param DocumentRequestId $id
      *
@@ -90,7 +98,7 @@ class DocumentRequest
     }
 
     /**
-     * Create a DocumentRequest entity based on an identity represented as a string
+     * Create a DocumentRequest entity based on an identity represented as a string.
      *
      * @param string $id
      *
@@ -102,7 +110,7 @@ class DocumentRequest
     }
 
     /**
-     * Prepare a document generation request
+     * Prepare a document generation request.
      *
      * @param TemplateId $templateId
      *
@@ -117,14 +125,6 @@ class DocumentRequest
     }
 
     /**
-     * DocumentRequest constructor
-     */
-    private function __construct()
-    {
-        $this->clearAnswers();
-    }
-
-    /**
      * @param QuestionAnswer $answer
      */
     public function addAnswer(QuestionAnswer $answer)
@@ -133,7 +133,7 @@ class DocumentRequest
     }
 
     /**
-     * Clear the answers
+     * Clear the answers.
      */
     public function clearAnswers()
     {

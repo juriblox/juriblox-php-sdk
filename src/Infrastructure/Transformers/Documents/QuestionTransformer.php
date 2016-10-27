@@ -11,7 +11,7 @@ use JuriBlox\Sdk\Domain\Documents\Values\QuestionType;
 class QuestionTransformer
 {
     /**
-     * Create a Question from a DTO returned by the JuriBlox API
+     * Create a Question from a DTO returned by the JuriBlox API.
      *
      * @param $dto
      *
@@ -26,14 +26,12 @@ class QuestionTransformer
         $question->setRequired($dto->required);
 
         // Conditional logic for questions
-        foreach ($dto->parentAnswers as $entry)
-        {
+        foreach ($dto->parentAnswers as $entry) {
             $question->addCondition(new QuestionCondition(new QuestionOptionId($entry->id), $entry->value));
         }
 
         // Allowed options for this questions (they're called answers in the v1 API)
-        foreach ($dto->answers as $entry)
-        {
+        foreach ($dto->answers as $entry) {
             $option = QuestionOption::fromIdString($entry->id);
             $option->setValue($entry->value);
 

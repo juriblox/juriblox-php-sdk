@@ -7,21 +7,36 @@ use JuriBlox\Sdk\Domain\Documents\Values\TagId;
 class Tag
 {
     /**
-     * ID
+     * ID.
      *
      * @var TagId
      */
     private $id;
 
     /**
-     * Name
+     * Name.
      *
      * @var string
      */
     private $name;
 
     /**
-     * Create a tag entity based on an existing identity
+     * Tag constructor.
+     */
+    private function __construct()
+    {
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Create a tag entity based on an existing identity.
      *
      * @param TagId $id
      *
@@ -36,7 +51,7 @@ class Tag
     }
 
     /**
-     * Create a tag entity based on an identity represented as a string
+     * Create a tag entity based on an identity represented as a string.
      *
      * @param string $id
      *
@@ -45,14 +60,6 @@ class Tag
     public static function fromIdString($id)
     {
         return static::fromId(new TagId($id));
-    }
-
-    /**
-     * Tag constructor
-     */
-    private function __construct()
-    {
-
     }
 
     /**
@@ -77,13 +84,5 @@ class Tag
     public function setName($name)
     {
         $this->name = $name;
-    }
-
-    /**
-     * @return string
-     */
-    public function __toString()
-    {
-        return $this->name;
     }
 }

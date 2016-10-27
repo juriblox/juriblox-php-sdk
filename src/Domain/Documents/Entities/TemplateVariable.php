@@ -7,46 +7,45 @@ use JuriBlox\Sdk\Domain\Documents\Values\TemplateVariableId;
 class TemplateVariable
 {
     /**
-     * Description
+     * Description.
      *
      * @var string
      */
     private $description;
 
     /**
-     * Variable ID
+     * Variable ID.
      *
      * @var TemplateVariableId
      */
     private $id;
 
     /**
-     * Name (used in clauses)
+     * Name (used in clauses).
      *
      * @var string
      */
     private $name;
 
     /**
-     * Title
+     * Title.
      *
      * @var string
      */
     private $title;
 
     /**
-     * Default value
+     * Default value.
      *
      * @var mixed
      */
     private $value;
 
     /**
-     * Varifable constructor
+     * Varifable constructor.
      */
     private function __construct()
     {
-
     }
 
     /**
@@ -58,7 +57,7 @@ class TemplateVariable
     }
 
     /**
-     * Create a variable entity based on an existing identity
+     * Create a variable entity based on an existing identity.
      *
      * @param TemplateVariableId $id
      *
@@ -73,7 +72,7 @@ class TemplateVariable
     }
 
     /**
-     * Create a variable entity based on an identity represented as a string
+     * Create a variable entity based on an identity represented as a string.
      *
      * @param string $id
      *

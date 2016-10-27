@@ -7,35 +7,35 @@ use JuriBlox\Sdk\Exceptions\CannotParseResponseException;
 abstract class AbstractPagedCollection extends AbstractCollection
 {
     /**
-     * Current page
+     * Current page.
      *
      * @var int
      */
     protected $currentPage;
 
     /**
-     * Records per page
+     * Records per page.
      *
      * @var int
      */
     protected $recordsPerPage;
 
     /**
-     * Total number of pages
+     * Total number of pages.
      *
      * @var int
      */
     protected $totalPages;
 
     /**
-     * Total number of records
+     * Total number of records.
      *
      * @var int
      */
     protected $totalRecords;
 
     /**
-     * AbstractPagedCollection constructor
+     * AbstractPagedCollection constructor.
      */
     protected function __construct()
     {
@@ -69,17 +69,15 @@ abstract class AbstractPagedCollection extends AbstractCollection
      */
     public function next()
     {
-        $this->index++;
+        ++$this->index;
 
-        if ($this->index >= sizeof($this->records))
-        {
+        if ($this->index >= count($this->records)) {
             $this->index = 0;
             $this->records = [];
 
-            $this->currentPage++;
+            ++$this->currentPage;
 
-            if ($this->currentPage <= $this->totalPages)
-            {
+            if ($this->currentPage <= $this->totalPages) {
                 $this->fetch();
             }
         }
@@ -96,7 +94,7 @@ abstract class AbstractPagedCollection extends AbstractCollection
     }
 
     /**
-     * Fetch resultset
+     * Fetch resultset.
      */
     protected function fetch()
     {
@@ -105,13 +103,11 @@ abstract class AbstractPagedCollection extends AbstractCollection
 
         $result = $this->endpoint->getDriver()->get($this->getCombinedUri());
 
-        if (!isset($result->{$this->getKey()}))
-        {
+        if (!isset($result->{$this->getKey()})) {
             throw new CannotParseResponseException(sprintf('The "%s" key does not exist in the result returned by the API', $this->getKey()));
         }
 
-        if (!isset($result->meta->pagination))
-        {
+        if (!isset($result->meta->pagination)) {
             throw new CannotParseResponseException('The meta/pagination key does not exist in the result returned by the API');
         }
 

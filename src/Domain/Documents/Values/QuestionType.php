@@ -7,29 +7,29 @@ use JuriBlox\Sdk\Validation\Assertion;
 class QuestionType
 {
     /**
-     * Radio button
+     * Radio button.
      */
     const TYPE_RADIO = 'radio';
 
     /**
-     * Short text input field
+     * Short text input field.
      */
     const TYPE_SHORT_TEXT = 'short_text';
 
     /**
-     * Boolean (yes/no) input field
+     * Boolean (yes/no) input field.
      */
     const TYPE_BOOLEAN = 'yes_no';
 
     /**
-     * Available question types
+     * Available question types.
      *
      * @var array
      */
     public static $types = [
         self::TYPE_BOOLEAN      => 'Boolean (yes/no)',
         self::TYPE_RADIO        => 'Radio button',
-        self::TYPE_SHORT_TEXT   => 'Short text input'
+        self::TYPE_SHORT_TEXT   => 'Short text input',
     ];
 
     /**
@@ -38,7 +38,7 @@ class QuestionType
     private $type;
 
     /**
-     * QuestionType constructor
+     * QuestionType constructor.
      *
      * @param $type
      */

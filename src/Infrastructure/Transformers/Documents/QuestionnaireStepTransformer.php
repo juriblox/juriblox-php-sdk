@@ -3,12 +3,11 @@
 namespace JuriBlox\Sdk\Infrastructure\Transformers\Documents;
 
 use JuriBlox\Sdk\Domain\Documents\Entities\QuestionnaireStep;
-use JuriBlox\Sdk\Infrastructure\Transformers\Documents\QuestionTransformer;
 
 class QuestionnaireStepTransformer
 {
     /**
-     * Create a QuestionnaireStep from a DTO returned by the JuriBlox API
+     * Create a QuestionnaireStep from a DTO returned by the JuriBlox API.
      *
      * @param $dto
      *
@@ -20,8 +19,7 @@ class QuestionnaireStepTransformer
         $step->setName($dto->name);
         $step->setDescription($dto->description);
 
-        foreach ($dto->questions->questions as $entry)
-        {
+        foreach ($dto->questions->questions as $entry) {
             $step->addQuestion(QuestionTransformer::read($entry));
         }
 

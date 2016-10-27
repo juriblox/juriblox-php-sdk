@@ -5,7 +5,7 @@ namespace JuriBlox\Sdk\Domain;
 abstract class AbstractValue
 {
     /**
-     * Create a value object from an optional value, returning either NULL or a value object
+     * Create a value object from an optional value, returning either NULL or a value object.
      *
      * @param $value
      *
@@ -13,8 +13,7 @@ abstract class AbstractValue
      */
     public static function fromOptional($value)
     {
-        if ($value == '' || $value === false)
-        {
+        if ($value == '' || $value === false) {
             return null;
         }
 

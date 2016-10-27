@@ -7,8 +7,7 @@ require __DIR__ . '/bootstrap.php';
 $application = new Application();
 $client = $application->getClient();
 
-foreach ($client->documents()->findWithTemplateId(new TemplateId(633)) as $document)
-{
+foreach ($client->documents()->findWithTemplateId(new TemplateId(633)) as $document) {
     printTable([
         'ID'           => $document->getId(),
         'Title'        => $document->getTitle(),
