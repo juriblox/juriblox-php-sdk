@@ -19,7 +19,7 @@ class QuestionnaireStepTransformer
         $step->setName($dto->name);
         $step->setDescription($dto->description);
 
-        foreach ($dto->questions->questions as $entry) {
+        foreach ($dto->questions as $entry) {
             $step->addQuestion(QuestionTransformer::read($entry));
         }
 
