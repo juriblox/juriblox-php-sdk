@@ -18,7 +18,7 @@ abstract class AbstractId extends AbstractValue implements IdInterface
     {
         Assertion::integerish($id);
 
-        $this->id = $id;
+        $this->id = (int) $id;
     }
 
     /**
