@@ -5,6 +5,8 @@ namespace JuriBlox\Sdk\Infrastructure\Transformers\Documents;
 use JuriBlox\Sdk\Domain\Documents\Entities\Question;
 use JuriBlox\Sdk\Domain\Documents\Entities\QuestionOption;
 use JuriBlox\Sdk\Domain\Documents\Values\QuestionCondition;
+use JuriBlox\Sdk\Domain\Documents\Values\QuestionId;
+use JuriBlox\Sdk\Domain\Documents\Values\QuestionOptionCondition;
 use JuriBlox\Sdk\Domain\Documents\Values\QuestionOptionId;
 use JuriBlox\Sdk\Domain\Documents\Values\QuestionType;
 
@@ -25,9 +27,14 @@ class QuestionTransformer
         $question->setType(new QuestionType($dto->type));
         $question->setRequired($dto->required);
 
+        // Required parent question
+        if (isset($dto->parent)) {
+            $question->addQuestionCondition(new QuestionCondition(new QuestionId($dto->parent->id)));
+        }
+
         // Conditional logic for questions
         foreach ($dto->parentAnswers as $entry) {
-            $question->addCondition(new QuestionCondition(new QuestionOptionId($entry->id), $entry->value));
+            $question->addOptionCondition(new QuestionOptionCondition(new QuestionOptionId($entry->id)));
         }
 
         // Allowed options for this questions (they're called answers in the v1 API)

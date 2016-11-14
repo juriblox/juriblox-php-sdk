@@ -3,18 +3,12 @@
 namespace JuriBlox\Sdk\Domain\Documents\Entities;
 
 use JuriBlox\Sdk\Domain\Documents\Values\QuestionCondition;
+use JuriBlox\Sdk\Domain\Documents\Values\QuestionOptionCondition;
 use JuriBlox\Sdk\Domain\Documents\Values\QuestionId;
 use JuriBlox\Sdk\Domain\Documents\Values\QuestionType;
 
 class Question
 {
-    /**
-     * Conditions for this question to appear.
-     *
-     * @var array|QuestionCondition[]
-     */
-    private $conditions;
-
     /**
      * ID.
      *
@@ -37,11 +31,23 @@ class Question
     private $name;
 
     /**
+     * Conditions for this question to appear.
+     *
+     * @var array|QuestionOptionCondition[]
+     */
+    private $optionConditions;
+
+    /**
      * List of options.
      *
      * @var array|QuestionOption[]
      */
     private $options;
+
+    /**
+     * @var array|QuestionCondition[]
+     */
+    private $questionConditions;
 
     /**
      * Required field.
@@ -64,6 +70,53 @@ class Question
     {
         $this->clearConditions();
         $this->clearOptions();
+    }
+
+    /**
+     * Add an option.
+     *
+     * @param QuestionOption $option
+     */
+    public function addOption(QuestionOption $option)
+    {
+        $this->options[] = $option;
+    }
+
+    /**
+     * Add a condition.
+     *
+     * @param QuestionOptionCondition $condition
+     */
+    public function addOptionCondition(QuestionOptionCondition $condition)
+    {
+        $this->optionConditions[] = $condition;
+    }
+
+    /**
+     * Add a condition.
+     *
+     * @param QuestionCondition $condition
+     */
+    public function addQuestionCondition(QuestionCondition $condition)
+    {
+        $this->questionConditions[] = $condition;
+    }
+
+    /**
+     * Clear the linked conditions.
+     */
+    public function clearConditions()
+    {
+        $this->optionConditions = [];
+        $this->questionConditions = [];
+    }
+
+    /**
+     * Clear the question's options.
+     */
+    public function clearOptions()
+    {
+        $this->options = [];
     }
 
     /**
@@ -94,50 +147,6 @@ class Question
     }
 
     /**
-     * Add a condition.
-     *
-     * @param QuestionCondition $condition
-     */
-    public function addCondition(QuestionCondition $condition)
-    {
-        $this->conditions[] = $condition;
-    }
-
-    /**
-     * Add an option.
-     *
-     * @param QuestionOption $option
-     */
-    public function addOption(QuestionOption $option)
-    {
-        $this->options[] = $option;
-    }
-
-    /**
-     * Clear the linked conditions.
-     */
-    public function clearConditions()
-    {
-        $this->conditions = [];
-    }
-
-    /**
-     * Clear the question's options.
-     */
-    public function clearOptions()
-    {
-        $this->options = [];
-    }
-
-    /**
-     * @return array|QuestionCondition[]
-     */
-    public function getConditions()
-    {
-        return $this->conditions;
-    }
-
-    /**
      * @return QuestionId
      */
     public function getId()
@@ -162,11 +171,27 @@ class Question
     }
 
     /**
+     * @return array|QuestionOptionCondition[]
+     */
+    public function getOptionConditions()
+    {
+        return $this->optionConditions;
+    }
+
+    /**
      * @return array|QuestionOption[]
      */
     public function getOptions()
     {
         return $this->options;
+    }
+
+    /**
+     * @return array|QuestionCondition[]
+     */
+    public function getQuestionConditions()
+    {
+        return $this->questionConditions;
     }
 
     /**

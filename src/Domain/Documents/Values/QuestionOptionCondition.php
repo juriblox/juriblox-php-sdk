@@ -2,27 +2,27 @@
 
 namespace JuriBlox\Sdk\Domain\Documents\Values;
 
-class QuestionCondition
+class QuestionOptionCondition
 {
     /**
-     * Linked QuestionId for this condition.
+     * Linked QuestionOptionId for this condition.
      *
-     * @var QuestionId
+     * @var QuestionOptionId
      */
     private $id;
 
     /**
      * QuestionCondition constructor.
      *
-     * @param QuestionId $id
+     * @param QuestionOptionId $id
      */
-    public function __construct(QuestionId $id)
+    public function __construct(QuestionOptionId $id)
     {
         $this->id = $id;
     }
 
     /**
-     * @return QuestionId
+     * @return QuestionOptionId
      */
     public function getId()
     {

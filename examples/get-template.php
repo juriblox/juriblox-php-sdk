@@ -7,7 +7,7 @@ require __DIR__ . '/bootstrap.php';
 $application = new Application();
 $client = $application->getClient();
 
-$templateId = new TemplateId(630);
+$templateId = new TemplateId(744);
 
 /*
  * Template details
@@ -58,12 +58,18 @@ foreach ($steps as $step) {
             ], 'Value', 2);
         }
 
-        // Conditions
-        foreach ($question->getConditions() as $condition) {
+        // Question conditions
+        foreach ($question->getQuestionConditions() as $condition) {
             printTable([
-                'ID'    => $condition->getId(),
-                'Value' => $condition->getValue(),
-            ], 'Condition', 2);
+                'ID'    => $condition->getId()
+            ], 'Question condition', 2);
+        }
+
+        // Option conditions
+        foreach ($question->getOptionConditions() as $condition) {
+            printTable([
+                'ID'    => $condition->getId()
+            ], 'Option condition', 2);
         }
     }
 }
