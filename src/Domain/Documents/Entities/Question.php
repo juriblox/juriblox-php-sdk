@@ -3,8 +3,8 @@
 namespace JuriBlox\Sdk\Domain\Documents\Entities;
 
 use JuriBlox\Sdk\Domain\Documents\Values\QuestionCondition;
-use JuriBlox\Sdk\Domain\Documents\Values\QuestionOptionCondition;
 use JuriBlox\Sdk\Domain\Documents\Values\QuestionId;
+use JuriBlox\Sdk\Domain\Documents\Values\QuestionOptionCondition;
 use JuriBlox\Sdk\Domain\Documents\Values\QuestionType;
 
 class Question

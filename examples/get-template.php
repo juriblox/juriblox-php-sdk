@@ -61,14 +61,14 @@ foreach ($steps as $step) {
         // Question conditions
         foreach ($question->getQuestionConditions() as $condition) {
             printTable([
-                'ID'    => $condition->getId()
+                'ID'    => $condition->getId(),
             ], 'Question condition', 2);
         }
 
         // Option conditions
         foreach ($question->getOptionConditions() as $condition) {
             printTable([
-                'ID'    => $condition->getId()
+                'ID'    => $condition->getId(),
             ], 'Option condition', 2);
         }
     }
