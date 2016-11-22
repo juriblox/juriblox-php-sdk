@@ -45,6 +45,13 @@ class Question
     private $options;
 
     /**
+     * Position.
+     *
+     * @var int
+     */
+    private $position;
+
+    /**
      * @var array|QuestionCondition[]
      */
     private $questionConditions;
@@ -70,6 +77,8 @@ class Question
     {
         $this->clearConditions();
         $this->clearOptions();
+
+        $this->position = -1;
     }
 
     /**
@@ -187,6 +196,14 @@ class Question
     }
 
     /**
+     * @return int
+     */
+    public function getPosition(): int
+    {
+        return $this->position;
+    }
+
+    /**
      * @return array|QuestionCondition[]
      */
     public function getQuestionConditions()
@@ -224,6 +241,14 @@ class Question
     public function setName($name)
     {
         $this->name = $name ?: null;
+    }
+
+    /**
+     * @param int $position
+     */
+    public function setPosition(int $position)
+    {
+        $this->position = $position;
     }
 
     /**

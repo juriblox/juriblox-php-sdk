@@ -40,7 +40,9 @@ class QuestionTransformer
         // Allowed options for this questions (they're called answers in the v1 API)
         foreach ($dto->answers as $entry) {
             $option = QuestionOption::fromIdString($entry->id);
+            $option->setTitle($entry->name);
             $option->setValue($entry->value);
+            $option->setPosition($entry->position);
 
             $question->addOption($option);
         }

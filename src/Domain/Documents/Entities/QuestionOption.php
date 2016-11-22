@@ -14,6 +14,20 @@ class QuestionOption
     private $id;
 
     /**
+     * Position.
+     *
+     * @var int
+     */
+    private $position;
+
+    /**
+     * Title.
+     *
+     * @var string
+     */
+    private $title;
+
+    /**
      * Value.
      *
      * @var mixed
@@ -25,6 +39,7 @@ class QuestionOption
      */
     private function __construct()
     {
+        $this->position = -1;
     }
 
     /**
@@ -63,11 +78,43 @@ class QuestionOption
     }
 
     /**
+     * @return int
+     */
+    public function getPosition(): int
+    {
+        return $this->position;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
      * @return mixed
      */
     public function getValue()
     {
         return $this->value;
+    }
+
+    /**
+     * @param int $position
+     */
+    public function setPosition(int $position)
+    {
+        $this->position = $position;
+    }
+
+    /**
+     * @param string $title
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title ?: null;
     }
 
     /**

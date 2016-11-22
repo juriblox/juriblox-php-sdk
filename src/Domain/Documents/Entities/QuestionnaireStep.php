@@ -28,6 +28,13 @@ class QuestionnaireStep implements \Iterator, \Countable
     private $name;
 
     /**
+     * Position.
+     *
+     * @var int
+     */
+    private $position;
+
+    /**
      * Questions in this step.
      *
      * @var array|Question[]
@@ -45,33 +52,8 @@ class QuestionnaireStep implements \Iterator, \Countable
     private function __construct()
     {
         $this->clearQuestions();
-    }
 
-    /**
-     * Create a QuestionnaireStep entity based on an existing identity.
-     *
-     * @param QuestionnaireStepId $id
-     *
-     * @return QuestionnaireStep
-     */
-    public static function fromId(QuestionnaireStepId $id)
-    {
-        $question = new static();
-        $question->id = $id;
-
-        return $question;
-    }
-
-    /**
-     * Create a QuestionnaireStep entity based on an identity represented as a string.
-     *
-     * @param string $id
-     *
-     * @return QuestionnaireStep
-     */
-    public static function fromIdString($id)
-    {
-        return static::fromId(new QuestionnaireStepId($id));
+        $this->position = -1;
     }
 
     /**
@@ -113,6 +95,33 @@ class QuestionnaireStep implements \Iterator, \Countable
     }
 
     /**
+     * Create a QuestionnaireStep entity based on an existing identity.
+     *
+     * @param QuestionnaireStepId $id
+     *
+     * @return QuestionnaireStep
+     */
+    public static function fromId(QuestionnaireStepId $id)
+    {
+        $question = new static();
+        $question->id = $id;
+
+        return $question;
+    }
+
+    /**
+     * Create a QuestionnaireStep entity based on an identity represented as a string.
+     *
+     * @param string $id
+     *
+     * @return QuestionnaireStep
+     */
+    public static function fromIdString($id)
+    {
+        return static::fromId(new QuestionnaireStepId($id));
+    }
+
+    /**
      * @return string
      */
     public function getDescription()
@@ -134,6 +143,14 @@ class QuestionnaireStep implements \Iterator, \Countable
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPosition(): int
+    {
+        return $this->position;
     }
 
     /**
@@ -182,6 +199,14 @@ class QuestionnaireStep implements \Iterator, \Countable
     public function setName($name)
     {
         $this->name = $name ?: null;
+    }
+
+    /**
+     * @param int $position
+     */
+    public function setPosition(int $position)
+    {
+        $this->position = $position;
     }
 
     /**
