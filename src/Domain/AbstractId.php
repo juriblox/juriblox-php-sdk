@@ -2,11 +2,16 @@
 
 namespace JuriBlox\Sdk\Domain;
 
+use JMS\Serializer\Annotation\Accessor;
+use JMS\Serializer\Annotation as Serializer;
 use JuriBlox\Sdk\Validation\Assertion;
 
 abstract class AbstractId extends AbstractValue implements IdInterface
 {
     /**
+     * @Accessor(getter="serialize", setter="unserialize")
+     * @Serializer\Type("integer")
+     *
      * @var int
      */
     private $id;
@@ -35,5 +40,21 @@ abstract class AbstractId extends AbstractValue implements IdInterface
     public function getInteger()
     {
         return $this->id;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function serialize()
+    {
+        return $this->getInteger();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function unserialize($serialized)
+    {
+        $this->id = $serialized;
     }
 }
