@@ -67,7 +67,7 @@ class DocumentGenerationRequest extends Request
 
         if (isset($payload->document)) {
             $castedRequest->documentId = DocumentId::fromOptional($payload->document->id);
-            $castedRequest->documentReference = DocumentId::fromOptional($payload->document->reference);
+            $castedRequest->documentReference = DocumentReference::fromOptional($payload->document->reference);
         }
 
         return $castedRequest;
@@ -95,5 +95,13 @@ class DocumentGenerationRequest extends Request
     public function getRequestId()
     {
         return $this->requestId;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isSuccess(): bool
+    {
+        return $this->success;
     }
 }
