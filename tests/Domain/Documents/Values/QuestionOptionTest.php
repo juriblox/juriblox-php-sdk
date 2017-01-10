@@ -8,7 +8,7 @@ class QuestionOptionTest extends \PHPUnit_Framework_TestCase
     const VALID_OPTION_VALUE = 'Test option';
 
     /**
-     * @expectedException JuriBlox\Sdk\Exceptions\AssertionFailedException
+     * @expectedException \JuriBlox\Sdk\Exceptions\AssertionFailedException
      */
     public function test_with_invalid_id()
     {

@@ -37,7 +37,7 @@ class ContactTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException JuriBlox\Sdk\Exceptions\AssertionFailedException
+     * @expectedException \JuriBlox\Sdk\Exceptions\AssertionFailedException
      */
     public function test_with_invalid_email()
     {

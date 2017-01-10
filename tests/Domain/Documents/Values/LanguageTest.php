@@ -8,7 +8,7 @@ class LanguageTest extends \PHPUnit_Framework_TestCase
     const VALID_LANGUAGE_NAME = 'Nederlands';
 
     /**
-     * @expectedException Assert\AssertionFailedException
+     * @expectedException \Assert\AssertionFailedException
      */
     public function test_with_invalid_code()
     {

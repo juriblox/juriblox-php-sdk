@@ -19,18 +19,18 @@ class TemplatePublishRequest extends Request
     private $templateId;
 
     /**
+     * TemplatePublishRequest constructor.
+     */
+    private function __construct()
+    {
+    }
+
+    /**
      * @return TemplateId
      */
     public function getTemplateId(): TemplateId
     {
         return $this->templateId;
-    }
-
-    /**
-     * TemplatePublishRequest constructor.
-     */
-    private function __construct()
-    {
     }
 
     /**

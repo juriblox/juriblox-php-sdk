@@ -7,7 +7,7 @@ class TemplateIdTest extends \PHPUnit_Framework_TestCase
     const VALID_TEMPLATE_ID = 1;
 
     /**
-     * @expectedException JuriBlox\Sdk\Exceptions\AssertionFailedException
+     * @expectedException \JuriBlox\Sdk\Exceptions\AssertionFailedException
      */
     public function test_with_invalid_id()
     {

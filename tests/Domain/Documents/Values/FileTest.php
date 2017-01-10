@@ -33,7 +33,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException JuriBlox\Sdk\Exceptions\AssertionFailedException
+     * @expectedException \JuriBlox\Sdk\Exceptions\AssertionFailedException
      */
     public function test_fromText_with_invalid_file_type()
     {
@@ -41,7 +41,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException JuriBlox\Sdk\Exceptions\AssertionFailedException
+     * @expectedException \JuriBlox\Sdk\Exceptions\AssertionFailedException
      */
     public function test_fromText_with_invalid_url()
     {
