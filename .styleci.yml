@@ -10,6 +10,6 @@ enabled:
 
 disabled:
   - concat_without_spaces
+  - no_extra_block_blank_lines
   - phpdoc_to_comment
-  - simplified_null_return
   - unalign_double_arrow
