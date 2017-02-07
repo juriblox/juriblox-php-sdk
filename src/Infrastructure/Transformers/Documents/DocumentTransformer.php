@@ -30,6 +30,8 @@ class DocumentTransformer
         $document->setTitle($dto->title);
         $document->setReference(new DocumentReference($dto->reference));
 
+        $document->setMarkdown($dto->markdown);
+
         $document->setAlertDate(new \DateTime($dto->validTill));
         $document->setCreatedDatetime(new \DateTime($dto->createdAt));
 

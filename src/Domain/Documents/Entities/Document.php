@@ -63,6 +63,13 @@ class Document
     private $language;
 
     /**
+     * Markdown.
+     *
+     * @var string
+     */
+    private $markdown;
+
+    /**
      * Office this document belongs to.
      *
      * @var Office
@@ -112,33 +119,6 @@ class Document
         $this->clearAnswers();
         $this->clearFiles();
         $this->clearTags();
-    }
-
-    /**
-     * Create a document entity based on an existing identity.
-     *
-     * @param DocumentId $id
-     *
-     * @return Document
-     */
-    public static function fromId(DocumentId $id)
-    {
-        $document = new static();
-        $document->id = $id;
-
-        return $document;
-    }
-
-    /**
-     * Create a document entity based on an identity represented as a string.
-     *
-     * @param string $id
-     *
-     * @return Document
-     */
-    public static function fromIdString($id)
-    {
-        return static::fromId(new DocumentId($id));
     }
 
     /**
@@ -196,6 +176,33 @@ class Document
     }
 
     /**
+     * Create a document entity based on an existing identity.
+     *
+     * @param DocumentId $id
+     *
+     * @return Document
+     */
+    public static function fromId(DocumentId $id)
+    {
+        $document = new static();
+        $document->id = $id;
+
+        return $document;
+    }
+
+    /**
+     * Create a document entity based on an identity represented as a string.
+     *
+     * @param string $id
+     *
+     * @return Document
+     */
+    public static function fromIdString($id)
+    {
+        return static::fromId(new DocumentId($id));
+    }
+
+    /**
      * @return \DateTime
      */
     public function getAlertDate()
@@ -249,6 +256,14 @@ class Document
     public function getLanguage()
     {
         return $this->language;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMarkdown()
+    {
+        return $this->markdown;
     }
 
     /**
@@ -337,6 +352,14 @@ class Document
     public function setLanguage(Language $language)
     {
         $this->language = $language;
+    }
+
+    /**
+     * @param string $markdown
+     */
+    public function setMarkdown($markdown)
+    {
+        $this->markdown = $markdown ?: null;
     }
 
     /**
