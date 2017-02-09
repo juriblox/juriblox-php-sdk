@@ -95,7 +95,21 @@ class DocumentsEndpoint extends AbstractEndpoint implements EndpointInterface
 
         // Add the answers
         foreach ($request->getAnswers() as $answer) {
-            $data['answers'][$answer->getQuestion()->getId()->getInteger()] = $answer->getValue();
+            $value = $answer->getValue();
+
+            // DateTime casten
+            if ($value instanceof \DateTime) {
+                $value = DateTimeConvertor::toVendorFormat($value);
+            }
+
+            // Array met uh, dingen
+            elseif (is_array($value)) {
+                for ($i = 0, $_i = sizeof($value); $i < $_i; $i++) {
+                    $value[$i] = (string) $value[$i];
+                }
+            }
+
+            $data['answers'][$answer->getQuestion()->getId()->getInteger()] = $value;
         }
 
         /*
