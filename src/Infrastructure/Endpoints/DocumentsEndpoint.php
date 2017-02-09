@@ -104,7 +104,7 @@ class DocumentsEndpoint extends AbstractEndpoint implements EndpointInterface
 
             // Array met uh, dingen
             elseif (is_array($value)) {
-                for ($i = 0, $_i = sizeof($value); $i < $_i; $i++) {
+                for ($i = 0, $_i = sizeof($value); $i < $_i; ++$i) {
                     $value[$i] = (string) $value[$i];
                 }
             }
