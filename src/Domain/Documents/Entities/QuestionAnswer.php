@@ -152,7 +152,7 @@ class QuestionAnswer
      */
     public function setValue($value)
     {
-        $this->value = $value ?: null;
+        $this->value = $value;
     }
 
     /**
