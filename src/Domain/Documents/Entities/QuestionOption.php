@@ -114,7 +114,7 @@ class QuestionOption
      */
     public function setTitle($title)
     {
-        $this->title = $title ?: null;
+        $this->title = '' !== $title ? $title : null;
     }
 
     /**
@@ -122,6 +122,6 @@ class QuestionOption
      */
     public function setValue($value)
     {
-        $this->value = $value ?: null;
+        $this->value = $value;
     }
 }
