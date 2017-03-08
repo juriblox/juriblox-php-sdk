@@ -46,7 +46,7 @@ class TemplateTransformer
 
         $template->setLanguage(new Language($dto->language->code, $dto->language->name));
         $template->setStatus(new TemplateStatus($dto->status->code, $dto->status->name));
-        $template->setRevision(new Revision(new TemplateId($dto->revision->derivedOf), $dto->revision->version));
+        $template->setRevision(new Revision(new TemplateId($dto->revision->latestId), $dto->revision->version));
 
         foreach ($dto->variables as $entry) {
             $variable = TemplateVariable::fromIdString($entry->id);

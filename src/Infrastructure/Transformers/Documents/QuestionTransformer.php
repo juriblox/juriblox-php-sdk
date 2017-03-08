@@ -22,6 +22,8 @@ class QuestionTransformer
     public static function read($dto)
     {
         $question = Question::fromIdString($dto->id);
+        $question->setFirstId(new QuestionId($dto->revision->derivedOf));
+
         $question->setName($dto->name);
         $question->setInfo($dto->info);
         $question->setType(new QuestionType($dto->type));
@@ -40,6 +42,8 @@ class QuestionTransformer
         // Allowed options for this questions (they're called answers in the v1 API)
         foreach ($dto->answers as $entry) {
             $option = QuestionOption::fromIdString($entry->id);
+            $option->setFirstId(new QuestionOptionId($entry->revision->derivedOf));
+
             $option->setTitle($entry->name);
             $option->setValue($entry->value);
             $option->setPosition($entry->position);

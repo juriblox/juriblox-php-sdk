@@ -7,6 +7,11 @@ use JuriBlox\Sdk\Domain\Documents\Values\QuestionOptionId;
 class QuestionOption
 {
     /**
+     * @var QuestionOptionId
+     */
+    private $firstId;
+
+    /**
      * ID.
      *
      * @var QuestionOptionId
@@ -72,6 +77,14 @@ class QuestionOption
     /**
      * @return QuestionOptionId
      */
+    public function getFirstId(): QuestionOptionId
+    {
+        return $this->firstId;
+    }
+
+    /**
+     * @return QuestionOptionId
+     */
     public function getId()
     {
         return $this->id;
@@ -99,6 +112,14 @@ class QuestionOption
     public function getValue()
     {
         return $this->value;
+    }
+
+    /**
+     * @param QuestionOptionId $firstId
+     */
+    public function setFirstId(QuestionOptionId $firstId)
+    {
+        $this->firstId = $firstId;
     }
 
     /**

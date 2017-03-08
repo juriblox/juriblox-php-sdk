@@ -12,12 +12,18 @@ class TemplateStatus
     const STATUS_PUBLISHED = 1;
 
     /**
+     * This version of the template is outdated.
+     */
+    const STATUS_OUTDATED = 2;
+
+    /**
      * Available statuses.
      *
      * @var array
      */
     public static $statuses = [
-        self::STATUS_PUBLISHED => 'Published',
+        self::STATUS_PUBLISHED  => 'Published',
+        self::STATUS_OUTDATED   => 'Outdated',
     ];
 
     /**

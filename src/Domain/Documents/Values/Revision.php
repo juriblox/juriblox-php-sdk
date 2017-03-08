@@ -10,7 +10,7 @@ class Revision
     /**
      * @var IdInterface
      */
-    private $derivedOf;
+    private $latestId;
 
     /**
      * @var int
@@ -25,7 +25,7 @@ class Revision
     {
         Assertion::integerish($version);
 
-        $this->derivedOf = $derivedOf;
+        $this->latestId = $derivedOf;
         $this->version = $version;
     }
 
@@ -38,11 +38,11 @@ class Revision
     }
 
     /**
-     * @return IdInterface
+     * @return IdInterface|TemplateId
      */
-    public function getDerivedOf()
+    public function getLatestId()
     {
-        return $this->derivedOf;
+        return $this->latestId;
     }
 
     /**

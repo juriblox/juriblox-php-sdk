@@ -10,6 +10,11 @@ use JuriBlox\Sdk\Domain\Documents\Values\QuestionType;
 class Question
 {
     /**
+     * @var QuestionId
+     */
+    private $firstId;
+
+    /**
      * ID.
      *
      * @var QuestionId
@@ -158,6 +163,14 @@ class Question
     /**
      * @return QuestionId
      */
+    public function getFirstId(): QuestionId
+    {
+        return $this->firstId;
+    }
+
+    /**
+     * @return QuestionId
+     */
     public function getId()
     {
         return $this->id;
@@ -225,6 +238,14 @@ class Question
     public function isRequired()
     {
         return $this->required;
+    }
+
+    /**
+     * @param QuestionId $firstId
+     */
+    public function setFirstId(QuestionId $firstId)
+    {
+        $this->firstId = $firstId;
     }
 
     /**
