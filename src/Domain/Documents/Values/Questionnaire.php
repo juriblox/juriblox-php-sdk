@@ -3,6 +3,7 @@
 namespace JuriBlox\Sdk\Domain\Documents\Values;
 
 use JuriBlox\Sdk\Domain\Documents\Entities\QuestionnaireStep;
+use JuriBlox\Sdk\Domain\Documents\Entities\QuestionnaireVariable;
 
 class Questionnaire implements \Iterator, \Countable
 {
@@ -10,6 +11,11 @@ class Questionnaire implements \Iterator, \Countable
      * @var array|QuestionnaireStep[]
      */
     private $steps;
+
+    /**
+     * @var array|QuestionnaireVariable[]
+     */
+    private $variables;
 
     /**
      * @var int
@@ -22,6 +28,7 @@ class Questionnaire implements \Iterator, \Countable
     public function __construct()
     {
         $this->clearSteps();
+        $this->clearVariables();
     }
 
     /**
@@ -35,11 +42,37 @@ class Questionnaire implements \Iterator, \Countable
     }
 
     /**
+     * Link a variable to this questionnaire.
+     *
+     * @param QuestionnaireVariable $variable
+     */
+    public function addVariable(QuestionnaireVariable $variable)
+    {
+        $this->variables[] = $variable;
+    }
+
+    /**
+     * @return array|QuestionnaireVariable[]
+     */
+    public function getVariables(): array
+    {
+        return $this->variables;
+    }
+
+    /**
      * Clear the steps linked to this questionnaire.
      */
     public function clearSteps()
     {
         $this->steps = [];
+    }
+
+    /**
+     * Clear the variables linked to this questionnaire.
+     */
+    public function clearVariables()
+    {
+        $this->variables = [];
     }
 
     /**

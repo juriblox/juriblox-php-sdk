@@ -91,6 +91,7 @@ class DocumentsEndpoint extends AbstractEndpoint implements EndpointInterface
             'remarks'    => $request->getRemarks(),
             'valid_till' => $request->getAlertDate() ? DateTimeConvertor::toVendorFormat($request->getAlertDate()) : null,
             'answers'    => [],
+            'variables'  => [],
         ];
 
         // Add the answers
@@ -110,6 +111,11 @@ class DocumentsEndpoint extends AbstractEndpoint implements EndpointInterface
             }
 
             $data['answers'][$answer->getQuestion()->getId()->getInteger()] = $value;
+        }
+
+        // Add the variables
+        foreach ($request->getVariables() as $name => $value) {
+            $data['variables'][$name] = $value;
         }
 
         /*

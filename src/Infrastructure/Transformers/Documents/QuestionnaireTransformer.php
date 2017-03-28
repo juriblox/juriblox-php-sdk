@@ -21,6 +21,10 @@ class QuestionnaireTransformer
             $questionnaire->addStep(QuestionnaireStepTransformer::read($entry));
         }
 
+        foreach ($dto->variables as $entry) {
+            $questionnaire->addVariable(QuestionnaireVariableTransformer::read($entry));
+        }
+
         return $questionnaire;
     }
 }

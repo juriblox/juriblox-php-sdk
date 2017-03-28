@@ -75,11 +75,17 @@ class DocumentRequest
     private $title;
 
     /**
+     * @var array
+     */
+    private $variables;
+
+    /**
      * DocumentRequest constructor.
      */
     private function __construct()
     {
         $this->clearAnswers();
+        $this->clearVariables();
     }
 
     /**
@@ -138,6 +144,14 @@ class DocumentRequest
     public function clearAnswers()
     {
         $this->answers = [];
+    }
+
+    /**
+     * Clear the variables.
+     */
+    public function clearVariables()
+    {
+        $this->variables = [];
     }
 
     /**
@@ -213,6 +227,14 @@ class DocumentRequest
     }
 
     /**
+     * @return array
+     */
+    public function getVariables(): array
+    {
+        return $this->variables;
+    }
+
+    /**
      * @param \DateTime|null $alertDate
      */
     public function setAlertDate($alertDate)
@@ -272,5 +294,14 @@ class DocumentRequest
     public function setTitle($title)
     {
         $this->title = $title ?: null;
+    }
+
+    /**
+     * @param $name
+     * @param $value
+     */
+    public function setVariable($name, $value)
+    {
+        $this->variables[$name] = $value;
     }
 }
