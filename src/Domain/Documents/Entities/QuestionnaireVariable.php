@@ -41,6 +41,14 @@ class QuestionnaireVariable
     }
 
     /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->name;
+    }
+
+    /**
      * @param      $name
      * @param      $type
      * @param bool $required
@@ -50,14 +58,6 @@ class QuestionnaireVariable
     public static function create($name, $type, bool $required): QuestionnaireVariable
     {
         return new self($name, $type, $required);
-    }
-
-    /**
-     * @return string
-     */
-    public function __toString()
-    {
-        return $this->name;
     }
 
     /**
