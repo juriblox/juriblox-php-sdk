@@ -74,7 +74,9 @@ class DocumentTransformer
         // Answers
         if (isset($dto->answers)) {
             foreach ($dto->answers as $entry) {
-                $document->addAnswer(QuestionAnswerTransformer::read($entry));
+                if (isset($entry->question)) {
+                    $document->addAnswer(QuestionAnswerTransformer::read($entry));
+                }
             }
         }
 
