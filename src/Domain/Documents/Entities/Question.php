@@ -260,6 +260,7 @@ class Question
     {
         if (null === $default) {
             $this->default = null;
+
             return;
         }
 
