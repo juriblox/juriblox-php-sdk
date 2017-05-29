@@ -10,6 +10,11 @@ use JuriBlox\Sdk\Domain\Documents\Values\QuestionType;
 class Question
 {
     /**
+     * @var mixed
+     */
+    private $default;
+
+    /**
      * @var QuestionId
      */
     private $firstId;
@@ -87,6 +92,33 @@ class Question
     }
 
     /**
+     * Create a Question entity based on an existing identity.
+     *
+     * @param QuestionId $id
+     *
+     * @return Question
+     */
+    public static function fromId(QuestionId $id)
+    {
+        $question = new static();
+        $question->id = $id;
+
+        return $question;
+    }
+
+    /**
+     * Create a Question entity based on an identity represented as a string.
+     *
+     * @param string $id
+     *
+     * @return Question
+     */
+    public static function fromIdString($id)
+    {
+        return static::fromId(new QuestionId($id));
+    }
+
+    /**
      * Add an option.
      *
      * @param QuestionOption $option
@@ -134,30 +166,11 @@ class Question
     }
 
     /**
-     * Create a Question entity based on an existing identity.
-     *
-     * @param QuestionId $id
-     *
-     * @return Question
+     * @return mixed
      */
-    public static function fromId(QuestionId $id)
+    public function getDefault()
     {
-        $question = new static();
-        $question->id = $id;
-
-        return $question;
-    }
-
-    /**
-     * Create a Question entity based on an identity represented as a string.
-     *
-     * @param string $id
-     *
-     * @return Question
-     */
-    public static function fromIdString($id)
-    {
-        return static::fromId(new QuestionId($id));
+        return $this->default;
     }
 
     /**
@@ -238,6 +251,19 @@ class Question
     public function isRequired()
     {
         return $this->required;
+    }
+
+    /**
+     * @param mixed $default
+     */
+    public function setDefault($default)
+    {
+        if (null === $default) {
+            $this->default = null;
+            return;
+        }
+
+        $this->default = $default;
     }
 
     /**

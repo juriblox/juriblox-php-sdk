@@ -29,6 +29,8 @@ class QuestionTransformer
         $question->setType(new QuestionType($dto->type));
         $question->setRequired($dto->required);
 
+        $question->setDefault($dto->default);
+
         // Required parent question
         if (isset($dto->parent)) {
             $question->addQuestionCondition(new QuestionCondition(new QuestionId($dto->parent->id)));
@@ -46,6 +48,7 @@ class QuestionTransformer
 
             $option->setTitle($entry->name);
             $option->setValue($entry->value);
+            $option->setDefault($entry->default);
             $option->setPosition($entry->position);
 
             $question->addOption($option);

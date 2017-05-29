@@ -7,6 +7,11 @@ use JuriBlox\Sdk\Domain\Documents\Values\QuestionOptionId;
 class QuestionOption
 {
     /**
+     * @var bool
+     */
+    private $default;
+
+    /**
      * @var QuestionOptionId
      */
     private $firstId;
@@ -45,6 +50,7 @@ class QuestionOption
     private function __construct()
     {
         $this->position = -1;
+        $this->default = false;
     }
 
     /**
@@ -112,6 +118,22 @@ class QuestionOption
     public function getValue()
     {
         return $this->value;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isDefault()
+    {
+        return $this->default;
+    }
+
+    /**
+     * @param bool $default
+     */
+    public function setDefault($default)
+    {
+        $this->default = (bool) $default;
     }
 
     /**
