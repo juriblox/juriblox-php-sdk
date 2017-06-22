@@ -6,6 +6,11 @@ use JuriBlox\Sdk\Validation\Assertion;
 
 class FileType
 {
+	/**
+	 * ODT file.
+	 */
+	const TYPE_ODT = 'ODT';
+	
     /**
      * PDF file.
      */
@@ -22,6 +27,7 @@ class FileType
      * @var array
      */
     public static $extensions = [
+        self::TYPE_ODT          => 'odt',
         self::TYPE_PDF          => 'pdf',
         self::TYPE_WORD2007     => 'docx',
     ];
@@ -32,6 +38,7 @@ class FileType
      * @var array
      */
     public static $types = [
+        self::TYPE_ODT          => 'ODT',
         self::TYPE_PDF          => 'PDF',
         self::TYPE_WORD2007     => 'Word 2007',
     ];
