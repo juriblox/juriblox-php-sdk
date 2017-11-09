@@ -60,4 +60,28 @@ class DocumentVariable
 
         return $variable;
     }
+
+    /**
+     * @return TemplateVariableId|null
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getValue()
+    {
+        return $this->value;
+    }
 }
