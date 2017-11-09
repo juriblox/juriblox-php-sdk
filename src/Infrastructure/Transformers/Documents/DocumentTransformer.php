@@ -80,6 +80,11 @@ class DocumentTransformer
             }
         }
 
+        // Variables
+        foreach ($dto->variables as $entry) {
+            $document->addVariable(DocumentVariableTransformer::read($entry));
+        }
+
         return $document;
     }
 }

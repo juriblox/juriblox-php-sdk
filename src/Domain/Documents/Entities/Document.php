@@ -6,6 +6,7 @@ use JuriBlox\Sdk\Domain\Customers\Entities\Customer;
 use JuriBlox\Sdk\Domain\Documents\Values\DocumentId;
 use JuriBlox\Sdk\Domain\Documents\Values\DocumentReference;
 use JuriBlox\Sdk\Domain\Documents\Values\DocumentStatus;
+use JuriBlox\Sdk\Domain\Documents\Values\DocumentVariable;
 use JuriBlox\Sdk\Domain\Documents\Values\File;
 use JuriBlox\Sdk\Domain\Documents\Values\Language;
 use JuriBlox\Sdk\Domain\Documents\Values\TemplateId;
@@ -112,6 +113,11 @@ class Document
     private $title;
 
     /**
+     * @var array|DocumentVariable[]
+     */
+    private $variables;
+
+    /**
      * Document constructor.
      */
     private function __construct()
@@ -119,6 +125,34 @@ class Document
         $this->clearAnswers();
         $this->clearFiles();
         $this->clearTags();
+        $this->clearVariables();
+    }
+
+    /**
+     * Create a document entity based on an existing identity.
+     *
+     * @param DocumentId $id
+     *
+     * @return Document
+     */
+    public static function fromId(DocumentId $id)
+    {
+        $document = new static();
+        $document->id = $id;
+
+        return $document;
+    }
+
+    /**
+     * Create a document entity based on an identity represented as a string.
+     *
+     * @param string $id
+     *
+     * @return Document
+     */
+    public static function fromIdString($id)
+    {
+        return static::fromId(new DocumentId($id));
     }
 
     /**
@@ -152,6 +186,14 @@ class Document
     }
 
     /**
+     * @param DocumentVariable $variable
+     */
+    public function addVariable(DocumentVariable $variable)
+    {
+        $this->variables[] = $variable;
+    }
+
+    /**
      * Clear answers.
      */
     public function clearAnswers()
@@ -176,30 +218,11 @@ class Document
     }
 
     /**
-     * Create a document entity based on an existing identity.
-     *
-     * @param DocumentId $id
-     *
-     * @return Document
+     * Clear variables.
      */
-    public static function fromId(DocumentId $id)
+    public function clearVariables()
     {
-        $document = new static();
-        $document->id = $id;
-
-        return $document;
-    }
-
-    /**
-     * Create a document entity based on an identity represented as a string.
-     *
-     * @param string $id
-     *
-     * @return Document
-     */
-    public static function fromIdString($id)
-    {
-        return static::fromId(new DocumentId($id));
+        $this->variables = [];
     }
 
     /**
@@ -312,6 +335,14 @@ class Document
     public function getTitle()
     {
         return $this->title;
+    }
+
+    /**
+     * @return array|DocumentVariable[]
+     */
+    public function getVariables(): array
+    {
+        return $this->variables;
     }
 
     /**
