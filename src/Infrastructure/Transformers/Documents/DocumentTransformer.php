@@ -40,7 +40,7 @@ class DocumentTransformer
 
         $document->setOffice($office);
 
-        if ($dto->customer !== []) {
+        if (isset($dto->customer) && $dto->customer !== []) {
             $customer = Customer::fromReferenceString($dto->customer->reference);
             $customer->setCompany($dto->customer->company);
 
