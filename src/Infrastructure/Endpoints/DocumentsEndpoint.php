@@ -94,6 +94,10 @@ class DocumentsEndpoint extends AbstractEndpoint implements EndpointInterface
             'variables'  => [],
         ];
 
+        if (null !== $request->getTemplateVersion()) {
+            $data['template_version'] = $request->getTemplateVersion();
+        }
+
         // Add the answers
         foreach ($request->getAnswers() as $answer) {
             $value = $answer->getValue();

@@ -68,6 +68,13 @@ class DocumentRequest
     private $templateId;
 
     /**
+     * Template version.
+     *
+     * @var int
+     */
+    private $templateVersion;
+
+    /**
      * Document title.
      *
      * @var string
@@ -303,5 +310,21 @@ class DocumentRequest
     public function setVariable($name, $value)
     {
         $this->variables[$name] = $value;
+    }
+
+    /**
+     * @return int
+     */
+    public function getTemplateVersion()
+    {
+        return $this->templateVersion;
+    }
+
+    /**
+     * @param int $templateVersion
+     */
+    public function setTemplateVersion($templateVersion)
+    {
+        $this->templateVersion = $templateVersion;
     }
 }
