@@ -78,7 +78,8 @@ class GuzzleDriver implements DriverInterface
 
         $this->client = new GuzzleClient([
             'headers'   => [
-                'User-Agent'    => $this->buildUserAgent(),
+                'Accept' => 'application/json',
+                'User-Agent' => $this->buildUserAgent(),
 
                 'X-JuriBlox-Client-Id'  => $clientId,
                 'X-JuriBlox-Client-Key' => $clientKey,
