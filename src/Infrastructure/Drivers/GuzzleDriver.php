@@ -235,13 +235,12 @@ class GuzzleDriver implements DriverInterface
         } catch (ClientException $exception) {
             $response = $exception->getResponse();
 
-            $exceptionCode = $exception->getMessage();
-            $exceptionMessage = $exception->getCode();
+            $exceptionCode = $exception->getCode() ?: $response->getStatusCode();
+            $exceptionMessage = $exception->getMessage() ?: $response->getReasonPhrase();
 
             $result = @json_decode($response->getBody()->getContents());
-            if ($result !== false) {
-                $exceptionCode = $result->error->code;
-                $exceptionMessage = $result->error->message;
+            if ($result !== false && isset($result->message) && isset($result->errors)) {
+                $exceptionMessage = $result->message;
             }
 
             // Throw authorization exception
@@ -263,18 +262,19 @@ class GuzzleDriver implements DriverInterface
             // Unprocessable request
             elseif ($response->getStatusCode() == self::STATUS_UNPROCESSABLE_ENTITY) {
                 $castedException = new EngineOperationException($exceptionMessage, $exceptionCode, $exception);
-                if ($result !== false && isset($result->error->errors)) {
-                    if (is_array($result->error->errors)) {
-                        $castedException->setErrors($result->error->errors);
-                    } elseif (is_object($result->error->errors)) {
-                        $castedException->setErrors(get_object_vars($result->error->errors));
+
+                if ($result !== false && isset($result->errors)) {
+                    if (is_array($result->errors)) {
+                        $castedException->setErrors($result->errors);
+                    } elseif (is_object($result->errors)) {
+                        $castedException->setErrors(get_object_vars($result->errors));
                     }
                 }
 
                 throw $castedException;
             }
 
-            throw new EngineOperationException($exception->getMessage(), $exception->getCode(), $exception);
+            throw new EngineOperationException($exceptionMessage, $exceptionCode, $exception);
         }
 
         return $response;
