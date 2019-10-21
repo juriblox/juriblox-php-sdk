@@ -8,6 +8,7 @@ use GuzzleHttp\HandlerStack;
 use GuzzleHttp\MessageFormatter;
 use GuzzleHttp\Middleware;
 use GuzzleHttp\Psr7\Response;
+use GuzzleHttp\RequestOptions;
 use JuriBlox\Sdk\Client;
 use JuriBlox\Sdk\Exceptions\AuthorizationException;
 use JuriBlox\Sdk\Exceptions\CannotParseResponseException;
@@ -230,7 +231,7 @@ class GuzzleDriver implements DriverInterface
                     'User-Agent' => $this->buildUserAgent(),
                 ],
 
-                'form_params' => $body,
+                RequestOptions::JSON => $body,
             ]);
         } catch (ClientException $exception) {
             $response = $exception->getResponse();
