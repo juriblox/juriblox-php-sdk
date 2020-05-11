@@ -33,7 +33,7 @@ class CustomerTransformer
     public static function write(Customer $customer)
     {
         return [
-            'reference'  => (!$customer->getReference()) ?: $customer->getReference()->getString(),
+            'reference'  => null !== $customer->getReference() ? $customer->getReference()->getString() : null,
 
             'company'   => $customer->getCompany(),
             'name'      => $customer->getContact()->getName(),
