@@ -20,6 +20,10 @@ class CustomersEndpoint extends AbstractEndpoint implements EndpointInterface
     {
         $result = $this->driver->post('customers', null, CustomerTransformer::write($customer));
 
+        if (!isset($result->reference)) {
+            throw new \RuntimeException('The JuriBlox API did not return a reference for a newly created customer.');
+        }
+
         // Save UUID
         $customer->setReference(new CustomerReference($result->reference));
 
