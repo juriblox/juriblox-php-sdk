@@ -123,6 +123,16 @@ class GuzzleDriver implements DriverInterface
     {
         return $this->jsonRequest('POST', $uri, $segments, $body);
     }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function delete($uri, $segments, $body)
+    {
+        return $this->jsonRequest('DELETE', $uri, $segments, array_merge($body, [
+            '_method' => 'DELETE',
+        ]));
+    }
 
     /**
      * {@inheritdoc}

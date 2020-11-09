@@ -80,6 +80,22 @@ interface DriverInterface
      * @throws RateLimitingException
      */
     public function post($uri, $segments, $body);
+    
+    /**
+     * Send DELETE request and parse the returned JSON.
+     *
+     * @param string $uri
+     * @param array  $segments
+     * @param array  $body
+     *
+     * @return object
+     *
+     * @throws AuthorizationException
+     * @throws CannotParseResponseException
+     * @throws EngineOperationException
+     * @throws RateLimitingException
+     */
+    public function delete($uri, $segments, $body);
 
     /**
      * Sets the application's name for easier identification in server logs.
