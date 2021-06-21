@@ -50,4 +50,28 @@ class PreviewRequest
     {
         $this->css = $css;
     }
+    
+    /**
+     * @return TemplateId
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+    
+    /**
+     * @return bool
+     */
+    public function isCss()
+    {
+        return $this->css;
+    }
+    
+    /**
+     * @return array|QuestionAnswer[]
+     */
+    public function getAnswers()
+    {
+        return $this->answers;
+    }
 }
