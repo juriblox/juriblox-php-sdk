@@ -2,6 +2,7 @@
 
 namespace JuriBlox\Sdk\Infrastructure\Endpoints;
 
+use JuriBlox\Sdk\Domain\Documents\Entities\PreviewRequest;
 use JuriBlox\Sdk\Domain\Documents\Entities\Template;
 use JuriBlox\Sdk\Domain\Documents\Values\TemplateId;
 use JuriBlox\Sdk\Infrastructure\Collections\TemplatesCollection;
@@ -46,5 +47,10 @@ class TemplatesEndpoint extends AbstractEndpoint implements EndpointInterface
     public function questionnaire(TemplateId $id)
     {
         return QuestionnaireEndpoint::fromParentEndpoint($this, $id);
+    }
+
+    public function preview(PreviewRequest $request)
+    {
+
     }
 }
