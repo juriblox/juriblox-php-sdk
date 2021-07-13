@@ -13,6 +13,6 @@ class DateTimeConvertor
      */
     public static function toVendorFormat(\DateTime $dateTime)
     {
-        return $dateTime->format('d-m-Y H:i:s');
+        return $dateTime->format('d-m-Y');
     }
 }
