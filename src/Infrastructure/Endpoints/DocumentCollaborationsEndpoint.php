@@ -50,19 +50,19 @@ class DocumentCollaborationsEndpoint extends AbstractEndpoint implements Endpoin
         
         $data['collaborators'] = $collaborators;
         
-        $this->driver->post('v2/documents/collaborations', null, $data);
+        $this->driver->post('documents/collaborations', null, $data);
     }
     
     public function update(DocumentCollaboration $collaboration)
     {
-        $this->driver->patch('v2/collaborations/{collaboration}', [
+        $this->driver->patch('collaborations/{collaboration}', [
             'collaboration' => $collaboration->getId()->getString(),
         ], DocumentCollaborationTransformer::write($collaboration));
     }
     
     public function finish(FinishDocumentCollaborationRequest $request)
     {
-        $this->driver->patch('v2/collaborations/{collaboration}/finish', [
+        $this->driver->patch('collaborations/{collaboration}/finish', [
             'collaboration' => $request->getId()->getString(),
         ], [
             'force'               => $request->isForce(),
@@ -73,14 +73,14 @@ class DocumentCollaborationsEndpoint extends AbstractEndpoint implements Endpoin
     
     public function abort(DocumentCollaboration $collaboration)
     {
-        $this->driver->patch('v2/collaborations/{collaboration}/abort', [
+        $this->driver->patch('collaborations/{collaboration}/abort', [
             'collaboration' => $collaboration->getId()->getString(),
         ], []);
     }
     
     public function removeCollaborator(DocumentCollaboration $collaboration, DocumentCollaborator $collaborator)
     {
-        $this->driver->delete('v2/collaborations/{collaboration}/collaborator/{collaborator}', [
+        $this->driver->delete('collaborations/{collaboration}/collaborator/{collaborator}', [
             'collaboration' => $collaboration->getId()->getString(),
             'collaborator'  => $collaborator->getId()->getString(),
         ], []);

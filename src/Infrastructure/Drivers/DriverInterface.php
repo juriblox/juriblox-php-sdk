@@ -13,11 +13,12 @@ interface DriverInterface
     /**
      * GuzzleDriver constructor.
      *
-     * @param string      $clientId  JuriBlox API client ID
-     * @param string      $clientKey JuriBlox API client key
-     * @param string|null $baseUri   Custom base URI
+     * @param string      $clientId   JuriBlox API client ID
+     * @param string      $clientKey  JuriBlox API client key
+     * @param string|null $baseUri    Custom base URI
+     * @param string      $apiVersion The version of the API to use, either v1 or v2.
      */
-    public function __construct($clientId, $clientKey, $baseUri = null);
+    public function __construct($clientId, $clientKey, $baseUri = null, $apiVersion = 'v1');
 
     /**
      * Send GET request and parse the returned JSON.
@@ -107,11 +108,12 @@ interface DriverInterface
     /**
      * Override the base URI.
      *
-     * @param $baseUri
+     * @param string $baseUri
+     * @param string $apiVersion
      *
      * @return mixed
      */
-    public function setBaseUri($baseUri);
+    public function setBaseUri($baseUri, $apiVersion = 'v1');
 
     /**
      * Set PSR-3 logger.
