@@ -10,6 +10,7 @@ use JuriBlox\Sdk\Infrastructure\Collections\TemplatesCollection;
 use JuriBlox\Sdk\Infrastructure\Endpoints\Templates\QuestionnaireEndpoint;
 use JuriBlox\Sdk\Infrastructure\Transformers\Documents\PreviewTransformer;
 use JuriBlox\Sdk\Infrastructure\Transformers\Documents\TemplateTransformer;
+use JuriBlox\Sdk\Utils\DateTimeConvertor;
 
 class TemplatesEndpoint extends AbstractEndpoint implements EndpointInterface
 {
@@ -50,7 +51,7 @@ class TemplatesEndpoint extends AbstractEndpoint implements EndpointInterface
     {
         return QuestionnaireEndpoint::fromParentEndpoint($this, $id);
     }
-    
+
     /**
      * @param PreviewRequest $request
      *
@@ -58,11 +59,32 @@ class TemplatesEndpoint extends AbstractEndpoint implements EndpointInterface
      */
     public function preview(PreviewRequest $request)
     {
+        $answers = [];
+        foreach ($request->getAnswers() as $answer) {
+            $value = $answer->getValue();
+
+            // Serialize a \DateTime object
+            if ($value instanceof \DateTime) {
+                $value = DateTimeConvertor::toVendorFormat($value);
+            }
+
+            // Serialize an array
+            elseif (is_array($value)) {
+                for ($i = 0, $_i = sizeof($value); $i < $_i; ++$i) {
+                    $value[$i] = (string) $value[$i];
+                }
+            }
+
+            $answers[$answer->getQuestion()->getId()->getInteger()] = $value;
+        }
+
         $result = $this->driver->post('templates/{id}/preview', [
             'id'  => $request->getId()->getInteger(),
             'css' => $request->isCss() ? 'true' : 'false'
-        ], ['answers' => $request->getAnswers()]);
-        
+        ], [
+            'answers' => $answers
+        ]);
+
         return PreviewTransformer::read($result->data);
     }
 }
