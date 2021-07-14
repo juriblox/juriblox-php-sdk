@@ -75,6 +75,10 @@ class TemplatesEndpoint extends AbstractEndpoint implements EndpointInterface
                 }
             }
 
+            if (null === $value) {
+                continue;
+            }
+
             $answers[$answer->getQuestion()->getId()->getInteger()] = $value;
         }
 
