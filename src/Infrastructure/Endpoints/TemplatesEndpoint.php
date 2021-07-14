@@ -63,6 +63,6 @@ class TemplatesEndpoint extends AbstractEndpoint implements EndpointInterface
             'css' => $request->isCss() ? 'true' : 'false'
         ], ['answers' => $request->getAnswers()]);
         
-        return PreviewTransformer::read($result);
+        return PreviewTransformer::read($result->data);
     }
 }
