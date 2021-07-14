@@ -82,9 +82,8 @@ class TemplatesEndpoint extends AbstractEndpoint implements EndpointInterface
             $answers[$answer->getQuestion()->getId()->getInteger()] = $value;
         }
 
-        $result = $this->driver->post('templates/{id}/preview', [
+        $result = $this->driver->post('templates/{id}/preview?css=' . ($request->isCss() ? '1' : '0'), [
             'id'  => $request->getId()->getInteger(),
-            'css' => $request->isCss() ? 'true' : 'false'
         ], [
             'answers' => $answers
         ]);
