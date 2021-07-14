@@ -88,6 +88,6 @@ class TemplatesEndpoint extends AbstractEndpoint implements EndpointInterface
             'answers' => $answers
         ]);
 
-        return PreviewTransformer::read($result->data);
+        return PreviewTransformer::read($result);
     }
 }
