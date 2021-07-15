@@ -82,12 +82,12 @@ class TemplatesEndpoint extends AbstractEndpoint implements EndpointInterface
             $answers[$answer->getQuestion()->getId()->getInteger()] = $value;
         }
 
-        $result = $this->driver->post('templates/{id}/preview?css=' . ($request->isCss() ? '1' : '0'), [
+        $result = $this->driver->post('/v2/templates/{id}/preview?css=' . ($request->isCss() ? '1' : '0'), [
             'id'  => $request->getId()->getInteger(),
         ], [
             'answers' => $answers
         ]);
 
-        return PreviewTransformer::read($result);
+        return PreviewTransformer::read($result->data);
     }
 }
