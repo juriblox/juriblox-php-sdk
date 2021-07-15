@@ -15,7 +15,7 @@ class Client
     /**
      * Client version.
      */
-    const VERSION = '1.1.0';
+    const VERSION = '1.5.3';
 
     /**
      * @var LoggerInterface
