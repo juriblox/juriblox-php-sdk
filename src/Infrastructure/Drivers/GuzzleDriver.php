@@ -73,7 +73,7 @@ class GuzzleDriver implements DriverInterface
     /**
      * {@inheritdoc}
      */
-    public function __construct($clientId, $clientKey, $baseUri = null, $apiVersion = 'v1')
+    public function __construct($clientId, $clientKey, $baseUri = null)
     {
         $this->stack = HandlerStack::create();
 
@@ -87,7 +87,7 @@ class GuzzleDriver implements DriverInterface
             ],
         ]);
 
-        $this->setBaseUri($baseUri ?: 'https://api.juriblox.nl/', $apiVersion);
+        $this->setBaseUri($baseUri ?: 'https://api.juriblox.nl');
     }
 
     /**
@@ -123,7 +123,7 @@ class GuzzleDriver implements DriverInterface
     {
         return $this->jsonRequest('POST', $uri, $segments, $body);
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -145,11 +145,11 @@ class GuzzleDriver implements DriverInterface
     /**
      * {@inheritdoc}
      */
-    public function setBaseUri($baseUri, $apiVersion = 'v1')
+    public function setBaseUri($baseUri)
     {
         Assertion::url($baseUri);
 
-        $this->baseUri = trim($baseUri, '/') . '/' . trim($apiVersion, '/') . '/';
+        $this->baseUri = trim($baseUri, '/') . '/v1/';
     }
 
     /**

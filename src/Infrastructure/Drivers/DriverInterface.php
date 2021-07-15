@@ -16,9 +16,8 @@ interface DriverInterface
      * @param string      $clientId   JuriBlox API client ID
      * @param string      $clientKey  JuriBlox API client key
      * @param string|null $baseUri    Custom base URI
-     * @param string      $apiVersion The version of the API to use, either v1 or v2.
      */
-    public function __construct($clientId, $clientKey, $baseUri = null, $apiVersion = 'v1');
+    public function __construct($clientId, $clientKey, $baseUri = null);
 
     /**
      * Send GET request and parse the returned JSON.
@@ -81,7 +80,7 @@ interface DriverInterface
      * @throws RateLimitingException
      */
     public function post($uri, $segments, $body);
-    
+
     /**
      * Send DELETE request and parse the returned JSON.
      *
@@ -109,11 +108,10 @@ interface DriverInterface
      * Override the base URI.
      *
      * @param string $baseUri
-     * @param string $apiVersion
      *
      * @return mixed
      */
-    public function setBaseUri($baseUri, $apiVersion = 'v1');
+    public function setBaseUri($baseUri);
 
     /**
      * Set PSR-3 logger.
