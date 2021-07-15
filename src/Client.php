@@ -6,7 +6,6 @@ use JuriBlox\Sdk\Infrastructure\Collections\CustomTemplatesCollection;
 use JuriBlox\Sdk\Infrastructure\Drivers\DriverInterface;
 use JuriBlox\Sdk\Infrastructure\Endpoints\CustomersEndpoint;
 use JuriBlox\Sdk\Infrastructure\Endpoints\CustomTemplatesEndpoint;
-use JuriBlox\Sdk\Infrastructure\Endpoints\DocumentCollaborationsEndpoint;
 use JuriBlox\Sdk\Infrastructure\Endpoints\DocumentsEndpoint;
 use JuriBlox\Sdk\Infrastructure\Endpoints\TemplatesEndpoint;
 use Psr\Log\LoggerInterface;
@@ -69,14 +68,6 @@ class Client
     public function documents()
     {
         return DocumentsEndpoint::fromDriver($this->driver);
-    }
-    
-    /**
-     * @return Infrastructure\Endpoints\AbstractEndpoint|DocumentCollaborationsEndpoint
-     */
-    public function collaborations()
-    {
-        return DocumentCollaborationsEndpoint::fromDriver($this->driver);
     }
 
     /**
