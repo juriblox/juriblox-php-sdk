@@ -2,9 +2,10 @@
 
 namespace JuriBlox\Sdk\Domain\Customers\Values;
 
+use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
 
-class CustomerReferenceTest extends \PHPUnit_Framework_TestCase
+class CustomerReferenceTest extends TestCase
 {
     public function test_with_valid_data()
     {

@@ -2,13 +2,15 @@
 
 namespace JuriBlox\Sdk\Domain\Documents\Values;
 
-class DocumentStatusTest extends \PHPUnit_Framework_TestCase
+use JuriBlox\Sdk\Exceptions\AssertionFailedException;
+use PHPUnit\Framework\TestCase;
+
+class DocumentStatusTest extends TestCase
 {
-    /**
-     * @expectedException \JuriBlox\Sdk\Exceptions\AssertionFailedException
-     */
     public function test_with_invalid_status()
     {
+        $this->expectException(AssertionFailedException::class);
+
         new DocumentStatus(-100, 'Invalid document status');
     }
 
@@ -23,7 +25,7 @@ class DocumentStatusTest extends \PHPUnit_Framework_TestCase
         $status = new DocumentStatus($code, $name);
 
         $this->assertEquals($code, $status->getCode());
-        $this->assertEquals($code, (string) $status);
+        $this->assertEquals("{$status->getName()} [{$status->getCode()}]", (string) $status);
 
         $this->assertEquals($name, $status->getName());
     }

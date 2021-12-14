@@ -2,15 +2,17 @@
 
 namespace JuriBlox\Sdk\Domain\Documents\Values;
 
-class DocumentIdTest extends \PHPUnit_Framework_TestCase
+use JuriBlox\Sdk\Exceptions\AssertionFailedException;
+use PHPUnit\Framework\TestCase;
+
+class DocumentIdTest extends TestCase
 {
     const VALID_DOCUMENT_ID = 1;
 
-    /**
-     * @expectedException \JuriBlox\Sdk\Exceptions\AssertionFailedException
-     */
     public function test_with_invalid_id()
     {
+        $this->expectException(AssertionFailedException::class);
+
         new DocumentId('INVALID');
     }
 

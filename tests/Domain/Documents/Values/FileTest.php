@@ -2,7 +2,11 @@
 
 namespace JuriBlox\Sdk\Domain\Documents\Values;
 
-class FileTest extends \PHPUnit_Framework_TestCase
+use JuriBlox\Sdk\Exceptions\AssertionFailedException;
+use PHPUnit\Framework\TestCase;
+use TypeError;
+
+class FileTest extends TestCase
 {
     const VALID_FILE_FILENAME = 'filename.pdf';
 
@@ -10,11 +14,10 @@ class FileTest extends \PHPUnit_Framework_TestCase
 
     const VALID_FILE_URL = 'http://api.juriblox.nl/document-download-url';
 
-    /**
-     * @expectedException \PHPUnit_Framework_Error
-     */
     public function test_constructor_with_invalid_file_type()
     {
+        $this->expectException(TypeError::class);
+
         new File(self::VALID_FILE_URL, self::VALID_FILE_FILENAME, new \stdClass());
     }
 
@@ -32,19 +35,17 @@ class FileTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(self::VALID_FILE_TYPE, (string) $file->getType());
     }
 
-    /**
-     * @expectedException \JuriBlox\Sdk\Exceptions\AssertionFailedException
-     */
     public function test_fromText_with_invalid_file_type()
     {
+        $this->expectException(AssertionFailedException::class);
+
         File::fromText(self::VALID_FILE_URL, self::VALID_FILE_FILENAME, 'INVALID');
     }
 
-    /**
-     * @expectedException \JuriBlox\Sdk\Exceptions\AssertionFailedException
-     */
     public function test_fromText_with_invalid_url()
     {
+        $this->expectException(AssertionFailedException::class);
+
         File::fromText('INVALID', self::VALID_FILE_FILENAME, self::VALID_FILE_TYPE);
     }
 

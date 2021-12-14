@@ -2,7 +2,10 @@
 
 namespace JuriBlox\Sdk\Domain\Customers\Values;
 
-class ContactTest extends \PHPUnit_Framework_TestCase
+use JuriBlox\Sdk\Exceptions\AssertionFailedException;
+use PHPUnit\Framework\TestCase;
+
+class ContactTest extends TestCase
 {
     const VALID_CONTACT_EMAIL = 'john.doe@domain.tld';
 
@@ -36,11 +39,10 @@ class ContactTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(self::VALID_CONTACT_EMAIL, $contact->getEmail());
     }
 
-    /**
-     * @expectedException \JuriBlox\Sdk\Exceptions\AssertionFailedException
-     */
     public function test_with_invalid_email()
     {
+        $this->expectException(AssertionFailedException::class);
+
         new Contact(self::VALID_CONTACT_NAME, 'INVALID');
     }
 

@@ -3,17 +3,19 @@
 namespace JuriBlox\Sdk\Domain\Users\Entities;
 
 use JuriBlox\Sdk\Domain\Users\Values\UserId;
+use JuriBlox\Sdk\Exceptions\AssertionFailedException;
+use PHPUnit\Framework\TestCase;
+use TypeError;
 
-class UserTest extends \PHPUnit_Framework_TestCase
+class UserTest extends TestCase
 {
-    const VALID_USER_ID = 1;
+    const VALID_USER_ID   = 1;
     const VALID_USER_NAME = 'John Doe';
 
-    /**
-     * @expectedException \JuriBlox\Sdk\Exceptions\AssertionFailedException
-     */
     public function test_fromIdString_with_invalid_id()
     {
+        $this->expectException(AssertionFailedException::class);
+
         User::fromIdString('INVALID');
     }
 
@@ -26,11 +28,10 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(self::VALID_USER_ID, (string) $user->getId());
     }
 
-    /**
-     * @expectedException \PHPUnit_Framework_Error
-     */
     public function test_fromId_with_invalid_id()
     {
+        $this->expectException(TypeError::class);
+
         User::fromId(new \stdClass());
     }
 

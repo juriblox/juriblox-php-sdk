@@ -3,8 +3,9 @@
 namespace JuriBlox\Sdk\Exceptions;
 
 use GuzzleHttp\Psr7\Response;
+use PHPUnit\Framework\TestCase;
 
-class RateLimitingExceptionTest extends \PHPUnit_Framework_TestCase
+class RateLimitingExceptionTest extends TestCase
 {
     /**
      * Requests limit.
@@ -53,6 +54,6 @@ class RateLimitingExceptionTest extends \PHPUnit_Framework_TestCase
         $time = new \DateTime();
         $time->add(new \DateInterval('PT' . $exception->getLimitResetMinutes() . 'M'));
 
-        $this->assertEquals($time, $exception->getLimitResetTime());
+        $this->assertEquals($time->format('Y-m-d H:i:s'), $exception->getLimitResetTime()->format('Y-m-d H:i:s'));
     }
 }

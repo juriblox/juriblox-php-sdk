@@ -2,7 +2,10 @@
 
 namespace JuriBlox\Sdk\Domain\Documents\Values;
 
-class QuestionIdTest extends \PHPUnit_Framework_TestCase
+use JuriBlox\Sdk\Exceptions\AssertionFailedException;
+use PHPUnit\Framework\TestCase;
+
+class QuestionIdTest extends TestCase
 {
     const VALID_QUESTION_ID = 1;
 
@@ -14,11 +17,10 @@ class QuestionIdTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(self::VALID_QUESTION_ID, (string) $questionId);
     }
 
-    /**
-     * @expectedException \JuriBlox\Sdk\Exceptions\AssertionFailedException
-     */
     public function test_with_invalid_id()
     {
+        $this->expectException(AssertionFailedException::class);
+
         new DocumentId('INVALID');
     }
 }

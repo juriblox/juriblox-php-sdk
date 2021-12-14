@@ -2,15 +2,17 @@
 
 namespace JuriBlox\Sdk\Domain\Offices\Values;
 
-class OfficeIdTest extends \PHPUnit_Framework_TestCase
+use JuriBlox\Sdk\Exceptions\AssertionFailedException;
+use PHPUnit\Framework\TestCase;
+
+class OfficeIdTest extends TestCase
 {
     const VALID_OFFICE_ID = 1;
 
-    /**
-     * @expectedException \JuriBlox\Sdk\Exceptions\AssertionFailedException
-     */
     public function test_with_invalid_id()
     {
+        $this->expectException(AssertionFailedException::class);
+
         new OfficeId('INVALID');
     }
 

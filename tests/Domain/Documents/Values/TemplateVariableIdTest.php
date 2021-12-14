@@ -2,15 +2,17 @@
 
 namespace JuriBlox\Sdk\Domain\Documents\Values;
 
-class TemplateVariableIdTest extends \PHPUnit_Framework_TestCase
+use JuriBlox\Sdk\Exceptions\AssertionFailedException;
+use PHPUnit\Framework\TestCase;
+
+class TemplateVariableIdTest extends TestCase
 {
     const VALID_VARIABLE_ID = 1;
 
-    /**
-     * @expectedException \JuriBlox\Sdk\Exceptions\AssertionFailedException
-     */
     public function test_with_invalid_id()
     {
+        $this->expectException(AssertionFailedException::class);
+
         new TemplateVariableId('INVALID');
     }
 

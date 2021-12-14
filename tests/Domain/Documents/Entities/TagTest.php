@@ -3,17 +3,19 @@
 namespace JuriBlox\Sdk\Domain\Documents\Entities;
 
 use JuriBlox\Sdk\Domain\Documents\Values\TagId;
+use JuriBlox\Sdk\Exceptions\AssertionFailedException;
+use PHPUnit\Framework\TestCase;
+use TypeError;
 
-class TagTest extends \PHPUnit_Framework_TestCase
+class TagTest extends TestCase
 {
-    const VALID_TAG_ID = 1;
+    const VALID_TAG_ID   = 1;
     const VALID_TAG_NAME = 'Foo';
 
-    /**
-     * @expectedException \JuriBlox\Sdk\Exceptions\AssertionFailedException
-     */
     public function test_fromIdString_with_invalid_id()
     {
+        $this->expectException(AssertionFailedException::class);
+
         Tag::fromIdString('INVALID');
     }
 
@@ -26,11 +28,10 @@ class TagTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(self::VALID_TAG_ID, (string) $tag->getId());
     }
 
-    /**
-     * @expectedException \PHPUnit_Framework_Error
-     */
     public function test_fromId_with_invalid_id()
     {
+        $this->expectException(TypeError::class);
+
         Tag::fromId(new \stdClass());
     }
 

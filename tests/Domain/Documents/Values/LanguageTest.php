@@ -2,16 +2,18 @@
 
 namespace JuriBlox\Sdk\Domain\Documents\Values;
 
-class LanguageTest extends \PHPUnit_Framework_TestCase
+use Assert\AssertionFailedException;
+use PHPUnit\Framework\TestCase;
+
+class LanguageTest extends TestCase
 {
     const VALID_LANGUAGE_CODE = 'nl';
     const VALID_LANGUAGE_NAME = 'Nederlands';
 
-    /**
-     * @expectedException \Assert\AssertionFailedException
-     */
     public function test_with_invalid_code()
     {
+        $this->expectException(AssertionFailedException::class);
+
         new Language('INVALID', self::VALID_LANGUAGE_NAME);
     }
 

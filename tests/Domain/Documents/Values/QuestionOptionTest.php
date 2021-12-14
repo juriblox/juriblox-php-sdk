@@ -2,26 +2,28 @@
 
 namespace JuriBlox\Sdk\Domain\Documents\Values;
 
-class QuestionOptionTest extends \PHPUnit_Framework_TestCase
+use JuriBlox\Sdk\Domain\Documents\Entities\QuestionOption;
+use JuriBlox\Sdk\Exceptions\AssertionFailedException;
+use PHPUnit\Framework\TestCase;
+
+class QuestionOptionTest extends TestCase
 {
-    const VALID_OPTION_ID = 1;
+    const VALID_OPTION_ID    = 1;
     const VALID_OPTION_VALUE = 'Test option';
 
-    /**
-     * @expectedException \JuriBlox\Sdk\Exceptions\AssertionFailedException
-     */
     public function test_with_invalid_id()
     {
-        new QuestionOption('INVALID', self::VALID_OPTION_VALUE);
+        $this->expectException(AssertionFailedException::class);
+
+        QuestionOption::fromIdString('INVALID');
     }
 
     public function test_with_valid_data()
     {
-        $option = new QuestionOption(self::VALID_OPTION_ID, self::VALID_OPTION_VALUE);
+        $option = QuestionOption::fromIdString(self::VALID_OPTION_ID);
+        $option->setValue(self::VALID_OPTION_VALUE);
 
-        $this->assertEquals(self::VALID_OPTION_ID, $option->getId());
-        $this->assertEquals(self::VALID_OPTION_ID, (string) $option);
-
+        $this->assertEquals(self::VALID_OPTION_ID, $option->getId()->getInteger());
         $this->assertEquals(self::VALID_OPTION_VALUE, $option->getValue());
     }
 }

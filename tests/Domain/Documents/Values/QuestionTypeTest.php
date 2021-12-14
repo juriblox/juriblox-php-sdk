@@ -2,7 +2,10 @@
 
 namespace JuriBlox\Sdk\Domain\Documents\Values;
 
-class QuestionTypeTest extends \PHPUnit_Framework_TestCase
+use JuriBlox\Sdk\Exceptions\AssertionFailedException;
+use PHPUnit\Framework\TestCase;
+
+class QuestionTypeTest extends TestCase
 {
     public function availableTypesProvider()
     {
@@ -14,11 +17,10 @@ class QuestionTypeTest extends \PHPUnit_Framework_TestCase
         return $types;
     }
 
-    /**
-     * @expectedException \JuriBlox\Sdk\Exceptions\AssertionFailedException
-     */
     public function test_with_invalid_type()
     {
+        $this->expectException(AssertionFailedException::class);
+
         new QuestionType('INVALID');
     }
 

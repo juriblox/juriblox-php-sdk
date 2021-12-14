@@ -2,9 +2,11 @@
 
 namespace JuriBlox\Sdk\Domain\Documents\Values;
 
-class DefinitionTest extends \PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class DefinitionTest extends TestCase
 {
-    const VALID_DEFINITION_NAME = 'Parties';
+    const VALID_DEFINITION_NAME        = 'Parties';
     const VALID_DEFINITION_DESCRIPTION = 'The parties agreeing to the terms set out in this agreement';
 
     public function test_with_valid_data()

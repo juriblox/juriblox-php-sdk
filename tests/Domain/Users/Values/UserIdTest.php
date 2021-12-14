@@ -2,15 +2,17 @@
 
 namespace JuriBlox\Sdk\Domain\Users\Values;
 
-class UserIdTest extends \PHPUnit_Framework_TestCase
+use JuriBlox\Sdk\Exceptions\AssertionFailedException;
+use PHPUnit\Framework\TestCase;
+
+class UserIdTest extends TestCase
 {
     const VALID_USER_ID = 1;
 
-    /**
-     * @expectedException \JuriBlox\Sdk\Exceptions\AssertionFailedException
-     */
     public function test_with_invalid_id()
     {
+        $this->expectException(AssertionFailedException::class);
+
         new UserId('INVALID');
     }
 

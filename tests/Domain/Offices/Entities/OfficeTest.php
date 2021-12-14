@@ -3,17 +3,19 @@
 namespace JuriBlox\Sdk\Domain\Offices\Entities;
 
 use JuriBlox\Sdk\Domain\Offices\Values\OfficeId;
+use JuriBlox\Sdk\Exceptions\AssertionFailedException;
+use PHPUnit\Framework\TestCase;
+use TypeError;
 
-class OfficeTest extends \PHPUnit_Framework_TestCase
+class OfficeTest extends TestCase
 {
-    const VALID_OFFICE_ID = 1;
+    const VALID_OFFICE_ID   = 1;
     const VALID_OFFICE_NAME = 'JuriBlox';
 
-    /**
-     * @expectedException \JuriBlox\Sdk\Exceptions\AssertionFailedException
-     */
     public function test_fromIdString_with_invalid_id()
     {
+        $this->expectException(AssertionFailedException::class);
+
         Office::fromIdString('INVALID');
     }
 
@@ -26,11 +28,10 @@ class OfficeTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(self::VALID_OFFICE_ID, (string) $office->getId());
     }
 
-    /**
-     * @expectedException \PHPUnit_Framework_Error
-     */
     public function test_fromId_with_invalid_id()
     {
+        $this->expectException(TypeError::class);
+
         Office::fromId(new \stdClass());
     }
 

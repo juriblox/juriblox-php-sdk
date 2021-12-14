@@ -2,13 +2,15 @@
 
 namespace JuriBlox\Sdk\Domain\Documents\Values;
 
-class TemplateStatusTest extends \PHPUnit_Framework_TestCase
+use JuriBlox\Sdk\Exceptions\AssertionFailedException;
+use PHPUnit\Framework\TestCase;
+
+class TemplateStatusTest extends TestCase
 {
-    /**
-     * @expectedException \JuriBlox\Sdk\Exceptions\AssertionFailedException
-     */
     public function test_with_invalid_status()
     {
+        $this->expectException(AssertionFailedException::class);
+
         new TemplateStatus(-100, 'Invalid template status');
     }
 
@@ -23,7 +25,7 @@ class TemplateStatusTest extends \PHPUnit_Framework_TestCase
         $status = new TemplateStatus($code, $name);
 
         $this->assertEquals($code, $status->getCode());
-        $this->assertEquals($code, (string) $status);
+        $this->assertEquals("{$status->getName()} [{$status->getCode()}]", (string) $status);
 
         $this->assertEquals($name, $status->getName());
     }
