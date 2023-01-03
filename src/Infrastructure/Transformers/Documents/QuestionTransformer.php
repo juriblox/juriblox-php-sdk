@@ -30,6 +30,7 @@ class QuestionTransformer
         $question->setRequired($dto->required);
 
         $question->setDefault($dto->default);
+        $question->setConditionOperator($dto->conditionOperator ?? 'or');
 
         // Required parent question
         if (isset($dto->parent)) {

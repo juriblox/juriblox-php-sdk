@@ -81,6 +81,11 @@ class Question
     private $type;
 
     /**
+     * @var string
+     */
+    private $conditionOperator;
+
+    /**
      * Question constructor.
      */
     private function __construct()
@@ -313,5 +318,21 @@ class Question
     public function setType(QuestionType $type)
     {
         $this->type = $type;
+    }
+
+    /**
+     * @return string
+     */
+    public function getConditionOperator()
+    {
+        return $this->conditionOperator;
+    }
+
+    /**
+     * @param string $conditionOperator
+     */
+    public function setConditionOperator(string $conditionOperator)
+    {
+        $this->conditionOperator = $conditionOperator;
     }
 }
