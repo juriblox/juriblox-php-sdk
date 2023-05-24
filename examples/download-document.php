@@ -12,3 +12,4 @@ $documentId = new DocumentId(3839);
 
 file_put_contents(sprintf('downloads/Document-%d.pdf', $documentId->getInteger()), DocumentDownloader::download($application->getDriver(), $documentId, new FileType(FileType::TYPE_PDF)));
 file_put_contents(sprintf('downloads/Document-%d.docx', $documentId->getInteger()), DocumentDownloader::download($application->getDriver(), $documentId, new FileType(FileType::TYPE_WORD2007)));
+file_put_contents(sprintf('downloads/Document-%d.html', $documentId->getInteger()), DocumentDownloader::download($application->getDriver(), $documentId, new FileType(FileType::TYPE_HTML)));
