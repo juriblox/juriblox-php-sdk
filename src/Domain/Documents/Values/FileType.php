@@ -22,6 +22,11 @@ class FileType
     const TYPE_WORD2007 = 'Word2007';
 
     /**
+     * HTML file.
+     */
+    const TYPE_HTML = 'HTML';
+
+    /**
      * File extensions.
      *
      * @var array
@@ -30,6 +35,7 @@ class FileType
         self::TYPE_ODT          => 'odt',
         self::TYPE_PDF          => 'pdf',
         self::TYPE_WORD2007     => 'docx',
+        self::TYPE_HTML         => 'html',
     ];
 
     /**
@@ -41,6 +47,7 @@ class FileType
         self::TYPE_ODT          => 'ODT',
         self::TYPE_PDF          => 'PDF',
         self::TYPE_WORD2007     => 'Word 2007',
+        self::TYPE_HTML         => 'HTML',
     ];
 
     /**
